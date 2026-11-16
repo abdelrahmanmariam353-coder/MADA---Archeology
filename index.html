@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore MADA Digital Archaeology: an interactive educational archive of Ancient Mesopotamian artefacts, archaeological sites, historical periods and museum collection links.">
+<meta name="keywords" content="MADA, digital archaeology, Mesopotamia, Sumer, Akkad, Babylon, Assyria, archaeological artefacts, museum collections">
+<meta name="author" content="Mariam Abdelrahman (مريم عبد الرحمن)">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#070b18">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MADA Digital Archaeology">
+<meta property="og:description" content="Explore Ancient Mesopotamia through an interactive archaeological map and digital artefact collection.">
+<meta property="og:site_name" content="MADA Digital Archaeology">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+
+<meta name="description" content="MADA Digital Archaeology — created and owned by Mariam Abdelrahman (مريم عبد الرحمن), Level One, Faculty of Archaeology, Ain Shams University.">
+<title>MADA Digital Archaeology | Mariam Abdelrahman</title>
+<style>
+:root{
+  --navy:#101b29;--navy2:#17283b;--panel:#1c2c3d;--gold:#d9b56d;
+  --gold2:#f0d69a;--cream:#f5f0e6;--muted:#bdc7d1;--line:#435264;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--navy);color:var(--cream);line-height:1.6}
+header{position:sticky;top:0;z-index:20;background:rgba(16,27,41,.97);padding:15px 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #344454;gap:20px}
+.logo{color:var(--gold);font-size:24px;font-weight:800;letter-spacing:3px}
+.logo small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:#eee;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+.hero{min-height:420px;padding:85px 20px 65px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#34485a 0%,#17283b 48%,#101b29 100%);position:relative;overflow:hidden}
+.hero:before{content:"𒀭";position:absolute;font-size:250px;color:rgba(217,181,109,.055);left:7%;top:15px}
+.eyebrow{color:var(--gold);letter-spacing:4px;text-transform:uppercase;font-size:12px}
+.hero h1{font-size:clamp(42px,7vw,68px);line-height:1.1;margin:12px 0;color:var(--gold2);letter-spacing:4px}
+.hero p{max-width:760px;margin:12px auto;color:#d4d9df;font-size:17px}
+.btn{display:inline-block;background:var(--gold);color:var(--navy);border:0;padding:11px 18px;border-radius:5px;font-weight:700;cursor:pointer;text-decoration:none;margin:8px 5px}
+.btn:hover{background:var(--gold2)}
+.btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+section{padding:55px 7%;scroll-margin-top:85px}
+h2{color:var(--gold2);text-align:center;font-size:30px;margin:0 0 10px}
+.section-intro{text-align:center;color:var(--muted);max-width:850px;margin:0 auto 28px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:900px;margin:32px auto 0}
+.stat{border:1px solid var(--line);background:rgba(28,44,61,.7);padding:15px;border-radius:9px;text-align:center}
+.stat strong{display:block;color:var(--gold);font-size:25px}
+.stat span{color:var(--muted);font-size:12px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:24px auto 12px}
+.toolbar input,.toolbar select{background:#f5f0e6;color:#17283b;border:1px solid var(--gold);border-radius:7px;padding:12px 13px;font-size:14px;min-width:205px;max-width:100%}
+.results-note{text-align:center;color:var(--muted);font-size:13px;margin:10px 0 22px}
+.era-heading{grid-column:1/-1;color:var(--gold2);border-bottom:1px solid var(--line);padding:14px 2px 7px;margin-top:14px;font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;overflow:hidden;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.artifact-art{height:145px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#293d50,#152536);border-bottom:1px solid var(--line);position:relative}
+.artifact-art:after{content:"MESOPOTAMIA • DIGITAL COLLECTION";position:absolute;bottom:8px;right:10px;font-size:8px;letter-spacing:1.5px;color:#c5b48c}
+.symbol{font-size:70px;color:var(--gold)}
+.card-body{padding:17px}
+.tag{display:inline-block;color:var(--gold2);border:1px solid #806b42;border-radius:30px;padding:3px 9px;font-size:10px;text-transform:uppercase}
+.card h3{color:var(--gold2);margin:10px 0 6px;font-size:18px}
+.card p{color:#c4cbd3;font-size:13px;margin:6px 0}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0}
+.meta div{font-size:11px;color:var(--muted);background:#142334;padding:7px;border-radius:5px}
+.meta b{display:block;color:#f0e5ce;font-size:12px}
+.museum-line{border-top:1px solid var(--line);padding-top:9px;margin-top:8px!important}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.card-actions .btn{font-size:11px;padding:8px 10px;margin:0}
+.record-unavailable{font-size:10px;color:#aeb8c4;align-self:center;margin:0}
+.empty{text-align:center;color:var(--muted);grid-column:1/-1;padding:35px}
+.about{background:#142334}
+.about-box{max-width:900px;margin:auto;text-align:center;color:#cbd3dc}
+.about-box p{line-height:1.9}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:28px}
+.step{border:1px solid var(--line);border-radius:9px;padding:18px;background:#1b2d40}
+.step b{color:var(--gold);display:block;margin-bottom:5px}
+.creator-section{padding:65px 20px;background:#101c31;text-align:center}
+.creator-card{max-width:750px;margin:auto;padding:35px 25px;border:1px solid #b99a5b;border-radius:15px;background:linear-gradient(145deg,#172740,#101c31);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.creator-label{color:#d6b36b;letter-spacing:3px;font-size:12px;font-weight:bold}
+.creator-card h2{color:#fff;margin:18px 0 10px}
+.creator-card h3{color:#d6b36b;font-size:29px;margin:12px 0}
+.creator-role{color:#fff;font-weight:bold;line-height:1.8}
+.creator-description{color:#d5dce7;line-height:1.9;margin:18px auto}
+.creator-university{color:#d6b36b;margin-top:18px;font-weight:bold}
+footer{text-align:center;padding:28px 15px;border-top:1px solid #344454;color:#aeb8c4;font-size:13px}
+footer strong{color:var(--gold)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:50;overflow:auto;padding:25px 12px}
+.modal.show{display:block}
+.modal-box{background:#101c2c;max-width:680px;margin:35px auto;padding:28px;border:2px solid var(--gold);border-radius:14px;position:relative}
+.close{float:right;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:5px;padding:7px 12px;cursor:pointer}
+.report-title{color:var(--gold2);margin-top:25px}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}
+.report-grid div{background:#1c2c3d;padding:10px;border-radius:6px;font-size:13px;color:var(--muted)}
+.report-grid b{display:block;color:var(--gold2)}
+
+/* Expanded object-study records */
+.modal-box{max-width:920px}
+.object-hero{display:grid;grid-template-columns:minmax(220px, .9fr) 1.1fr;gap:22px;align-items:start;margin:18px 0 24px}
+.object-hero img{width:100%;max-height:440px;object-fit:contain;background:#0a1420;border:1px solid #435264;border-radius:10px;padding:8px}
+.object-hero figcaption{font-size:11px;color:#aeb8c4;margin-top:7px}
+.object-section{background:rgba(28,44,61,.72);border:1px solid #435264;border-radius:9px;padding:15px;margin:14px 0}
+.object-section h4{color:#f0d69a;margin:0 0 8px;font-size:16px}
+.object-section p{margin:5px 0;color:#e1e6eb}
+.object-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.object-facts div{background:#1c2c3d;padding:11px;border-radius:7px;color:#bdc7d1;font-size:13px}
+.object-facts b{display:block;color:#f0d69a;margin-bottom:3px}
+@media(max-width:650px){.object-hero{grid-template-columns:1fr}.object-facts{grid-template-columns:1fr}}
+
+.notice{font-size:11px;color:#9eabb8;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
+@media(max-width:650px){header{align-items:flex-start;flex-direction:column}nav{gap:12px}.hero{padding:65px 18px}.stats{grid-template-columns:1fr}.report-grid{grid-template-columns:1fr}section{padding:42px 5%}}
+
+/* MESO-SCAN cinematic introduction */
+#introScreen{
+  position:fixed;inset:0;z-index:9999;display:flex;align-items:center;
+  justify-content:center;text-align:center;overflow:hidden;
+  background:
+    linear-gradient(120deg,rgba(7,13,21,.82),rgba(12,22,33,.48),rgba(7,13,21,.88)),
+    url("https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=2000&q=85")
+    center/cover no-repeat;
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#introScreen:before,#introScreen:after{
+  content:"";position:absolute;inset:-30%;pointer-events:none;
+  background:radial-gradient(circle,rgba(217,181,109,.13) 0 1px,transparent 2px);
+  background-size:55px 55px;animation:dustDrift 28s linear infinite;
+}
+#introScreen:after{background-size:83px 83px;opacity:.45;animation-duration:40s}
+#introScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.intro-content{position:relative;z-index:1;padding:28px;animation:introReveal 1.6s ease both}
+.intro-content h1{font-size:clamp(48px,9vw,92px);line-height:1.05;letter-spacing:9px;
+  color:var(--gold2);text-shadow:0 0 28px rgba(217,181,109,.55);margin:18px 0}
+.intro-content p{color:#eee2c7;letter-spacing:3px;font-size:12px}
+.intro-line{width:105px;height:2px;background:var(--gold);margin:24px auto;box-shadow:0 0 16px var(--gold)}
+.enter-btn{background:rgba(16,27,41,.35);border:1px solid var(--gold);color:var(--gold2);
+  padding:14px 25px;letter-spacing:2px;cursor:pointer;transition:.3s;margin-top:14px}
+.enter-btn:hover{background:var(--gold);color:var(--navy);box-shadow:0 0 25px rgba(217,181,109,.4)}
+@keyframes introReveal{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dustDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(55px,-85px,0)}}
+
+/* Interactive historical-polities map — self-contained SVG, no external libraries */
+.map-section{background:#142334}
+#historyMapWrap{background:#e8dfc8;border:1px solid var(--gold);border-radius:12px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+#historyMap{display:block;width:100%;height:auto;min-height:300px;background:#e8dfc8}
+.map-controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0}
+.map-controls button{background:#1c2c3d;border:1px solid #9b8054;color:#f5f0e6;border-radius:6px;padding:10px 14px;cursor:pointer;font-weight:700}
+.map-controls button.active,.map-controls button:hover{background:var(--gold);color:#101b29}
+.map-legend{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:12px}
+.map-caption{text-align:center;color:var(--muted);font-size:13px;margin:15px auto 0;max-width:900px}
+.map-status{text-align:center;color:var(--gold2);font-size:13px;margin:10px 0;min-height:22px}
+.map-land{fill:#d7c8a5;stroke:#927d59;stroke-width:3}
+.map-water{fill:none;stroke:#5796a6;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.map-water-label{font:italic 17px Georgia,serif;fill:#286779}
+.map-region{stroke:#5d4930;stroke-width:2.5;stroke-dasharray:8 5;opacity:.78;cursor:pointer;transition:opacity .2s}
+.map-region:hover{opacity:1;stroke-width:4}
+.map-region-label{font:700 20px Arial,sans-serif;fill:#302719;text-anchor:middle;paint-order:stroke;stroke:#f4ead4;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+.map-small-label{font:700 14px Arial,sans-serif;fill:#342b20;paint-order:stroke;stroke:#f4ead4;stroke-width:4px;stroke-linejoin:round}
+.map-city{fill:#8d342b;stroke:#fff8e9;stroke-width:3}
+.map-city-label{font:700 14px Arial,sans-serif;fill:#302719;paint-order:stroke;stroke:#f4ead4;stroke-width:4px;stroke-linejoin:round}
+.map-note{font:12px Arial,sans-serif;fill:#5a4c36}
+.polity-layer{display:none}
+.polity-layer.active{display:block}
+.map-north{font:700 16px Arial,sans-serif;fill:#423725}
+@media(max-width:650px){#historyMap{min-height:220px}.map-region-label{font-size:17px}.map-city-label{font-size:12px}}
+
+/* MESO-SCAN interactive archaeological map */
+.map-intro{max-width:900px;margin:0 auto 22px;text-align:center;color:var(--muted)}
+.digital-map-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);gap:22px;align-items:start;max-width:1180px;margin:auto}
+.iraq-map-frame{position:relative;width:100%;max-width:700px;margin:auto;border:2px solid var(--gold);border-radius:14px;overflow:hidden;background:#d8d2c0;box-shadow:0 12px 35px #0005}
+.iraq-map-frame img{display:block;width:100%;height:auto}
+.map-pin{position:absolute;transform:translate(-50%,-50%);width:23px;height:23px;border:2px solid #fff;border-radius:50%;background:#b3261e;color:#fff;font-size:11px;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0009;display:grid;place-items:center;padding:0;z-index:2}
+.map-pin:hover,.map-pin:focus{background:#f0b84b;color:#17202a;transform:translate(-50%,-50%) scale(1.25);z-index:5}
+.map-pin.active{background:#f0b84b;color:#17202a;outline:3px solid #fff}
+.map-side{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.map-side h3{color:var(--gold2);margin:0 0 10px}
+.map-controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px;justify-content:center}
+.map-controls button,.map-reset{background:#24384d;color:var(--cream);border:1px solid #65758a;border-radius:20px;padding:8px 12px;cursor:pointer;font-size:13px}
+.map-controls button:hover,.map-controls button.active,.map-reset:hover{background:var(--gold);color:#152235;border-color:var(--gold)}
+.map-detail{font-size:14px;color:#e5e9ed;line-height:1.65;min-height:115px}
+.map-detail strong{color:var(--gold2)}
+.map-help{font-size:12px;color:var(--muted);margin-top:14px}
+.map-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);justify-content:center;margin:12px 0}
+.map-legend span:before{content:"";display:inline-block;width:10px;height:10px;background:#b3261e;border:1px solid white;border-radius:50%;margin-right:5px}
+.map-legend span:nth-child(2):before{background:#f0b84b}
+.map-outside{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;font-size:12px;color:var(--muted)}
+@media(max-width:800px){.digital-map-layout{grid-template-columns:1fr}.map-side{max-width:700px;margin:auto;width:100%}}
+
+
+/* ===== MESO-SCAN DIGITAL MUSEUM EXPERIENCE ===== */
+:root{
+  --navy:#070b18;--navy2:#0d1530;--panel:#111d38;--gold:#35e0d0;
+  --gold2:#b5fff5;--cream:#eaf8ff;--muted:#9eb6cb;--line:#24415b;
+  --neon:#8d75ff;--lime:#b7ff72;
+}
+body{
+  background:
+    radial-gradient(ellipse at 15% 10%,rgba(53,224,208,.10),transparent 32%),
+    radial-gradient(ellipse at 85% 30%,rgba(141,117,255,.12),transparent 35%),
+    #070b18;
+  color:var(--cream);overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.18;
+  background-image:linear-gradient(rgba(92,210,235,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(92,210,235,.12) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+header{
+  background:rgba(5,10,24,.82);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(53,224,208,.25);box-shadow:0 8px 30px #0005;
+}
+.logo{color:var(--gold2);text-shadow:0 0 18px #35e0d055}
+nav a{color:#cce7f4;transition:.25s}
+nav a:hover{color:var(--gold);text-shadow:0 0 12px var(--gold)}
+.hero{
+  min-height:650px;padding:90px 6% 55px;text-align:left;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  background:
+   radial-gradient(ellipse at 75% 48%,rgba(53,224,208,.16),transparent 34%),
+   radial-gradient(ellipse at 82% 25%,rgba(141,117,255,.20),transparent 32%),
+   linear-gradient(125deg,#080d1e 0%,#0b1730 55%,#10152b 100%);
+  border-bottom:1px solid rgba(53,224,208,.25);
+}
+.hero:before{
+  content:"𒀭";left:auto;right:9%;top:4%;font-size:clamp(180px,30vw,390px);
+  color:rgba(53,224,208,.07);animation:heroGlyph 12s ease-in-out infinite;
+}
+.hero:after{
+  content:"";position:absolute;width:420px;height:420px;right:10%;top:12%;
+  border:1px solid rgba(53,224,208,.22);border-radius:50%;
+  box-shadow:0 0 0 35px rgba(53,224,208,.025),0 0 0 75px rgba(141,117,255,.025),inset 0 0 70px #35e0d00b;
+  animation:orbitPulse 7s ease-in-out infinite;pointer-events:none;
+}
+.hero .eyebrow{color:var(--gold);letter-spacing:5px;font-weight:bold}
+.hero h1{
+  color:#eaffff;font-size:clamp(54px,9vw,108px);letter-spacing:8px;
+  text-shadow:0 0 18px #35e0d066,0 0 55px #8d75ff44;margin:18px 0;
+}
+.hero p{margin:10px 0;max-width:650px;color:#c5d9ec;font-size:17px}
+.hero p:nth-of-type(1){font-size:clamp(18px,2vw,25px);color:#8ff8ee;letter-spacing:2px}
+.hero .stats{width:min(100%,900px);margin:35px 0 0;grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat,.step,.about-box,.creator-card,.map-side,.card{
+  background:linear-gradient(145deg,rgba(18,31,60,.92),rgba(9,17,37,.94));
+  border:1px solid rgba(53,224,208,.2);box-shadow:0 12px 34px rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+}
+.stat{border-radius:12px}
+.stat strong{color:var(--gold2);text-shadow:0 0 15px #35e0d044}
+.btn,.enter-btn{
+  background:linear-gradient(110deg,#35e0d0,#8d75ff);color:#07101d;border:0;
+  border-radius:7px;font-weight:800;box-shadow:0 0 22px #35e0d033;
+  transition:transform .25s,box-shadow .25s,filter .25s;
+}
+.btn:hover,.enter-btn:hover{transform:translateY(-3px);filter:brightness(1.15);box-shadow:0 0 30px #35e0d066}
+.btn.secondary{background:transparent;color:var(--gold2);border:1px solid var(--gold)}
+section{position:relative}
+h2{color:#b5fff5;text-shadow:0 0 20px #35e0d033}
+.section-intro,.map-intro{color:#a9c2d7}
+.toolbar input,.toolbar select{
+  background:#0b1730;color:#eaf8ff;border:1px solid #315c73;
+}
+.toolbar input:focus,.toolbar select:focus{outline:2px solid #35e0d0;box-shadow:0 0 20px #35e0d033}
+.era-heading{color:#a5fff3;border-color:#24415b}
+.card{border-radius:15px;overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-8px) scale(1.012);border-color:#35e0d0;box-shadow:0 18px 40px #0008,0 0 24px #35e0d022}
+.artifact-art{
+  background:
+   radial-gradient(circle at 50% 40%,rgba(53,224,208,.2),transparent 48%),
+   repeating-linear-gradient(0deg,transparent 0 19px,#35e0d00b 20px),
+   linear-gradient(135deg,#121f42,#10182d);
+  border-bottom:1px solid #24415b;
+}
+.symbol{color:#a5fff3;text-shadow:0 0 25px #35e0d066;animation:artifactFloat 4s ease-in-out infinite}
+.card h3{color:#b5fff5}
+.tag{color:#9ff9ef;border-color:#277d82}
+.meta div{background:#0b1730;color:#9eb6cb}
+.meta b{color:#e7fbff}
+.about{background:linear-gradient(180deg,#0a1023,#0b1730)}
+.step{border-radius:13px;transition:transform .3s,border-color .3s}
+.step:hover{transform:translateY(-5px);border-color:#35e0d0}
+.step b{color:#8ff8ee}
+.creator-section{background:linear-gradient(135deg,#070b18,#111a36)}
+.creator-card{border-color:#35e0d0}
+.creator-label,.creator-card h3,.creator-university{color:#8ff8ee}
+.creator-card h2{color:#f0ffff}
+footer{background:#060a16;border-color:#24415b}
+footer strong{color:#8ff8ee}
+.modal-box{background:#0b1730;border-color:#35e0d0}
+.report-title{color:#9ff9ef}
+.report-grid div{background:#111f3c}
+.report-grid b{color:#b5fff5}
+.notice{color:#9eb6cb;border-color:#24415b}
+
+/* Digital welcome screen */
+#introScreen{
+ background:
+  radial-gradient(circle at 50% 48%,rgba(53,224,208,.15),transparent 30%),
+  linear-gradient(135deg,rgba(4,8,20,.96),rgba(9,17,39,.97));
+}
+#introScreen:before,#introScreen:after{
+ background:radial-gradient(circle,rgba(94,255,236,.8) 0 1px,transparent 2px);
+ background-size:57px 57px;opacity:.22;
+}
+.intro-content h1{color:#eaffff;text-shadow:0 0 18px #35e0d0,0 0 55px #8d75ff}
+.intro-content p{color:#a9fff6}
+.intro-line{background:linear-gradient(90deg,transparent,#35e0d0,#8d75ff,transparent);width:180px}
+.enter-btn{padding:15px 28px;letter-spacing:2px;color:#07101d}
+.intro-content:after{
+ content:"DIGITAL HERITAGE LAB  /  MESOPOTAMIA  /  ARCHIVE 001";
+ display:block;margin-top:34px;font-size:10px;letter-spacing:3px;color:#83a7c4;
+}
+.map-section{background:linear-gradient(180deg,#0b142b,#080d1d)}
+#historyMapWrap{border-color:#35e0d0;box-shadow:0 15px 45px #0007}
+.map-controls button,.map-reset{background:#101e3a;color:#dffcff;border-color:#2e6573}
+.map-controls button.active,.map-controls button:hover,.map-reset:hover{background:#35e0d0;color:#07101d}
+.map-status{color:#9ff9ef}
+.map-side{border-color:#28576a}
+.map-side h3{color:#9ff9ef}
+.iraq-map-frame{border-color:#35e0d0;box-shadow:0 14px 40px #0007,0 0 25px #35e0d01c}
+.map-side{background:linear-gradient(145deg,#121f3d,#0a1329)}
+.map-pin{background:#ff4f9a;box-shadow:0 0 0 4px #ff4f9a22,0 0 18px #ff4f9a77}
+.map-pin.active,.map-pin:hover{background:#b7ff72;color:#07101d;outline:2px solid #fff;box-shadow:0 0 24px #b7ff72}
+.map-legend{color:#b7cbdf}
+.map-legend span:before{background:#ff4f9a}
+.map-legend span:nth-child(2):before{background:#b7ff72}
+@keyframes heroGlyph{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+@keyframes orbitPulse{0%,100%{transform:scale(.96);opacity:.45}50%{transform:scale(1.04);opacity:.9}}
+@keyframes artifactFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(max-width:700px){
+ .hero{min-height:590px;padding:70px 7% 45px}
+ .hero:after{width:230px;height:230px;right:-30px;top:12%;opacity:.45}
+ .hero .stats{grid-template-columns:1fr}
+ .hero h1{letter-spacing:4px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+
+
+.museum-feature-strip{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+ width:min(100%,900px);margin:32px 0 0;position:relative;z-index:2;
+}
+.museum-feature{
+ display:grid;grid-template-columns:42px 1fr;column-gap:12px;align-items:center;
+ text-decoration:none;text-align:left;padding:15px 16px;border-radius:12px;
+ border:1px solid rgba(53,224,208,.25);
+ background:linear-gradient(135deg,rgba(16,34,63,.85),rgba(10,18,39,.88));
+ transition:.3s;backdrop-filter:blur(10px);
+}
+.museum-feature:hover{transform:translateY(-6px);border-color:#35e0d0;box-shadow:0 12px 28px #0006,0 0 20px #35e0d022}
+.feature-icon{grid-row:span 2;color:#9ff9ef;font-size:28px;text-shadow:0 0 16px #35e0d077}
+.museum-feature b{color:#e9ffff;font-size:14px}
+.museum-feature small{color:#9eb6cb;font-size:11px}
+@media(max-width:700px){.museum-feature-strip{grid-template-columns:1fr}.museum-feature{max-width:500px;width:100%}}
+
+
+.ma-signature{
+  color:#8ff8ee!important;font-size:10px!important;letter-spacing:3px!important;
+  font-weight:800;text-transform:uppercase;opacity:.88;margin:0 0 12px!important;
+}
+.logo{display:flex;align-items:center;gap:12px;font-size:32px!important}
+.logo:before{
+ content:"";display:inline-block;width:3px;height:38px;
+ background:linear-gradient(#35e0d0,#8d75ff);box-shadow:0 0 15px #35e0d088;
+}
+.logo small{font-size:9px!important;letter-spacing:1.5px!important;line-height:1.5}
+.intro-content h1{letter-spacing:12px!important}
+
+
+/* Share, QR and install controls */
+.utility-panel{width:min(100%,980px);margin:28px 0 0;padding:18px;border:1px solid rgba(53,224,208,.28);border-radius:14px;background:rgba(8,17,37,.72);position:relative;z-index:2}
+.utility-panel h2{font-size:20px;text-align:left;margin-bottom:8px}
+.utility-panel p{font-size:13px;color:#a9c2d7;margin:6px 0 12px}
+.utility-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.utility-actions .btn{margin:4px 0}
+#qrArea{display:none;align-items:center;gap:18px;flex-wrap:wrap;margin-top:14px;padding:14px;border-radius:10px;background:#0b1730}
+#qrArea.show{display:flex}
+#qrImage{width:180px;height:180px;background:#fff;padding:8px;border-radius:8px}
+.qr-caption{font-size:12px;color:#c5d9ec;max-width:520px;overflow-wrap:anywhere}
+.card-actions .catalogue-note{font-size:10px;color:#a9c2d7;align-self:center}
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"MADA Digital Archaeology",
+  "description":"An educational digital archaeology archive exploring Ancient Mesopotamia through artefact records, archaeological sites and museum collection links.",
+  "creator":{"@type":"Person","name":"Mariam Abdelrahman","alternateName":"مريم عبد الرحمن","affiliation":{"@type":"CollegeOrUniversity","name":"Ain Shams University"}},
+  "inLanguage":"en"
+}
+</script>
+
+</head>
+<body>
+<div id="introScreen">
+  <div class="intro-content">
+    <p>MARIAM ABDELRAHMAN · DIGITAL ARCHAEOLOGY</p>
+    <div class="intro-line"></div>
+    <h1>MADA</h1>
+    <p>EXPLORE • DISCOVER • INTERACT</p>
+    <button class="enter-btn" type="button" onclick="enterMESO()">ENTER DIGITAL MUSEUM &#8594;</button>
+    <div class="intro-line"></div>
+    <p>A PERSONAL DIGITAL ARCHAEOLOGY MUSEUM · ANCIENT MESOPOTAMIA</p>
+  </div>
+</div>
+<header>
+  <div class="logo">MA<small>MARIAM ABDELRAHMAN · DIGITAL ARCHAEOLOGY</small></div>
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a><a href="#ancient-map">Ancient Map</a><a href="#digital-map">Digital Map</a><a href="#collection">Collection</a><a href="#method">Methodology</a><a href="#about">About</a><a href="#creator">Creator</a>
+  </nav>
+</header>
+<main>
+<div class="hero" id="home">
+  <div class="eyebrow">MARIAM ABDELRAHMAN PRESENTS · DIGITAL MUSEUM EXPERIENCE</div>
+  <h1>MADA</h1>
+  <p class="ma-signature">MADA · CREATED BY MARIAM ABDELRAHMAN</p>
+  <p>MADA DIGITAL ARCHAEOLOGY — EXPLORING ANCIENT MESOPOTAMIA</p>
+  <p>Explore ancient cities, discover archaeological objects, move through historical periods, and connect every artefact to its cultural landscape.</p>
+  <a class="btn" href="#digital-map">Explore the Digital Map</a>
+  <a class="btn secondary" href="#collection">Open Artefact Gallery</a>
+  <div class="museum-feature-strip" aria-label="Digital museum highlights">
+    <a class="museum-feature" href="#digital-map"><span class="feature-icon">⌖</span><b>Explore Sites</b><small>Interactive archaeological map</small></a>
+    <a class="museum-feature" href="#collection"><span class="feature-icon">◈</span><b>Discover Objects</b><small>Search the digital collection</small></a>
+    <a class="museum-feature" href="#digital-map"><span class="feature-icon">⏳</span><b>Travel Through Time</b><small>Filter by historical period</small></a>
+  </div>
+  <div class="utility-panel" aria-label="Share and install MADA">
+    <h2>Share & Install MADA</h2>
+    <p>Generate a QR code for this public website link, or install MADA on a supported browser as a web app. Publish the site first so the QR code points to a link everyone can open.</p>
+    <div class="utility-actions">
+      <button class="btn" type="button" onclick="generateMadaQR()">Generate Website QR</button>
+      <button class="btn secondary" type="button" id="installMadaBtn" onclick="installMadaApp()" hidden>Install MADA</button>
+      <button class="btn secondary" type="button" onclick="shareMada()">Share Website</button>
+    </div>
+    <div id="qrArea">
+      <img id="qrImage" alt="QR code for the MADA Digital Archaeology website">
+      <div class="qr-caption">
+        <strong>Scan to open MADA</strong>
+        <p id="qrUrlText"></p>
+        <a class="btn secondary" id="downloadQR" download="MADA-website-QR.png">Download QR Code</a>
+      </div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong id="totalCount">0</strong><span>CATALOGUED OBJECTS</span></div>
+    <div class="stat"><strong id="periodCount">0</strong><span>HISTORICAL PERIODS</span></div>
+    <div class="stat"><strong id="museumCount">0</strong><span>MUSEUMS / COLLECTIONS</span></div>
+  </div>
+</div>
+
+<section id="digital-map">
+  <h2>Interactive Archaeological Map of Iraq</h2>
+  <p class="map-intro">Explore the archaeological sites shown on the reference map. Select a city marker to display catalogue objects connected to that findspot, or choose a historical period / polity to filter the collection.</p>
+  <div class="map-controls" aria-label="Filter by historical period or polity">
+    <button type="button" onclick="filterMapPeriod('all',this)" class="active">All periods</button>
+    <button type="button" onclick="filterMapPeriod('Neolithic Period',this)">Neolithic communities</button>
+    <button type="button" onclick="filterMapPeriod('Uruk and Jemdet Nasr Periods',this)">Uruk / Jemdet Nasr</button>
+    <button type="button" onclick="filterMapPeriod('Early Dynastic / Old Sumerian Period',this)">Sumerian city-states</button>
+    <button type="button" onclick="filterMapPeriod('Akkadian Period',this)">Akkadian Empire</button>
+    <button type="button" onclick="filterMapPeriod('Ur III Period',this)">Ur III</button>
+    <button type="button" onclick="filterMapPeriod('Neo-Sumerian Period',this)">Neo-Sumerian</button>
+    <button type="button" onclick="filterMapPeriod('Old Babylonian Period',this)">Old Babylonian</button>
+    <button type="button" onclick="filterMapPeriod('Neo-Assyrian Period',this)">Neo-Assyrian</button>
+  </div>
+  <div class="digital-map-layout">
+    <div>
+      <div class="iraq-map-frame" id="iraqMapFrame">
+        <img alt="Illustrated map of Iraq and Mesopotamia with archaeological cities and regional labels" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGBgaGBgXGBcaGBkdGBgYGBsdGBoYHSggGholHRcXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQFysdFx0rLS0rLSstLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0rKy0tLS0tKy0tLTctLS0tLS0tK//AABEIAioCKgMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAQIDBAYHAAj/xABLEAACAQIEBAQDBQYEBQMCBAcBAgMAEQQSITEFBkFREyJhcTKBkQcUQqGxI1JiwdHwFTNy4RYkgpLxQ1OiNERUY4OTstLCwyY1c//EABgBAAMBAQAAAAAAAAAAAAAAAAABAgME/8QAIxEBAQEBAQADAQACAwEBAAAAAAERAiEDEjFBE1EiMmFxM//aAAwDAQACEQMRAD8AzGKwRdSyR20vsNtL1V4WCjXK63FiRYXtsaibGOmg02Fx9atHiDrApNjr8zWHrVejxebUroelvh3sas4yGyBgRm9tTf5bms7BxORbhQBcixPT0o/wzHBjmnOi9tgRte3rUdWwTFzAQlTlZbW2JAt8tKbiuIQovhsDr1sNbnvaqvHOMlhaMdNWH61DwGUMtiocDvqR7a0vf1WJWEWdyLKyjyltiANtt6o4bGeJnFgCdR210FtPSj/gh2b9mCLant3+dVcJw+K3lKFQSQB8diOt9dCDROhijDi0RMhBU5bhst9eutrU7BYtSrIyhutyBmq/Ggy2VQVXvqe9DMfi8s1hGLPudN9t+ntSn6MhyweCQ9gAfbrVtuKIcu3ttt12pfNkHiAMOx9O3tWf8Revrb0ANhVT9K+Hz40EkdNTt9Nak4TlW4YA3sR21qqyB20Fh1opNgrKHzLtYdL9tqLRMaDhr2AsE0uOnSmcax8gXPEoBsBoBYnttvQYRyqga4ANwbb6730qvPJISF3AUFT0uanTyG4N3BYyLqdb2Fjr39qp8SkVlNlswI9gL1fnd1yaG19T0IqsoKsc66XpyleTJk8RVOii1rDe/c+/aiOHkyqqpbbVmGunS1U0xJVctl3v+VJFjQt/LuLXtsetqr9LMFJOISILkDzbba+u2lBcRJvI1tdALa0x8SljqTuRc7e1JDZx59B0pyYd/PC8FcmTLf4gVHvvpW1hwruFCEZh5b2Bv0FgNzvWXwnDbMChu17+Ujr2ronIGA8Bw8zWaRiFzagtYbetrVP/AGvibcgnwDkpVtIRlYkMTYFmvvftWuhwaItgigDpZdPerd9PasnzRxLFjE4eHCvGM8cznxAbEoNBptWsljPdaUov7q/Qf0phUW2H/aP6VluHc1GWeAmyRyYSaRgdg8ciLofa9UMDzROGwPio7+PFiGZIlBJCSgRk32GVgao22Kj91foP6UuQdl+g/pWM5a5klkbCmdsqTNjc2YWt4c1o1PY5b/ShfEOacUIsI2YKcRJikLH4VXXI59hY05pOjsB2H0H9KaoH7o/7R/SkwoPhoC2c5Rdhs2m49DVfENMSViRb/vyHy29ANSR8qOvzxSxJkUXfIo7kKo+poDxTmdEdkgwkmJIBJaNBkFtdXtb86G828iNjIjnxcrTDVdcsd+gCLtrbWrfJUeMgw+XHCMqmiZLlzba+mt6j0KvAftAwcx8OcfdZxe6TKFH/AEk7n0r2L+0HhiOczMSDbOIWKA9swFhS8e5cmnnXEwxxNKNvvOgVd7KqgnMbDfperWGxEWJBweKwLRO1ywCgxm1vMrqLa9ib08DQ4XExSoJIyjowuGGUj2pmNxKxqWZVA/0j+lY3hPI0+GnLYXFHDwf+18eY3Nz6AjKPlWzeEWAbzC1mPe/W1F8DiH2oc3Li2TDRplWJjmJFiSOwoZy9y7LJZiCF0NyN/Yb2rY84fZ2ZcUpjbKHtcAEgqPXofeul8C4THAioFGgAv12qbdOMBwTkNr5nU2OpLgAb9BvW34TyxDFsqn0IFr/SjjAfSkzUvqLUE2EiKhTGh9lHY+n51xf7QOHYjxmlRSYdhYap0s46Cu3Zb+9QYjDq+h0J32INv3gaLz6UrgfLOHzEG2oFtba+2nbrUcjyGRlZAuugI6dbm1GOZMTHBjJHCmwawC6LpbUDpfWqeBZpZDmJKnr111AFjWdtaT1Lg+CiyMmt28xO1twAO3qaLRwKM1n83SOwt+nzqmMWYEuNrhdr/F1+VQNHKMrNMGXpbp1/lb51M1WRcfiEMarcANmK2PTTzMRbY3oU+kme3iAjZdh76dd6FcySRrLdTnJGpvexO9WuEYpVRQQbsTrv0036VVl/SqLiswHQXJ26DvSNiR5WXSwAItpb2NWpsFNKLtkUACxvr66dbiiP+FYcAeLISLDYGp0Q9sAjQZ47sfy17+lUE4IjKBLm8QEE5VNj6aUQwMMqS2T/ACSLi/UDvREPIL+dDboNx1omxWRU4ZwYR3dWCsfKA2oHuO9UcSWedY3QG34rWU6aEkdKj4txViVYAlbakXsDff5UnCcUBIwZCyMvlJJ0tbf01o2/qcivNGsZUZAXN7EjS/8AD6bCguJjexYj8Vjbb9Kt8ZzmcxrsBdNdhre1/UUuC4gqCzAknU9iAdbepFaliDhKarclQe40HUad6OYpQ8apdfKczE2va2502vVPCYR5WOQZVBvY9r3/AENX+FNCZcmIvqwFwdLf7UutKRU4NCBIY3y2AOU6Hfre21DuLP4TgHXc6De21HsfDCmI0a17Akbe1Qcbw4kyKR5VNgRuPQ1nK0wvBOHqbS5r7kDS2ouQR1qLimAizObasL6dOxtapUw3hhvDNjbRffSq33eZGLuMykWvvpbWwpz0ZMR4OANAyKxJBOnc2/T0oKseU2On9+tElYkhozYroBawJ6k1RnzMxL2v6VpzbE2LOIOZALLcjX+Rob4BBANqtyLexBsRbr07U3EOW2UCw3q9pLvhgLY0CaQ3Pk/KiTSkoDr6mhRf+70g2HFsJFEoUHM2mo9R2pYsVCsC51v5tDbrRvi+FjdSwyhwo0t0sKxMcgDEMLi+3Y97VHN0qvcQeNk0Ug5h03vV7lyJChzC4a+be1h0oS2FkexUXUm3z6Ua4Vw+aPzKbjUZegJo6EUeISsfLksAdPb1opy9w4Brh9CCTV6fbdTb4gfXrVNcLNmHhlfDvof1rO3xcXMQJQCkag3NyxJuAKHwr4AV8t7HzE7672rSRAotrjXf0FZnjs6iQqWIDEW9utKei0Uw6kv4iLYkbfh76j2oFiE/aKZCBdjfoPl87UmCxTeIAjNm1FidD/YqzxPhU02W1iRcEXsO+vfpVeEvxY6zGOyjTRjruNbemn51n+McPJdiiaDUsTuLC/60R5fweeVUk8hQ2v77g99q1svBoRqPNYWbfXU3AB9LU9yjNYiDC+Cud+nT0IqPCzLIpWQgIDZQdz1qbG4VpJAAsgJJshGwHc1Tm4cY3GcHqB2Gtjc1XlT+QU4i5dABewFh+VrfSrM0WVEufNlB09utVHYZbXOZdV6iqcLFmWQyeS5BA7jv61H4uLUMpkIVvKq22G5pOM4qxykrY2tp5hY9+1OOW9wScw07bUM4xgSYhIBa3S9zRyLVLOSSb/106CmylgO97n2JqDCvb3tRrguHM7ZBuPyrXcZ/oVFETubddankTUKuvYdzV3G8KYSBU1BNvmP5VuOT+S7uHYX7noP9Hel9tH4TkHlZ2PiSemnQA9B3Y/yrpHE+CiWHwwMpGqEbqy7Ee/Wr2GgWMAKAAP73qR5f7/v5VfMxn3/ygXy/xEyxefSWM5JB6jr89/nXuL8BhxJUyqboGCsrFSA3S4qDH8OkEwnwxUORaRT8Li2hPqLb0kPHirZcSngk7Ne8bf8AV0NbXjfY5+e/p5U+L5fw0iRxvEMseiAEggaaXG40q4mFjVldUAZFyIf3U08o+YqS/W+h2PQ+1NlcKCzMFA3J2HvWdjpll/FLE8Dw7oI2iBQMzgdixu1vepW4ZCwQNEhCKVUW8oDaEW9utLgcekoJQ3tffS2thf3qaSdVKqzAM9woJsWtrpemT0USooRQFUCwA2AqQmkZaaKBC5qS9UeIcZihmhhdv2k7WjHey5iT2GhAoZiuccMjshvdcSmGP+t7a+2opG0JNIWoZi+OQx4pcITeZo3kA9EF7H1P8qF8M50jmiLCGQSeH4qxNYGRALlkJ0NuvuKZtMK9WVHPCCMSzQvCrwtNHnI89vwgrcZjcWHrRLE8xxRz4XDuCJcSNF0ul0LDN8xajANrUiisvDzjEy4ewHiTT+D4eYZl1YFv/jtWpOlLARqSnUtIEU2qCbEolmcgAXuT7VPQ3iPClmGV773Hb5ilQ4VzViRPipHQnJ4llt2tZTRGIx+WJCDKpWwHXuVPffSt5xr7OoZAckaZjr5WZNvbS9Y7H8upBMoCuoNrP+6wte/rvWPTTmxamwcTlCLllJUL003v7ULcliYicwU2UbD2Jq5FNlYaHMCQWtvcfzqtjYyCxuAPi0GunX/as9aSA2O4aiaOrFib3voNgwPc0k+MMZUgBgbZNNVA1/Sj0YknVNEF2b4t7W0YU7DcCjL5h5uljt3JFaypqCTiCDznKbrcAbjbf6mqp4ii6EXY29rXvYetDOMYOQO2xBY7dP8AahDYl1OjajoaP8cKVvcBxwPmjRDmA3I07BRVHDRzQtd7Wa7EjU27H1ofwjj1nAOhbYgaD0PrRps5U+Fly2NyTqt/elYrUnFrSYcJH+yNwzabqOlvW/5VmMXjjDaNbkW+MizEX6elEOD42Q5lkJIXqbdrfMVX4vCWQFt1Om2o7URKlho2LAm5Y6noRt16bmp8HODvHmy3tY9L/nTzjowBobk6266df76U+DBqxQo2XML5QDe1aaRBjXMYu9rsPlYafnapporlnLAKAtiNSe9+29D4MIzNkawEbm1zYsBRyEoVMedSii7gAknNtqe1qmhLHPARcWJUm5OgNrWqPiK5gcpGS6m47271m5Z4onKp51I8wboac/G2KCNRudbbelvWoxW+tAigWB+K2ut72GpobjizqAGYb2F/70qvIGVCpzXA37D3ojg8QCisBY2+tKTD3Q7B4dkN2NwdyNhTeM4ezCxzAi9xa1WsfhwyMwJvfXXy29qpQTqYwmtxcdjer5pWKmQDvc1PgcMMue3pvTRAUOVte1/608Yi2YHyjp2v11rRGmPhyVNtNetD2wrX+EUZ4LCsj2lDFLHY9TRaXguHBI82hP4jRpjHF51eNtQLqNdiLgULwvDQFD6WtYsdz7XoRxpJVfK2l7dfQa0SwWMLRKrnRevX5Vn9cgt9HMDhla2U6D0qTDq17IlgASTfT296o8K4kqM3mshFzm/L50WfFhjmFgPTQH1rO6fKu+DVhYC7MOu3ep8Fg8pyOLAAMANR62qzhsux1ufof6UmLZAyEEko2t/UaW70ouxFiljMdl8upuToSPSsHjoGMupuRbrt1tf0H61uHmve9ioOxHXf50JxkCyNIBlUi1z39vyq4mm8Gw0cbq2UE2231N96mkxKhiLktmuQNtKEeGLrdjobeX0796nx2XMPNY2N7bkdL0XnaNU0x1pGy3N2Jt6nbbWjuKx8nkyk7Ws3ckm/rpas88LJKJF0Frhhsb73oxhwZFGoO9umo6+1PqSQpVjF8Qa4kFtBZ/3i17eX3FUP8QjkUbi7ElT002+dMmxarKI2Fvb1q2eHBpc42Ou1tbVEOs9jXVXIjuA1jroBUuDxAN4wbqWv7DrRLHgLGqMACW18tyNLaVnVORvnr7dK15yotGoeHiMtZs4AuNbfT1qfD4VmRgVJBNh222JoVh8O8xyrc66WrsvLPKUYgUSpfT4dbD1+dTZ6rcjm3B+V/EHre3lBJ9q0+D5Ykha0cB8wsWawro+FwSQjLGoUelS2qvrb4j7+sTgeUnBUsVSMG7DTbc6mthgcTCSFjkjaw0VWUkD2HTSnYyRRG5ZSyhGLKBcsADcAdzWD5GWBGlxAw0i4h0dgnhlRGi2yxqT+Im1xT54xN610CSYagkCw11+HS+vbrVd8ZGASXUWCk67Bvhv71guDYDGq+MlxKk/fMKzWUk+G63CxkfvWfp2NQcN4VMOGT4d4H+9ssR8Q+ZZNVCEdgtrEenrW2JdHlxMaEhnUFRmNzst7X9ia9Okb3ifK2lyhsTba9u17VhONcuYtzjVZ/GeTBoiMq5FBSVmKDXejnL7yz4mXFyRNCvhRwqsnxXDZnNu2w+VG5+JvMp2Iw0mC/aQkvB/6kRNyo7p7dqK8TkR8OSblHC/CNTmIsBVHjeJd3GEh+J1JkY7Rrf8AU1elwJWKJIstoiujkgEKO49a16959c/x3OrP4G8CmZBK+KBikK3bNbLkjYqh062tQnjXBXxs+HxSQsFiJNnkyM4ykLkX8JJPXpRfjHCcROUJMIynUZmOYaGx02uL1bZcb+9hh/3/ANKydSfhvERKXXKUkSweNtxfY+oNt6sj/as7j+CYqWRZTNEjBQpZM4JUNmttqdK0ZtTDLcQ5Q8XEtimlPirJG0H7saRkHKR62P1oU/2ags0jTXkZWa428bxFdXt6KpHzre0hqRrLnkwGYYlpScT4pZntdcpQpkAOtgGHzvUOD5RnVY1bER/8vDJBBZDosllOe+/lVa139/r/AFpAaZ6zkHKV8PhcPNKJUwzow8u6xrZF+tiT6U/HcmQzTyYhnJmeWKRH/wDbEZBCAdV3v71oga9QNZ+Dk6BRFlsJI5/H8TKM7asbH3z2+VaY6mow1KtAOvT6jLUt6YPpA1MvXhUme8g1Nc2+1vjZjMccYu4GZyNbaEC/rrXQ5heuYc/YNkndlUsXJ2F9CfKaz7ggbwhmxFmKlV11voSP9r03EFPEyqwIYXFtrgjeqXL0c8eZcknhjUEL1NWZ+Fqo8Sxz5u9rDfb61hZ62lMklv5i3m8y6aa2/WrHA5JFuhy57CxNtVG9u5FLFw9XBfZl7NbXuR16UNxBaO/kdyvXpbXMb9PajTxbxULuHmIjCqbG+5G16G4vgMbEG1r2Fl63F760R4bjcwKPqgADaWAzbC3XakIYlwR/otsbabnYWpy0B8vAFEZbrcAW6D5VSWUxFS7XtYGM6HKNbkVtcNhmcgyLlIFgA+hsNDpodaocQ4JFKzXNidj5Qb2tbT2/OnO9IP8AuiTRh18g2Y9TrewA00qpxJlOmXQDf1HWr/AJGusRQBEzF2J3uLWt3vaqHEiplCqbxgi5B0B7E+tEIDhwhY30olhMFaQB5MqjUm/Qa1Ni4Cy3SIhwTv5T26b63qk2CIe5NhcDzX7VcJZxSopMikvrYEbi996fg8NLmLoVswFyf76UO8d1QJlAGYnTuet+1T8HkOVlz7aD69O9FGnScPLqCACtwHYDdhuB7aVOvD4oiLkam4739ascK4oUzQrHdQe3UnVjRDCYF5GcFc9jbN0A96ytqoqFhY+IPiqsiEWA6fpRHH4FvxWuDtfW19LfKqkDqDlJAJ0Hpap1X4jllKhwNiLG/egkkJZtDb29K2GKiR47AXI0J7nv6Cs/Bw0rm10U666m2pt8q0n4VexWGQAWdmXLvv5uov6G1UMRlMdipzX1P87VekUB9FIR7ZB2Fxe4HWq2LUs5ynyi+laSosMgXyWzeoI7j/zVj/EwN4yT1N/9qrRpb3A2+lK0gv1+lAFOL4dpGDpfKQN7mwsKrwxPCeh0vatLiccqOYpAtrLa399KBY6DzFg2l9Pajn2Yiz015NbyCwa4a/cEbdhRVCgWwv2B6b7/AJUI+/GygqrDZhuOw+VEMHYNcmyX0A1+l+lT1yvmiwxfmyW1Itmt3qljsY5BjO/79gLdqIYUgup1G51vbaocfiIGGtri2ov3qJF2+BeGxpRGjLXsSyk62NUDMXBVSS2up09dBRqHhEDvnZjktrbqRVXimARTniBcOfKBuCNB8qvfUfgP97ZQLfEBv/K3SvQlncNfQfpvT5IGbMuvxgHS3a59qiicLKVNyBcC/wDKruYmimJUuAga1jpbcjreivB8PmWy/GNAQP1odwsrmuwJvfKT09K1HLsoRiMt76i+y2G3uay6OLHFeBQOis4yuoU5x6VlsTiiXKoMwB8uvy/SinG+LNLOIU0jy/F0qpDw2KIZgxJBJsevSpkxVVXwzs1yVGW+h1sW7ULx+DjV9SNRuNr0ZOKyK1gGYgDUaa9RWTja7kP0bzfM6gVfEKujfZly+XbOTdQ1wfQHSutsLCsb9lw/YZgLA5bDsBetjMdBW3M1nfVdmptPy14irTTdq8WPevNXgv56fXT+dIlGbjUCfFMvte+unarayXFwbg7exrloxsSKS8nmDZWQWGqFk1sL6it9ys5ODgYkklNzv8TW+g0+VLTFQ1Ozd6jFOvVFaFYvh8yzNPh2S7qoZXvYlb2sRtoaQYjHrqYYX9Fcg/K9F69etOfkn9c9+H22B3DeNpI3hsrRS/uPoT/pP4qJm9UOL8OSdMrXVhqjj4kI2sar8E4izM+Hmt40drno69HFFkvsVz3ZcoqTrVLi3E0gQM9yWZURRbMzMQoC39quTHL+lYXm7EIvEI2lAKRYbxIwSbF87Amw6gW+tZ1v4NRc0J94TDSwSwyMQqlwCCTruD8qOmuacW4x4kkGJZwwSaFltYkLnFwbdg1b3jnFY8Pq5uWJCqNzY732C260EvV69Z+PmUHeBvk6flc60uG5thYXyygAkXtfY2O3saDaJaUVn+M80xRYR54zmYkxxrY5jLbQEdxvWJx/OWJEWGk+8Mr+BJnREBVpo5VjCyEjyLY2oOR1cL16XtevCubHjuI/xIKZmVHnWFwGQxqrwBwEG+YPc5rWt1qTlri8ofDGXGtIHxWJjcM0dskOdUvbYG9/nQK6KadeofvKZfEzDJa+YWOmuxFZfjfFpVkikCkhZo/2Y+Io4ykEdyW26AUw1eIkVFLOcqjck2H/AJr0kyKpdmAUC5PS3ofW9ZrHQtPKjyn9iniEoD5WJUgBj10u1ZvlfBT4iFY5i8kauRCDoN2BzfvIgYD3pUNPwbmsYibwyuWN8wgk6OUNmX+laGbCK/xqCRoDt8vauac5cPaYIuEJjTAgCMgWvLoCR/Cuax71t+S+MHF4OKVx+0AKS/64/K31IvSsAgnDoxdAgAIPU9q4/wAbkyztHY2DGu0zGxVvW3yNcq594d4c8kuym1z76j9Kw78ac30ImmKB2yAg6Ejcba/3vaqqyZw4UvcqL3W2uwzA996M4WZPDsLNm1sNajlaLLmckXIAO2pNte/asY0tU1gKRtk8zhcxe4sSDaxA9Nqz2EmXQtK+a9wDt61qjg3fTLZAb30APW/0qti4YWlSIwqACfMosfe9aZ4E+C4oJQouCyAg9L+o+VUeIYTIUkVgHBzAHp7jqaufdoo5AqoLfiJ3ry4ZWHisucagH6gVOieqWJwysmcStc7gbHMb39qH4mN4JQqKuUm4J2PajeEUQxiNsufMtwT0vcWqrxnASsQ+ZbNey2BN99ewqk39LJMzJ4hcBtR/2/76UH4kXuniX3v6E0zO3iZCAoYm5Go21tU3FcQzMhAuig3AGoI03q5CJg8OZF1IJOgHU+vtTuG8PHigMLAEhj61UhZkKlSQDYkDTQ/prR+DhfjS5fOE+LNewJ9O9K0s1Sw+DytKytbUkLfcAnQHua0HCOJOoIUAhrFwTt6UMlwjJIyEg2sAbaDfp3q5wcILE+VTdb9z+Ims7NXmCWLxULWDldQbX0ItWUxOECDMxU2PTQgHv8qP4jBYaVgGB8h8jX36C/zoQ0QRyxkDKCQQdSf9qfMKvcLxMWWRGYWbRQSQb/0oTiMKUdgpYgjfex7Cis0MIUOj2I+K40GuwqjiPEs8iqFUeYa3W/Qr32q4NVsFE3jJod9R2tRDmXB5JwVuA6g/O23vSQ4l0AcBS1rkgaD1queKSu6mQBkDA7aZraWPbXanCVuIwNCUuSWcZiOottf3pzzm50I19Ks4iYzMTmtYk6jtYWHcaCqjeGTchrnfytVBoMdDnJYi0gUbbfDc+nShcWHdve1rbCw3/O1aATkxlCNLCznrm1tQsSmI2bzG5On6e1Z80WJcHwf9mS4ygjtpajkGGgIW+mYjX1HYf3vQjiKyvCpDjKToBv8A3raqeJgnWOytmHUE2I/0npRTjScXYBHVmADAgBdwO/zoFDhnWMonwdSRfpt33qaOQfjGa9sp39/n1qkuPGdlUsq33PTXtSwar4LykXa+XpsLdaL8HGUFwbLc5VI79qbLErL5QxBuTpvfrUSDKmYk5dAoO/0pjEkkoLsM2a3y+VDMbw12kzBb2s1hcm3WnxN51IBAJ9O9EOJyWUsGIPcaH2ohYq8PQFirXBU6D0rSSvZLBgpbbuNALn10qjwLGo0eYBQw+I9T/U0J4vxBxKQDYEXF+9hQIZOmXE21u1hfoDRHEyWIDG9hvQZuKljfTMdCbaW7irxIdVtcm9jr1GuvpRYqUL4himJKrdVG99jY6e1PaMMgZFALfVbf3erOIg8hVdA1y1/Q6WobHIYz063t69qcnniK7V9mURGF82+g+iitfKNqwn2T8ZWXDmMnzxmzX3Olga3sgrXjxnVa1IakNMNWSNhQ7mDHPBh3ljALrltf1YA/QEmiTUD5vjc4e6bq1/qrICe4BYGlSYQLF4niPbV8kitoRJOPKw/eXT5Fl9a0nCOJPFhI4YQniQhhKrmxWzED3vcEe9Y7DQ/eo8iqFkcsylnACSXs0R/gFnO/UWracA4JCJQ5AzRIpkIPlMzAaEdlUL73qc9UK8u8XXER6svjJpKi/gPQH1tb60XWsvyziYBjeIorLmeYOMu7ARIWI763q8vNWGMXiqzMvhvIQFJYCNgrXHcXvVkOUlCV5kgzOhzK6LEzKVsbTGyEdze9x0tUWF5ohZWYh0UPkzEaX8wO2wuv50ENNQPmLDsAuKi/zYDmI/eQ/EPXTWvJzOhZl8NrJEJWJ6AoXGm97D86u4DiccxfwzmCBbnp51zW97VXPlZ/JxsWFxYliR0IKsAR6XrJ88ACbAyEX88qMLfEpUMQfS4NEeGj7tiDhjpDLdoSfwsNWX56mgH2oYiRGwzRxlyomkZQdhbJf60/k5z8L4+t8oI0P3qLE4mZFjRgIkKCwUqTY+/w61X4PJNjSJZSxCqFlOtny7KpGgTTXvWj4hgzheExQSAGV2VnXcEkjy3OnWqc2HRMmFhBRPM8jAZWCi4sGRiPMdNtiayjZYPEAG8OJc0mm2ircHVmIK9BYX6UmEwHhR5XNwAWLFQF1OZmuARbX8qdguDyzKrQhUgDDKAQrOV3LNpdflvTOLcBmTLP4YbwyTIhktG6HSzADU72JvTMe5JwiNAZWS+bESyxFtSNQgYe4B+VF58PhoyCYVvO/hnyizeJ5mzdNctO4bjUlhSSIWQrou2XLoVt0sahx/B1mZDIz5FIOQGysy3sT162owJV4Lgw5k8GIOLIW00uLDTvbSh/D+CYKXx4/usOWKawAXfyKdT89a9ByjACScxu+br2sBvrajPDsAkKZIxp1J1LHTVj1OlMrUGO4SrxJAhESIQVAHlFtQLdqBf8DgZnGLm8WRi0j6XYnTy3+CwuBbvWtr16CgBxLlWOZY0MsixxAhVU2zErlu1t9DV3hHBxBEY0kb4cqsbXUajT5m/vRC9VMfxARCwGZ97AE2sL3Py1pnFbg/LkcERhzNICQSXYXH4hf0JJPuadjMfBgUZ2vaRy5AH7wzMQB0ArKPxnFYWXDyORI+ISQzRjQJZhkA9Vvlt6UQPDxmfG4pvFMayKq7KZHYrkUdei37mpNtFdZEDKbqwBB7gjeg3MvC0nhcsBmRSDfYr/AF2PyrJ/Zrx6aOUcNxYCsULwm97/AIjGT1IH6VtOL38KbKCxK2AHrU9DfXB+FFS/hAtbMRobHQ71pXbw45CSzgfgABKAXsfrVPA8j4uGbxAQRdj8LDei33WSMsZFzX3yb2HYG1c/cytZ1ATC8ekJSPwHsxsLr0OhOvpRh+GSRkMlsiXzBm1JPahnGJXeIPExJS+TQhltve9Z6bFYlsuZnKn4h+tElVrT/wCKKM5lGU2IzXBAJ0sLelVMFjAkbAHMBYAk2Gvp1NUsDhEV2vfIw+He+bQXqAwSXMZF0LaEWuLaaimUvrRYXBRiHxWJZrAsX3OnT6ih+DWMpnd3vISAt72AYfyqlxLMkZUt5TYZQe1tdaoxYsWUohCre5ub3uLaU5CtGfu8bFS3kC6AE203BPzobxLGOpKhv2Z0IG5se/TSqTzN4rXHxa66+3yqTH3jBz6s+wtYDT+lUQhwWJ52ZrggAE3HrfLWn4WjRyFZXAW3kvvcm5XsANKGcDgWKJQgJZvNf13q3xOYlFcpfp66Deser625mQfn4KLsbZvEFzY6XAsNazeOwRWGQFV8r6DZiOu+9M4dzQ66H4R0P6A0O4rxZcUVYIxYXGW/0NPmUWoMNK5YFvKRa6ntvf8ASphGl2e2m5JBy79PWqUuYuFNlYC927Xv8zbSijYQyoSjEre2Xr9O1VP1KskV5MpIynXXbWrnG4I1VxfUCyAXygDUA9v96FYZ3SXIGuwI+IaWPr0pOKYoOzIvxaBrmwJ/pVZ6nUUEaiPKbsWGZvNa3YUqTs0eW219D62tbuadiYgjBcuW4Fydvke1OWQZgmhAuSw6aVWE9Pjg6qqrkI39QN7e9qn/AMUPS49LUPxICk2OpGl/XrSNxA/+5+X+1PQ0M3EbxqALjQDp7GqeLkk1YITYAHqQepr002ZVbJYAafIVRk4xJkJzAZvKdN+p1+Vqyk07XovFspLEC997USxc+VVZiNRe19TQnEcRGSw9N6cXBjW9tdu9VIQhh+MqpJA0ttU2FAmAy9b3HUbbGs7CB5lN/T67Ud4IyjykEHdTfTTe/eqsxP5RnGmSNBkG29/XYetVGhMnx3AsD/4q1i+KrouYW1Nj+o9aojiWc+3frUL1OIUWRc9rWBGux1+tF1ySGzRrY6377/0rMR4VHktdtBc3N1F9tf5UWWQxr+1lDJewtuP5jb86DM4lio1ssUYz6E5RtVEYUzE3upBO/X+lPxMDCTPCfMxJH7rAnYDoRUgFnV2LZiPMBsdbfyNG4WAmL4dkKgfi3o5wvDCNO7HW/Qa2H5VUmYifM4uuthbQj+VX4eIJbXTX5bXFPq7BPFPiTkZrG2o6aba/Ks9K++t7Ef70T4zi8uqm973obg4RbMddSLe25p8+QrRTlHjDYXExzDVSQrr3S+/yr6E4djUmXMhuK+boMIN1e2the1d15DhAiJB7VVvuIsaFqYaklFMYVoz1GaintlfNbKUbNfbLY3/lUjGg/NsuXBynYXiv7eKmYfMXooYGPDhowTGttCGzEHdrHRNzlY0Z5b4KJhNd8hSdWNruT5Bo17XUmoX4qmVgARfQdtBP02sAy/Wi/J2JzPiCAwDBTZhY6My6/lUyerC+UeDW4ljGZtMNIVTy2DCRMxvbe16OryjhwpAaRS0PhMym11JBYnS19KNEWJtbU6nqbaa99Kd0sdQQQfnvWiWY4h/h6O6zOxeJElLnXKsQAXUb3B1Wo4xw/wAGWJ5lMEgjlALLmF2LdBpqaMJy3hvBkgyEpJfOWYljewtmOoAC7UuJ5dwrIqeCgUZbFQA1l2BO5FBIMNhIJ5J5g1814m8Nroy5Qo9Qcumhojh8FHFm8NQtwoNtAcoKjTvapUjVRZFCAm9lGUa+g6+teNABebTaOFx8S4iLKe2Y2NCuelAkOY2D4SVF9WEhcj3tRTmjX7tH+/iE+iAmm824VZRh4zu2IGU9vI+b6gCtOv8ArGHE3u4Hc3SCSLDhTmDESabHIATc/KszxWeMSSq0mVmZFFlvaM7nMthpdt+pqxwif7twzFEhpLTnw1+IhW+EAnUA7ad6qPysYpJJJpSWWTDswWwzRzMqm/TQn8qxdA/xfnrDQwiPDsdFCrIUORel7dWN60PHsWqYCWRzcGDf94svb3F/pQnmHljCpA1kJPiRZbsbXMq20B10vQHjDycSOJdtMNhJBHkW657izaix8tgd6FD/ANmGL8XBM17/ALT6XRCa1hFZjk7Crh5J8MvwgKy/9BMZ/LKfnV/mjmIYPwfJ4niyGNQNCXt5fYX/AFqkjimnrWfn4li1xWFgMUX7dSXuzXUx6uB0O/5VQ4Rze8uIeErGdMQVCElk8A2HiX081INhelNYvhfOsk2EOLEIEYaKMXOpYuFkJHRRfSrXMfNT4YYpggZcO+HBI3PiXz29bWpk1Nv9r7X6fnWb4Tw7GZpHxHh7EqisfM5O7Htawt2FGeDTySQo8oUO9zZTcBSbqD62terlqDYzBcuY7xkmxEkTsoawUGyFyCSP3ra/MUX4zwmaWSBUaJcPFqwbNmLXABAFhcC59zRyvWqTBsVy4jTxz6Z45g4PVQFZTbve4vRl1B160t6YxowH2Pc/WoMRhVcWZAw+jD2NeLUqzd6V5gZfjnLCmN/N5CNf3lPQ3G4vofeuf8J4bNJMVEbALpcbGuxZlLMmYZitynddjcda9hcHHEuVFsPn+V6yvPpzqsdBytIyknKrEAajttVB+R2ViCCGAPm3F+4rpTSC2v8AKo2mW1r3+dF5OXa5DLypIVyZGcjqAep6E0Pk4JJDmUpc2uFNwbDf3rtXEOJxwrnkYIoF9Tb6dzXKOc+bzjgRhlKqhy+Id2zdPaiabIYfOzoApJ1AB2Gv8t6P8X4cQmdh5lUC5+twOvSqOAlMcViuZiSAwOuu406a1WfGzZWBbMTot99TY/mKXUU2SYZUjia4IIBsN9qznGeNZWyKpG976/FvUnMEMkaRSOxBAF7aLawFrDrehGIj8WxVxfc9+1qicervSHCOEzAi6NtfervAYVEw0JQ330t6XqmIcshGw2Iv1tuPejODx4ISMqFN7ZuhsNDaqpNLxThsDxFivQEHrp61k+D8Q8KXw5I2UEkgvRuV38ERTPdidCoGgGv8qszwQ4pFE+hUg51Nr6d/fepnlOs3PwoozyHVTqtjtc6aVRxuFzN4gPTt270W4hh3hlGudRbf93pSxYiMoVVSoub3J77CtJWcUJBLItmDEAHXS2lrCq2AhZD4g1PRB19DRueNYoJGbMQ5/DbKPa3X+lCzioygCEq1/iOg/wBqNPDJ4s8l8pubggjY2vt6XqBolGmU0T4VgXLE+JfQEHfqb69TTMVGudtG+I9bdai9LkRtJeMnXYaULxTA2sLHUWH53qxJMWuVFgPz+Q61VjsTmPvWnM8Z2oViJNhvRLhuGI1I17dR61FBIC2vWwvtTjigrHLe9rCqN7FWDE2J63726+1S4adRqdbkaXqo2JubHVf6UxR2pWCiPFWH4bkH8R3/AKVWjY5lU7EXp+dj19qgncltTt1pSIlH+HlVuL2B37/WrcCRyN5xqNQToGtpQbBNJIy5BcKDdiLD5+tLBjHgmAbVRpb3tt9KjKudNC0TKpyHMytbS1tdxc9qhGJRrxjzNba9ttz8qtYbiQlibwo8gOtiNfWgPEHHiKRo3w6dfQ9x3qZ6qr/E8CBZ73tqbnUe1ulqBTImQak31Ivudh9BVp0ksSwOXYXFjr89qXF4RRlyAkAajqDtr0savEaHIqsAtiX/AA9Mvv3FMw0LrmzaW6f33o9h8Mgu7A51sNPbpVMYgknLY9NtbD30JpzoYB4l7nQWNfQP2dqRhVv2ufpWB5E5REzeI/TbfZdvnXXsHgVhQIuw+tOe1NSudaY1OvSNWsZmNQLnKfJhbnZpoVPreRSR63AItRxqznPMwWPDXNr4uH6IHf8AlRaGcn4jH4Moy3JjnsMvVkjCjb0J+VFOTWPjTA6nIp2I2KnTN6EUOmxEPhEXW9my31/+1KroNfiZh71JyRII8U0fkuwOUKW1CxwnMc2u9xpppUxbbsK9pSV5atB6mkJpDTS1OgpNeppNKpo5K/gHjXDY+IE+TDxPK3a50H5XrP8AHeKYicmSHCytEin7uQNGlkBGcn9wKbj3NaDgcYmOJmbaZyg/0J5T/WnJwCMAKJJgAAABKwtbS2nS1afJ/Iy+H+1jsVxPD4fC4SDOJc00Tz5fw5SDa3YW2p/M3G1mgxEoYLIyxpFCNXypIsgY9tqPDkTA3v4TE+sjU/8A4KwI18I/97VjG4Q3N0Uro05yJHlZUtcvKB8T/wAIubDvrWch5vkSBsN4an7xiXLkHL5Zcq9OpsBet0OS8D/7F/dnqWHk7AqQww63UggksbEe9NSbgnBpI55MTO/7R7gRqboikLa3djlF6ucY4JDihEJgSIyxABINyuW4O4Ybg+lXA9/7P86cDTSznHcLhYHwsuIxM3iRDLCA7ea4sc1t7ga1PLg+HYcHEXCNld2ZD53WYkHPb4xfa+1X+IcGimbNJnvYCwawt6WqgvJuHE/jecfskiCK1rBSTcnrQaHhnDuHDCSOt1w5QI6kmwEZvmy/hck3vvUvA8BgsThnRAzoZFeTxGLSMVIKly1ywsANemlWP+FYMyn9oFBZsocjMzhQXYjW4taxolw3hkcObwltnIZrkkkjTc0Ek4fgUhUpGCFLFgL3AzG5A7D06VZpK8aKDrUjUwtSEn+dSDi1Rs1IzUlOnCXqlxbHmJRkTxJX0jT17nso3+VXB1vt1NBICuKnY5HCgFbupXyKRmGu+c2+QqbTZLjhlw0S8Rdy+IOI/ZKL2aPVSPVSt2tsbCug8A4rHi4VxEWqPffoazyF8ViJ3eGRUjBSLMCotcaqOpY6ewqXkXgbYN8RFr4bCOQaaK2oYL62telgaPExXyjuw2rjnO/Ep48QTDM6qC17EgfEa6zxnOUfw/iCEgd7Xrh3MWIPivG40soVTsVNjcHte9TnokQSs86L40sjnNqJGJGvYbVHFNGgsshBG/bTpU0eKRsoZdQbX3GnarssCMC0cakEhTca3I7d9KdXFTBY9cp2IB3tf5+n+1JiZzERKgDx5gf571HBgct7LcgEsL6/O9Pi8ylMpCjW42uRm0HWpMegP+IQuS2XILhT6+9ZCNHSUWFr9tdB19KMYLEHMQ+ZRbRui21tYb6fSqsUYDKcxUFrC2ot3pYVq9iCmVTtI2qra4t/ERpVWKdgpFhZSbXtb5UZOARikaMo6lnOgA9B86E8xYPwrBZFZey7jXejn09NikfMHY2OXbcnXYClTjTB/DaPQ6WBIPzoZw5idSTcaW9Pn2opjsRGyI3wuLgnq3b5UfWC3YspxFL2IYm34iTcel+tQyYYvItzfUG19+utu1DY8UG02e9gb9O1E/uYVdB5xYliT19B2osKDGIxgU+GdEGupvr3tQx+HgG8mgY5hdbBR3vSYLOsvmKHzah9S1xoB/tRrGSu8bJuRmWx0Gp2B+VZ21cQcHwcK4glWOgDD92xvepcXChkc3TVmPTqTQ/GYwwLFcD1te+UDY0yXiMZYkA2JJGnep+urgQ0hA0AGguB6incN4eJHWMmxYH4fTvUkWFLEEGwGx1sdNKWLxEdXB8x+G2+/QVt/GFE+N4CKHJYaLbN3a+mlAeLyozhksAABbrWoxcqRIxnYuX6Nrt27amsfl1N+hNqfKq8GN196kLBbC+pv+tRhtKnSIMga+o369apKSGK+t9tf9qmOKsNANTre1V22uDe+4222psbqdCNehphfw/EQisFzLfSw+EW600JmUyuS176DfpVKY2t7Va8B1CsGNmG/Qe/rU3wRPwrHuucAnIbA9D6e1exM6k3BGcfCAL3JvvrtejsWEjWDza5hZri2rbGsxjOGMjgr38p29r1Mw7ohicZPZRl3GocaaHpVV1xDXYC3oLbeg9KOzxMyqyvm8vnBsTcX09KZw1wPO2UC2ik79QQaV8pq3DHbwznWxA+Zt2v3oF97Iby9W0HXfWtPOHf9sY1zBToT8PTQdaCcO4SfvMYuCCRr/tT59Fd15KweSAH97UUekaouGxhY0A6AU5zWvMY0lNNeptV+FhGrMc9QsUwzqgkEeIDNHfKXvG65Qehua0xqOWMMLMoI0NmHUag+9IOW4jUywzJHA08kbxEszlAMnk8g6kEfOiXD4JRjfv8rRXWLwkiQEeXM24Oza/pW5XDxqbhEB/0i/y0vVTjnGcPhU8TESKi9jbOfa2vzpTxSPh/E/GYqI3Wy3uRpYab1fANca5o+1KbEMIcIPBR2C5zbOcxGv1NFucftFlwr/dIE/bRBUeeTW9hlLKvUG16Yx04vrlv5u3X6UmYXa7Dy76jSucfZ6Y5JxLJjpZ52zCwFo7EXIJP8qxHNsr4XFzQs73Oh8x1Q6jrTLHf2dQLlhtfcbd6qcVxPhwSS/uoSPW4sLfWvnmPFmVRfEZfwWZiPLf3r6DlwEcuFWFSMhRQGU3vYDW/a9VxP+UR8n/WmcNyYbBqznKscWdj76n3JrP8L50abBYrFCG7wSZVjFySpF129CKl4lA2JVMBim8PzqxK/DiEW4y+h2q1/wAJeE0zYOc4XxREcqgMoeI2uQ3RlsDV/JPUfD1MwNwPNE33bEzFoMTJEoZI4QwIzdw2pUd6hg49i3heVJoJniZHkiSN1fwtnWzdgSb9bUSTlObNJiHxp+9OqKJEjRUVUNwuQCxBqxgOW3RpppcSZcRLE0QfIqKikGxAUam9Ztmb4tzTPJaWGZIcLJikgjd1OgEUju/tmGX5U7G8fxsmB+8RzIjRTmAyBMyzhmUI410t5r/6vStFNyhhmw2EwpGaLDOHINrSWRlIb3Lk/IVUxHIsbRGCPEyxYcyeIIly2Ugg2W/TSgE5y49Jw/BKhdJMW9wjEZRcDMzW/L5Vo+FYwTYeGYG/ixo/zZQT+d6H4TlqISrNOzYh1j8NfFAIAzsbgDrZiL1d4Nw1MNCsCElEzZb7gFswX2A0paF7NTg1Qn+/z/pTgOv8qYCuaeYThBHlQO8rFVzsEQWFyXY7elScF4600yROiDNAspKPmXMXy2BHtTeOcNxE2TwJYlABDRyxiRCSbgi+xFB8NyZLh1RsNigkwEiyMyXUiRsxyL+HKb2oAjyzzM2JlKNGFXw5WB6nw5jH+dqTmHmxcNisPhiAzSsM99o1bRdu7VSXlWaFojhMSseSHwmLIGLXbOzC+xJpvEuT8OY8RNiJWeZyH8c3BjEYBUADpcUBKOZ5vGXBtGBivvIQ75fBAzeIDsRl/PSgeM+0iyzWCXTG+GBrrEGsWHpYHWtRwdoMTi5MbHNnZIlgXy2yfiZtd73/ACrM8L5awMghAdnaXD4nDg5bZj5i7665gCbGgDvN3Ni4SfDwqAxldWe5AyRswW/uSy/K9VsBzU33rGYfEWULI64eQ6LcJmyHsbG4J7VZXkuBklE5MssiKhlPxIEUBcnbXWm8I4Jh8ThZWYtImKk8TzfEpRRFdSNj5fzpWnAnhfFeJTyYMLPEoxGHMljGTlMZyt111NE+DcwYmbEQ4VwEkg8Q4s20KjSPKezXv6ZTXsPyRGjwMmJnX7vGEjCkWtfMwPcNcfSjScJjDYl8zZsTo56quW2VfTUn51P6bMYfndsRiMdDEVCR4eUwHqzwmzH2qTC83eNLw2OJpBne0zMjBX/ZE2BNuoo3/wAJ4QLCqoU8JGQFdGZXXK2Y9b71Zl4RCy4ZTf8A5Zg0djbUKV1+RqiX5Y9b9tLfrWI535TWVPEjHmW5X0t+Entat0slMxKC1mJKtuP6etR0cr5vlw8pYWUqU6H0NaLC4lgBYC7N131B6De1t/Wn8zIDPkjVrszAN0sO5qVIDElvjcKCXHQE7C9Y9VpIHY2E3dmaz66Dt3NUvvJRVN9AbEX30vejaTySM+aMkX6LsCB1/OqGP4EobKGDMdSelr3t9KJRgdhJ75lW5z3NrX3P62qZ8LJGVJPmtovfXepuHL4TeSxPrUuHxZaTwyL29LNY9BT0vqcYpGUXQAEG+utr6ajrv9apxYEF2SXyZh5SBm9frWpxzBYSFVVAUsb/ABG3vWMjxzhmbKcxBtfv0tTmSni+nCUUsVk1UdRa+2x2vaqhwVrsGy9dRvrsKJnFeLCA4EYJYADUM1rX7i1qrzYVoiNDLfYbnWi0pAiRHMlwRprpWhwyF1JIck220uLb/wC1C+KzSI2UoFJ7jW2+laDg15CmaUBQCBtewH60rTVMQojVGdgcu1h263720qhiOMkuMmYA63Jvqdr/ACvWl4zy4fCCq121KhbBdiTf1tUOE5X0XNIDYAgAaexPep05y9wuaMoXmQsdrdNfU1A+EQklcM1umvTpVrE8NzxOMPHLcNax0BNvXoKvNFGpymR7jQ+btUy3+NIFyFY4kDjUgZdzt1FvSh74Pw/2niG6qp0Ghvubd9a0zwxSIBnXSxHc6CstxLMpZRci+3YelVzWdiueIX0MpZb/AI/0pIcEJXyq1h0v61RC21y9du9abgWSxNwGJvv5gR0q75C1nMfhWiuhG2zdD7VXhAYqt7a2Nuvv9KLcWwblmOcG17DrYm+x2ofgQpBWQ2W+43PzqpfE0RiwTAAG1zsP01qBkUHUE2/M0YwXDfEUFHFwQQTuQNrdDVHHQF5Wj/ENbdARuNNu/wA6mdegMVRmBv119L6D87VosSCIpFIBAsRY/D0/v3oLiYCq3zAgdfUf70mFxJLHPtls/ewI27n+tVfRFmLijEDMbrvY72F9KPHFRyRAlQ3lBt+6ddP5/OsjLgWzjKDlY6Ei396Vfw8TL+zLWBv8m2IPypXnw00rXcZVyLJYZ72BOltjRMvAbh8pZBZe2h3FUViMkiRbx2DNcaXtcC/0q9h+GeGHdwCSNV0uLi9h6VNPQ5MQfEJYkRldCL1e5B4eHx6rfRQCOunr61W4hiP2ClbKSx8vWw3FaT7PJUOJV0W17A/IU4m10fm3jTYSASRxGQl1TQEhc2hZguuUUD4lzHiRhIJ4Ww7l5Vie1yt5DlFu1u1aXjHCvGCFZpIWQkhoyLm+liDoRQibkqAwRwZ5VRHMnlYAvIWz5m9b61rKiq+I5maDHfdplAi8KMmVR5Y5XJADHorZdKr8Q4/iP8N+9RtGsiiRmDKSGVHyAgfnR9uAQsZWcF/FjjifMb5hFmyn/UMx1qk3JuGKQxgyKsIsoDfEpbPle+h1FP8ASU+buZpMDg0ZssmKdQVUDytYBna37oFxehfN3N8kEkBgljCPhjKFZb+M+ZFEYb8JN2N/4a2OJ4TDJKJpEDMEMeuwVtWA9dBVRuWMKVVGizKsXggNr5Mwb63A1pkvQsSqkqQSFJXqMwBP61xXn3ldzxTL45ZZU8QFwziPVhlIGgF1JHvXakhCqqrcKAANbm22/wAqxPMHEMTFxqCCKQImJgTMcoJvG0n0pVUrky8ClyxvexaRlt4T3QIfjOm2l/Yiug/alweGTC4XFHWUtBGzroHDga/0opzZj8XBisJhxjBkxLFG8gvYkKbHppel+0nC5cFhoAbhZ4wD3EaEg/8AxFODQd+W4sBxPhqYd3yytIXUm40AtpQv7WuFH78ZbqFnjQLfowfL/OtLzNIDxDhshPw+Ef8A9wEE/kKEfbGt5oP4I8/0lp6NL9onJ8GHhw80SRqEGSYkCzEr297VsuQsO0fDsMrm5MYb5Nrb2ob9qi58GidHkWw9470U5FmzcNwZP/sqPpcUJonjsBHMnhuNNwRup6FT3qnwvFOkn3Wc3fKTHJt4ijv/ABCiqmhfMa5ThpeqTqL+kgsR7Vtxd8rn+Tn6/wDKCxFqbT5RavZD9N/T/wAVjjfnrYjtSO1ONtNRrfLY721/SmKb3BIuCdAdrW099R9aFFBoLjOZMmKfDmEsqJHIWXezE3IB3y21t0NFpsSikAugOuhI3Fr2+tUeO8MEqHKoE41iY6EMPMBcbq1rEetIE4/xeKLCPMZCodD4TrrmLA5cvrreue4fieLV5XSaX9kkcjLnzeV7ZrA6HLuQO9WeKY1XRoJcO7YdnEkaK6hoZEBLIbnRd6s4hcXh2hiEETRTSMIgZVzBXiHiI/fS1u1ByH47mySeKEoXjK3GIePZJCQsdz2Isa1nLfFWxGFSRwA93V7bEo2W497X+dYCSd8BhMXgpojnkZZFZDmXKxFlZuhAUVteWMKYcJFG2hN3I7GQ57fK9LQN56biC3huVUOwU5V6E2NgR1FMVqnUU0uecO4txWBG8TDNmkkiKkmNFyqB4qgX1G41oqZMc3gYoYTOyTTssKsinwZEIjt01OWtLxLhUGIAWeJZQM2UNfTMLGrEMQRFRRZVUKB2AFhSUwkfNfESqF8OkeWS7F2EYdFBJQBt7aajtVrhn+Kw4VIYsJGCpZg5lUrldi4A9bGtZjuHQzEGaNZCAQCwuVDbgVOFAFgAB2G2mg/KmAPlOPHASnG5bkp4YVgQLAhtvlR8GkBpLUGlDUjCmoKc+mp2qaT0WtTMoIGu2tZjmDm2LCoHdrHNbKBckUE4p9pkPhXw7eI7D4CpB9d6i0H/AGhNHh4C8cVpNWDdLXtr9a59wZ2YI7ybk3UnRh3t+dEsVxmfG5VxOURgggDQE/EAfTShfGSqsCkZGYFd9KitefGsxavBokiZW1Jvrbv7WqlBNG5L6OGYna2mgOnqQaDR8RQKsUnmYjL6KL6XNekx2RFeO113A7XP561OVWp8XhC80kMWmUXzdBsf9qHtgGhcGRyJD8J3JovhMbmyulruQCbeW5081+1VuJKH0Lh3DnzC/ltpYel70iMwcsmZllzdAST13t+n1rQz8PR8KoQKXzXLEWIBO2b0qoMAhUNmKu0fmzbXGgI+QFXsHD4qkgnMNO6dtAKVq8RQ8pQzMGUkoFtlucoPU37mtI/DYIgHy6xiwt06CsPxXiUyEoMyafhP4r9q9g+JYiQZZHzG/rqPf+VTlpYbzFDJK4kcGxLAELqO1xT+D4OF2KSNY5QQNrsOnpUvGJ3SJFdQVJAzZvmb21ofDxeNCyhFC73AuT3sN6r+CD3EeMGJfDsCVOo18wtrqKscOC28YnMCAQhOg6+UdxpQvh+KilsSLhRbQHMba/00qaTEP4gkjynKCClumlr9jS+pjWI49aNmRGy2ttrc2F/pQg4aA6+GNfWh+PxjqrFzo1rDUZetvUetBpcWcx867nvVc8jRCPGstmcrlsdhqCQAPloaGz483PXNvf8AlRnivCGZhlOa2VdrgCwtQfHQ5JLbkGx23q5PWdVZ37dRpfp61a4AQCAdGLXB9v8Aeo/AUm5vY9CdRT8MqqVNwbb6679Krr8TP0f4lw85b/jJsTsBfX6VV4fAEu4swAs1xcLU03GixKOtza6gHf3qnjMXKw/YgRDKfE21tsPnrU8w6ty4ho3Ey2MdgtiLW9hU3I8HjTSSE3U3G1ZWfikklk09h+VajlHifhK5I1UaqOvtR1Mgn6s83cHQRqIV2Ysdd9P61nOGYazMj2uy79K0XFOIPiNEQgtt6e9UsfwJ0hABzuDvtbvb2qZT6n+ld8JcjzkqvbpfTT5frVjECzaAALa2YEhh/wDzdPlTcIzRoS4AUDUdSR3P0qPhsZdCXIDE3yk99auUamw/ECAcyhWU62FxtawJp2IxDyxNlGVrA3bc2NCcVi8jSDQkm47AWpsGO0YXItbU679AKeahC4YAAsCSSW9Njb31FGuQsSwxiAEhb7d6HycLDtodWAIv10/Kj3JfCiuMS46jamMdzvpUVSrtUdapr1eNeptOJIaY1SU1hQEdq57zcbcb4c3aMD/ulcfzroZrI8zcoTYnFLiUxfg5UVFXww1spLXv7tSo30I+0tbY/hjW+CT/APuID+tG+cuWhjcimdoRGzkZRe5II/Q2oXxTkbFTlWm4kxZB5SIlFrG4rXRKwVQzZ2AALWtc21NvU6/OlDZrinJyzyQSHEyK0KRoBYWbIb3J/ves79qcOacjfLgmY/JzXR8o61meY+VJMTO06z5M0Qjta+mv9aAi5zUvBw4fvvF9TEaufZx//rYF/dzr9GNO4xyy80eEQYjKcMF1A+Iqtqv8tcIOFh8IyeJ53e9rWzG9qJKQkBVTjOCM0LIDZhZkPZl1X8xV61OjGvp/WteLlZ/LzvIHNzCFwP3oJmcrZEHWUnIF9s1qxWDxM64TE4bFTHDzPPG4kcsVtKc+ViuqqSCPnW05aATxcM4sYpWZAeqN5lI72NGJkSxzqltAS4BFh8N76adPejuZ6n4bsc14Ri5WkwseFijzR4jEqrZ5GgkBgBzhjrYbW2pOF4t8NxA4jGMFRcRiUkK5igLQ4Vktfvleuh4fH4cyNAjJ4kSliosMgYhSQdh0v70NxON/ayB2i8ArpqhIOyynS5LNdbfw1DdzniGBnYCVcN47TR42ZVYkGJTMMjj+LLqBXTOES5sPD5i/7NPMQQSRvcHrfT5U3l/FtLhIZW+JlN/k7KRftptVlmowBPH8PhPDeXEIlv3raliCotbUsb2tXPsVDLGkf3gs8xBMasf8onQ59dyoUr10otzNjPHlcMHEMMgUMMtkspDvbq+YgDSuXycQkldmZiQoNt7kiygsepsRSOV0vhuMJxf3fE5S2KiUOQLrdifCZDtlsoHob1tOBYpnhGf40LRyf6ozlP1teuR8AwkkJDSAtIh8guSbwSK2vYANoPeuqctYtJfvLJfKcQzC+hGdVZgf+oml/RaNrU4qBRU600ng1XixsTSNCJFMqfEl/MLgG1upsanFYrivCJji5jHh2EkmIw8sWJBACKixhwzbkWU6Hfakppv8dw2aRPGTNGGZxrdQNTersU6M+RWBYKrkfwtorfOg3D8I/wB/xTPhl8CZVTxCRqEBVvLv5s1vneqnBOAz4fDYnwz/AMzKxWPMb5I1JWJb9gCzUDGgXiMOXP4gK+IIrjX9oWC5fqRT+JYuOBGklcIi7k9Ndqx2G5TxOGw0kEf7cDFYfERksFLEOrSg9tV/On828vYziSRpKFw6WdnVWzaj/LF/lrRobONwbEWIIuPY60s7gqdfaguBleHCxxzkCRUUMemm2vtXOOcuPSCb9jKwLHQLsFA09iaxvVtxf1L9rqWl0GxTb1FYjhuJVSDIufWx6aXtp60bnxLyENiGDt6m5+lU5II22VtL6gb79Kqfgs8FcRxBb5hGwAAsCRY20t7/ANKiixglkyqGDHS7WsPb1oZJhZrLcHzWte9r/wB3qykbYcgmz9e4Hqe1KyQ9WOM8HVMrGQ/izE6XPyqCB1hADXN1uL7WOh13qxLncZmAcHXLf5W/K9VxI0im8d8rAk2vsdrUQzeGYq75coACk5QdCR11370QV0AYsQjOfITbQbHUbjWh0qg6kbWy/LQ1Vx05zXGx0yNrYelKwbjYRw5bm+ZfLc3J9P79qsYWJ4gcs6OgzXUjKDcm1zvegi8RywCNWsAMxXcm39Ku4BoERjIj5io0Oosegt9axsxeh3+ImaZS62N7EAEny6WJ9a1yrGFDZMhP1uP73oRh0imlY2KSLY3Gx/3tRzFQeVWzKdTe/wAWvT2pW38DP8Xgz2LMFY/CRqPUkDptVY8LIyhbFvxG1s39BRHEsI4zlGuoG19ao4WUgFnJOY7Dr0q4KpeC8SN4YANze3Qb2B+W9XODSAA5QPP8RJJOuv8AKrIiV00DLb0tp29aEDEojZRmW1zbQ/LX5VUmgRfiyESI0eYHUE20Ov5aUEeQXPlqfHcVDCxUW7gasTve3a1D5cWpYnKNzVhr8Xi0WLw5hIieXzqOthbbW21C8WsTFGQhypW9wQDp1qs3E5UQqxzDT49fl9KhxMnwtGttNR0+vWp5mRBmPYeJYC1/p8qjXL1K3bTXYetQ40+bznta36VCLAabm+/SrhLrMSykEX6EelWsROsiMhNntofWhuElIOlvlT5EINrab5gNb9qWYao8DA3vr1q4MVIj2va62230qbDYfN5r3Db30sRU0+HFwWsel79KfXsKjfBuLiKO7rmNxqvw26fOn4rieZiwBynS38x60DxsqqoWMaAa+tu3evcKxTZSrKbk7dbWJ+VZ4fuHY/BvKbq7E/uk7j09qsxwOqaMfEAOjC+3SmJiVBDa5LbqdR7fOpMLK4YsGJGnxAb/AC60aM0kOLRgY3XcDVhY/WohBC4yLoAbXHe+tX+LkSC9gWsN9gb9hQ5I1N7g3GpsNiNB/Wql8TVWXEtDLYagbBvxAiuofZ5gGldZyMgAuV9dhb5ViuDcB8eQPnLHMBl30tXcuE4FYYwgABA1tTk2latNUdK7U0VsilptOr1MjaQ0teoCOqvEsWkMbyyGyopYn0Hp86uEUM5mwLT4SeBCA0kbKL7C/wCnvRgw84yMzeADdygkA/gzWGvc32qhJxmLJPIhaUQtkdY1JbNpewG4sb/KqUfK0kMksmHc5nw3hhpHZmD57nvYBdvlUnKPK/3B5QkpdJVQm/x+INHb2I9aDRR83QGFplScoDGo/ZsCxkJUZe+oNEcPxiBsOcSHtEucsTe65PiVgeoPSh+K5Yd8BHg/FylJVfOtwbLIzeXs1iLVXXk1jhUwkk14RM7yFb5pVOoDafFm3oDRYTELLGkqG6SKrqfRhce3XSp1FUeX+GHDYdMOWzCPMEP8Ba6j5DSr9qA9altXqRqCB+YsMwIxUIvLFuvSRD0Pyp3EsKuOwwCSssblHuPiIRw4X0uQL+1GUagHCU8DEz4YfAQJYx2zGzD2vWsv25c//wCfX/inNyVh3xU2JlLP4oUBASoW25JG+w+tSxcnYBCGXDi62tdmOim4B16E3o61REVk6IgihVFCIAFW9gNhck6fMk/OmMdf72qdxULLQbl3NfL88QxGI8KPwkdpcxc5iCbgZdjqetYXG8MaDBh20aZly7fCuuhB3va/tXZPtLxSpw6ZS3mlyoi63ZidhXPubVM2CwsKRnxMMrmW+lhbTXrtQINYnCFcYVBsZ44cRhzfRmIRGjPYM2/vWo5OmzPiLqVN1LKejZnVrdxpWa5W45BxGTB4cqUlggIMlh5WRgVZddbH2rZcu8OmjkkMtj5QoffP53e57HzCkY6u9TA1Cq1KmlCTg1SBv7sKaopRQopNPjam04ClTezV5qRzamriANzUdXwRivtC8TLobLcA/wAv5Vx3B3z2bXU766jc19G8RwaTjK1iG09jbQ1wrmTCGLFlSMouR8x1FZc9er0suH0Pk0sNyd/QdqIYTDDIQl8yi4uR1GunalXhpyhgxvltqb9Nbel6XjcYSFJAf2iAZ8vYi2tqdvqs8DIJpoyJJBoSQuY6A69PaiUqy5GN0sLBrKNVO+tEuFYZmUFwDH2Ou4vTMVgo3VhoDYW6W/PWj7ejNCOHspZkVMuhIHXpt3/3qYY+JVZCCjE3yt1A/rTp8IxUkPla1lta+x6/SqWC4Q0iFZQS+mpPmBGlvkKekgjxStmyrltqqmxOppw4YrAurKSBbKSAb3oZjsG8bG19NL9auphrIgIuWIb1HvanTHMNwYqxLAKoXWxBJJtt6VNHHYrZiVBuBfc9AfS9WsEwIz2YsRpqMouLHT5UOiVAPICwJOZgdRruBWdUnwvFCl7gaE2BXXbN897U7E8fSTIpQXO5AtlPrSRyxsrBjfKNxvprY/Ss1iHR2NswJJse5OtKTRrYQRljlI0B+Lpb0qhFAgxRRW0WzJ6jqLd96p8P4hKhy5bZcotvmF/yNTYrFMJGDJr8XTML9PajMGinEWVlJ1Fr6dfmOlZ5HDAsuq7WbrRPF4hGABa7MVJH6A/SoeInVsmt9rW3/l1onhKwwaMtrakg26C3aqUmCFzqdz0q+kzhCgAvo2Y6HTpc9apScQNz+ybfuf6Vf2LUGKnB23IH6VYgwZdRlfW9yDpYfw+tNlbMwZQPe3oP6U2MZXvmsAbX7+tPSVuIR2e1yfcam1QsVAF1v6j1NH3wEUm7MSfNmP8Ae1C+KYSwBAsLaW2+tVKFTOEJC/CSD9KPJiNrqT5dAPh12uaCjAqRe5vV3hmMa2Q/hIsfQGihSZ/Mc1xc7dKlOKLCxFxRTHxq2hA+X6+9UkjswQKTpe5HftRvgV1xABvbT2q/hSfFjkzXBIDKu9uwvUCYDUg3t173PQUSXBWUENlZNTbY26+9T+j+jmPjQpYoqjoALWH9a9iIESMFSANP0tVDB8QRrXYuL2JYWNye1HcJy7JimGU5Ywfkf7NZSW+KvUAf8RAYoUZwARYi1wBrY+9QTcQGZAI8i3Fxb4rqw1/KunQchYe37R2LdxYWpZ+QYSP2cpUja4BANXJWeofs74Mq3kCgAWt79a3TtpWaSSfCKkUWHMqBQS4YAljvpStzM4+PCTL8r/pXVx8dkc3fyyUdNKKArzKD/wDbz/8AbThxyZtEwcp/1WFXPjrP/PB2vGgf3zHHbDRqP4n/AKUhxPEN/BhPoHNP6f8Ap35v/BykoLBzAQ4jxEZhY7E6ofn0oyajqWL4+SdPXpjU61C8Dx2CaVoo2LMl7kKcpI6Btr0mi+TTKpTcbgU4hc12wyZpAOgylh+VqtpKrRiXZCge56AqGH60CFvXlahmH5hgeKCVDmTESeGh0sD0v6UyPmCFpTGL3+8fdgehfwvF37WoMVJpBQTHc1RxA2jeQjENh7KLksq5mI9AL17Gc1wrHh5Y0eZJ2ZRkHmXKuZsynqLaikBy1eNAeJ81Ki4eSKJ5o8Q2VWQgZW7MD2sdKSXmqMTYqAqRJh0D5Sf8wZMxCna4pwhxjQvjeBZmGIhbLJGGtcXDIdSp10q5BPnRHGmdEYDtmUGx9adfcX3q+OssR8nO8q/DsaJoo5QLZlBt2Otx+VTmg3LUmVWwzG0kTNp3BNwR3GtF70+5lL4ut5/9eaq+LLBGKLmYAlVJy5j0F+nvVg0hrNqxOO4bxKaZZJYMOyRsGjiaXyowFrk5fNVCXlDHPI0jfd7uXLKZHyHMb2yhdgNLV0IimlaAyGC5dxkcqyouAjZUKDKr7HuetaHh0eLBY4h4WXL5RGrA36b71eGlOAowWninrTUX9KflJ/v+/WkcLelvXsvf/wAadfqKQL8z2HQHY0GcDT81NEdICNew39Ld6m0JJE0rOcZxhjzvb4dTRuXEjKSrK1t7EHf22rnHNvHWtLGY27fSsPl9VwIYPnXDyXvJkI6H07fT86wnPvE4sRPmiNzmubdLi2/yqDAxIfKwylgRrvrrpQWeBw5GW9iBp/Olxzh40PCsayooYG4a19wAe9vWrPGf8ogWJ0LEHre9vaokREVBfUi7C24toKh4fDG0RzA3J6nrm2I72qjGcE94wLhbHfpeqmKxZbyt8aXYW+EjbX60PxF9FR9M3ca3uf5VFFgZGLlZD5R+LqL7VNg+yWLEsbNYWUaC/r1q7HxmMAO4KkG/l7/zoIqHzAE2bvoQR2pcLAJhlJ8w0q7Bo1jOJo6u2QrqNSP6d6G4XFkKdAL21PQH1q/iD4aEWXRQGHU+9B4GDu6AZRrp/LWiQCsvEg4CowFrgg3GX1qfhyMY2sy+XoBuL3Ovreh+DwVyTktYkG5v0uL1OzOgVVy+dNWGp9gOlThrAxCAedQCTrbXMD7VWm4cpIeJwRc6dRbv2FEsNgkVRKFZrEancXGpodxHCEp5XAD66afWnyMJHIzDcbnXbzbDXtVT70WNzq3X1vpa/paoI5liyZnLDXQAX0PXtUuIId2VbLubi+rEU8JPkCAMdOtR4KfVn3WxFifofeoVlvkUi5Asext096glQIzG9ttD630owWiGFw/jWJOUAkgsd9dgO4FSvhGubKbX01P9K9wrExrGCAS2vyp0nE3udW3NLcEVopGBIBGvppe2tMmVbXv0p+Nw6qqssgOgJXYgDvVSQ5iTlJ9ttaqTwCEfE1QWCi9gLk71XxuMLr0sdgNvlQxkHQG4O1SAgdyOlvanIKYJWDbm1XosQQSdwO43+dD5HH1qwk2nlFNK4Zy2oqb72pGVWObTU/nQb7xbYWqxFmYAAfO1KwaITvpo2b+IA6H371VwczhtyTtrrc+t6s4DhWJkFo4ybnqLVveV+QHA8TEgKBqb7/Kpg1T5R5VM5VnXKBqTbf8A3rq+Gw6xoEQAADpTcJEiIqx2ygaWqQ+n9+9VOf6Vp1z/AHtUiN/f52+lc0fmeSTi8GTP9zWVsNmA8jyHQkk9mBsaTgGKMnFJoppmSOPEyNAlyBNIAQRfsnbbSqkqXTfl/WkLdb/nb6VzfifHJ34nDIgkGDhm8Et/6bO9wzHuA1lHvU/i4fEY6X73K6vFiEiw8KswICZWDG2+YnU1UuJyOgM9gbtoNzfa29/rTjf/AM/l9a5RxifFnC8V8KNTAcTOGkLkOLSKGCjfSr/2h8QxLlYcMjlMMI5p2HXLYqvqOtqel9Z/p0R5FBsWUHsSBpvsaVWuL6EHYjb/AHFYznHguHnODxDRBnknhVyTujI5N/S/StfhcIkKLFGuVFFlUbAdhTVkMx+DSaMxuLqfqPUHpagWE4m+FPg4q5UaRygXDDoGt1rSUhAIsQCOxtb86vnqf1h38Xu831Uw/EoZAfDljJtoL/rWa4Ly7i48QZvJDZZPKjsUldwLMytotiL6Dr7WO43gGGkBzRKD+8oAI9Raq/LUzDx8O7ZjC4UMTclGUFb/ADvTvMs2FO+pcoDg+R3jSYrMWfE4eRJi/WVtQR6akdquScIxc+E+7TyRxAmJW8IknwkADi52JtuNa1LsNbsB03t0uKibS+otrf0069hWboZWLkZFhjw3iXgjxJmVbkHwytsgK6/Frfenf8JGIOcO6oy4sYmEMGZQfBERVydSCM2vrWoI/pTAykkBluNwCLj3HSgM7/w7MsMXhyocSmIbEu7A+GzyXzCwsQoBA+VRDlqVEgMU6ePFPLOzMlo2MwIYKFtoL7Vo1nQmwdCT2YH8r17xlspDCzfCb6N/p9bUgzE3Ksghw0UeICeBIZ2bIPPIxYmw2tdtqk4ryrHOMT4jnNOyurro0ZEYjP8A0trptR6R9/QX6Xt3t0FV4MSkgJR1cX1Km4v60QJsJGEREvoiqubuEFix+hNY/gfNWImxiI8IXDTNIkT21JUMUI7hgKL83Y4w4KdwQrZCq31NycpsOpsay+LhgOHK4TAYtmRAIJiGFmA8pW58ut/rTDa8T4Us1jcpIvwuNCO4PpUfCMY7M0Mv+dEFzEbMpvlb3qThPEVxEEcyXyso3FjcaMCPe9Usb4kWIOIWMyI8YRgvxDKb7dd/yrX4+vtLLHL8nP0uz8HRXiKEx8z4fZ88bdc6EfnV2DHRSfBKhv0Bqb8djSfLzUxFIRUhH9aYTeo/uNZdmwwinqNh3Nvrp/Oq+LxkUS55XVFva7MACe1QY3jWGhMfiToDL/l63LA7Wt0oNgOMcUxZxE4QP4TSrKpBIyphMokUW6E3970e5t4tiWxEJw6N4GHMU2IIv5vF+FR3ADG9azwlt8K2IPQWIb4vr171Ih7Ae1hr6EdRRTjC8YmxEb8WdRI8DNlKC+ZC0AZZI7a5b2FhVXjOKMc5lEkqYrwMG0CLmKyOy+aMr8Op0Oml66QG3sPf1v37+xpb6g2FxaxIFx7HpSNj+asTi2xcMkMbCDCvE0uU/E0vlaw/EEza1a4HxaJJ8Zh5c5z4l2AytYoyLfXYbW071qL6fXf17+9Ouf739damwMb9mcEfgTosbo5mkLFgwzIWIjtm7AV7mDgcrOXUAgixB0tY73raCX3obxicWKj4j09OtYfJF8OfcV4MiXMg84HlIJIHawrIQpZ2ZDmOxX0HX3rRc+Y8eOsavmJVdB0tQPhvhqTY2c6b1PMuLWXzqVNwtwVueg7Fe9VJSinRgQNSRuT7U3HxyPuFyjY9bnaocOrJKt1uLea/XvWkiKleGxjkVQGFyCfYjYdakTEtCzmQCQNYb2IPS9SFQY2bOcpZTcHQC4FqLyYZGABGdB6ahjsR/fWinIBzRZwXXS/f9R9KBYfN4mVD5mY6/OtpiV0bJZAF819wPQVV4DwmAOshOZh9L0vtkPAbE4HE6yyBrCw7H0IHWokxGV8x+K99tdq2nFuLK+YFwFTKLWsLkgAAncWoNNhIHSRkIZ9BoDca/nROixTXiTEZ9FB2UWuW2uflU8UXh2kYMx2GW5t3uRQyK6teT8A7aXPX9KPcGxweN18SzhvKOhva/wAqfUENh4sDNdDcMQLX8v0qtisShbQ6gnTprVDHYIpMUtYsSwy7anS3yqfA4ZEuzgAa2vvcG1KKoZxXDkG52Nie30q7wWXyklbgbn++tM4mN3LXB01/Qdqj4bY+RxZHOnar3xK9PgFJSSJrHNqpOptqLepFVJsOzsSR8ROY9Aew9bUYwmDVSbN0JU9jtoKjwGDVmdC12sW+YqdB+EwyxQsMrEX+LtoL3G9VDw8HUS6H+KjwhKxZ4vM+zIN9tT9LULl4cmY3YDU6ZTpUyxUgVHEShOt9rE/Ie+lSw4dlQ2I9d7e9XXhIQEjU22G4A6+1Vb5L3O+3qKuXYhSkiYtfoO3pUuHTPpew1371JipGj2GjDrVJJbC5Ol9R6Gq/hf1JxDCkDU2PbTWrXBOXJ5zZBe/W9X+XeCPipAAhyXFr9f8Aau38E4NHh4wqqM3U9vap+xVgODfZQosZ5PkK2PD+UcJFosd/ej9qUCqs8LUMWGRNEVV9hT2131pzU2nICKttKUH8rfrevUoFVE6rrgowqoEXKpzKLaBr3zW731pBgItD4Sk5zILjUM2pYHodKsU6mDUhS2XKuW+a1vxXBvb3BPvSjDpn8TIuc281he3a9rilFPFApnhKQVyjKxJOm99yw6k1J4Y1Nhrvp6W176ae1LaloKm5RYCw02GltNre1Io/OvEgXJNgNz29fbSuYS88zTjiXgsqJHCHwx6+RvDJPuaRun5aQ1h8JzRI82CikIjlEkiYpO4SBnDg/u3UG9Bzz3LiP8TyMUjXCvJhjbW0TZSwvvfOtOB07J3rP42T7vjVlOiTpkY9A6E5b+4IHyoXguYZJ8ZgIhHLGnhTM5cW8QiOMAj2J/OtZi8MkqlJFzKdx/exrTjrL6w+Xm2eMxzLy/FLjsKzKxEpkElncL5YiVuBoNbChHHhi7cTESqIPEjuTnLm0UYOTvR94XwUsISVnhkcRlX1KFhYFT9BWjkP9/3660uuf9K+PvfL+sDzI+LbGQSwoww2Dkj8TU3dnADEL+IKG1qrguHTrxRpREVhbGSXm8xZlMSARsv/ALdzoe9dEY7UxpD/AH/ft9KlozPCuXoYsdiJBAAoSJoiL2DMjhsp73oFy1w3FIvCWmYNHHnJjCHMl431cnqdr+tbx2/vb6W2qPN60GxXCsNjTi5MViEsmKgmjCDUxhbGMN2JtTeQeEz4d28eIR5sPEqhPg8l75//AMzWtqzf3/ZqM0oGa5xxB8fAqkfjSLK0vhaWyBCgYntmIF6uoeKObl8NFpcKA7kDsTttQriGMmPEj90hEzQwNE+a4RGdgwue1tdKvjA8Sk+PFRwj92FMx+TMaYQ8miSBsRgpSjGG0yyJezDEuxOh9RvWoU1jMVw6TB4vDYg4qSXx5Vw8odVAylHZLZdb3T862ZFv79T/AEo9n4LDmsRYgH3FUsRwTDvvEoPdfKfqKtA1Ipq530zvxc0GfATweaBzKg1MMm//AEtRHh+NSZA6d7EdVPVSN7irQNBVTwcblXRMRGWsOjodT9Kr/tPWWf4+pgT9oBxJi/ZZRHYL8AkeWRzZUUbAW3Nc25U4dj1nuisPDzRk5VdkEb5WyKeik2Nq7r9Pci+ttCPWhUyLHi8MFGUSjFKbbkyASE++hrJ0y6R+YsPEgSXEB5FIU+WzsW28gowpuLjqL1znin2dr95Wdpnyl1BsfNdm8t710TDQBFVBqFFr/wBaDSga0prwpb1JlUU4CkBpTQDJnsL1geb+KlPKhOY6k9hW/eLMCO9ZTjXK9y0iMczb31FYfIrmuaQQRyNnynPfTT63odxGILIAhOu/oTv+VayfDSROF+EHQ6CxFBpsFGJcofNa7HXqTpcH00qZV0NwYkJYdQQLHr2NX48Q+fIwG1x+lV24eyt4pY5ddtDYbfKoFx2eS50sDYganqL1SUviyIwXL5CDp09/WrOJ4lkIud97bWI0I61GOJIfM9y2UBV6fP61S4w18rG2a1vl7Uzq3i8ddwugvl82utX8eyQxxurm5It8h2rP+Ey2BawOq1ENXyuWZQbXGtl6n0p2ROrEjvMAFU9S3Y6/rRXlS8Mhv8LaHsLd6J5VWIBcrXAs1rWv3qkpy+Qgs126Aaka2HUC5qbljSLPEWWQsmVgP3lF1YbjfrpQf7p4dmXTTQDc2OvztWhkYRRrnJ82UKDa4J9ulDeKBIcRke4V/NpvqLfT0pbSs/qrHxCTOqsga1sl+nXU9dKs4nFDOP2Zb0Hw67/1pcXiIQwteykeYDQm1v0qI4x1kJHwgabden0p6SXGcJiLK2dQpIN9SPY0vEECEZSDFe6su+m3tre9V48R5DcWN/Kt77+h0p2EwviOdQE21Ngt/wBTehR8cxDlRc5mHmOw/vWpzjkFlQXcE2Ye9QyqtyGBAXci1zrufypeGasA1hvbTU+vzqegK8HxzJe663Ot99KoTSksx8Vxcn8HrV2UJGPKy6am+3yoHJxpbmwW1z1p88+EKw+aKxBGUHL6m3eqPDcBNJIAoLa6ncVpeE8sSYsghSitlZvkP0rpnA+Bw4ZAEUX6nrRzpXqMpwjkFCL4kX1uAaLv9n/D/wD2vzrSk0hrT6s9VuH8OihXLEgXSxPUj3q2tNvXgaMwFr1IaS9WC14Ugr1OA6vU29evTThbUtIDS0EQb0+mLvTzQD1paaDTr0FVfH4ZZY3ja+V1Km2hse1CcfylhZlCNHYCMxeXy3UkGxtvtR6ktQYRxLlnDTOskkd5FVkDg2Yqy5LEj0puL5ZwrqFMQAWJoVsbWjOU2+qg/KjVNagKkvD4meKQr5oQyxm/wq1rj/4r9KmNPvTGoIC5rU5InClhHMjsALmwqKTmuMHMYpggIu5QgAE7+1aC9VuIwiWN421DqRatubOpJY5++LLeoc57a32+l6FcV4xFCQjEtK3wxJq5PqOlR8uYsvhlzatFeNhubx3G3qKyvEuLzrI7YGAJn1aZ4naQtoDa+1rdKjrnK3+Pv7RpOBcbXEh1KmOaM2khb419R6GiLEXIBFxuAQSPlXInwfFDiRizK7TqNCImFwOhA3rX8tYBFxsmKP3gSTIbh0IiVtCbE9dPzqVtYaC8ycwpgkR2jeQuSoCC5uBfWjTUP4vweLEqqzBiEbMMrFTe1txQHO+G89SRTYt0wUjfeZlcZhYr5QoBse9WU+0TFvcpho1sIyAxOokfICPnWlbkXBX2l3BH7Rveo15AwIt5JLAAAGQ2spuBbsDrQcYfjXNeNxAyu0UXg3nXLrdonEdvfzk/Kq3CPtKxzTxK0qsHdQwKj8R1tXV8Ly/hIxZcPFbrdbnUk7nuf0FWo+F4cWth4gQdLIL9xrS0L8lrm399aSmm5N+9PAo0qUUI48csmEe9ss+U+zhhb660XFBeJr42Khg/DEDNJ/q1Cj861+Nz/NlwXff++hNZrmfiEcWL4dncACdwddg0RUE9hc1put6zPF+RcLipTPP4jSG2ubQW2sKzv6258i5zrxGODCBncLeWHL65ZFYn/tB+tG1mDWZTdW1BHUGqsnDYmVEeNXCABc4zbDfXrViNAAANANh2FKqiQGlIqMU8GhR4pwNR3r1LAmElPYA1WFLG9qmz/ZfgLx3hKsL216enb5Vi8XhSW/y1Eq3BJA26+5rp8y3B9ayXMnBy4LC+YbeoHT3Fc3Uv28ac9eOePivjjdlUL3F7nsO1AHmKSFgvTtoL1pcVibSZCpuRcm3Vd/5UP4kolay3VdN19rkn3q+aVRYPwhGXJ85HXUDvpVbF4PPdrgZSCABodydfpXmiyPZXDhDfQ3Fv6XolhMasgaPLlN7t/tV/08A5cToBYgrv9LVZwmJiQP5j5rfTS4Jqo+VnO9rmp4YkK6C4OrN1FtrVQwSmxEkmURpkFiGsPofYVb4dilRg8hNxoBck9N6AYjFvJ8OZVAtpfYf71AJiR4ZF9b360sC/xHiLyPbQa6L+lOx8pdgJD51AA+mmtUkU5Q5sBewvv2vVjB5ZGs583T1tR9fBolw+FljIP4rH6VbxGFUsSCASFvfYf0qHCSLmC62W5trcmigwhKnNqCy2yjcDa9Z605gXh8KG1IvrY+gHbsfWiUOEjBIUZlKnyg3OmxHbrVkwZARYk2N/4gf0Ioe2KiQ2jUKw76aDffep0KmIOYqQmXcW36Ea96oT8RDEZQwK+W427VZxDi37RmBvfy7C9AsXYMcpNuh2rWc7E1ZkkYghrm56/wB+tU3VASA22m3arXDkLm3UC+uv1q/JjkBI8EGxPanhPozCQqiKFAGg29hU9Rx7L/pH6U4mnOWRhpL0ppALkCrMtJXO+I/a3h4pHj+7zHIxFxpsasD7S4HwU2Ljic+CyKUbS5fTelgbpjSBq5vw/wC1ZC6pisM8Af4W6a10RJARmBBBAII2II3FP8B5avZjWZ5r5yhwMkMbAtJKyjKPwqSACfrWhxs6Qq0rsFjQXJPTragJwadauXyfabiZ3YcPwBmjUnztmN7e1G+SuehjJGw88XgYlbnLrbb19LUw2wFLemg0poRTr0opopaAdS1HTwaAcDS3qMGlBoCQ0w0pNNowPGm17NTXajAaxqFj60rtULGnPCvoFLJ91xLOf8jEWBP7kg7+h70bMh+XS31qLF4dJFKOMytoR/T1oNHgMXD5YZUljGgEoIK+l+ta+d//AFz+/HfPwcMx9aiZz3oT95xovfDI3+mT+VLhuNKz+HIjRSHYNs3saX+KtJ8s/okNT/fp/X8qzvCeYTLiZInVIkXPlDkiRhGdSARatEpHcfUe31oC3KMTXMk88vlZUDMv7MP8WUqLk6W1NTebF/eBEvPQbB4vERoLwyrHEDe7h/hNvar/AA3nGJxjJGK+Fh8pQj/1FZQBa/dzars3LGGZ1YJl+C6rYI3h3Ckr3yn8qiw/KGEQRjKxVFQBSdGCMXBfvY96jYuVnZ+d5TBh5laKMuk5ZXDeZ4mW0YtsxDfkaJYLmiVscITks8gTwLWkjXwxIZCx0IB0tRt+XcKzMzxBs2e6n4f2mUNZdgfLuKVOXMLb/LJbNmz5j4l8oX4t7EWFqAo8v80LicbiYFt4UQvGw3fKbOfe5OlaQ71UwvCoIzEY4wvhIUW2nla2YH9651+dWr08KpFoJwFgRicUxsHkIBPRI9Afa96Lynyt3Cm30oRwHDh+HxxliodCCV38xJ0/StJ5xWF97kSDjMZmSNGVkaOWRnBBC+HkBB/7r17FcehUJIJYmiLFXfNbKctwAOp20qrw/lHDwKQjSXYOMxbX9oEv/wDwiqg5Bwexac+bPbxLeYC1/e1ZN8apCCwAIuRcDqVOl6zvBOafGxTYYxgH9pkKsC37NspzL07+1T8E4KMPPJIC7XVVQvIWNgbmq2A5WSPEtifFJOaVkVVVSDLa+Y7sBuKVOL+D5ihkxOIw4/8At0Ds/Q/vAe1qHYPmtngnnMcShYZJoEEgMhVLkCQbLewp/D+U8PDZlLZjHLHK19ZRLqS3Y3uR2vVfh/JcMaTK0pdpYWgD5FUpGQwO3xPbQmma3LzbGzssJSTLg5cQ1jfKyeHZT82NWeX+PNMfDni8CURrLa+ZWQ/E6t6XAt615uAwZlIGS2Hkw5CKBdZAoYn+Ly3qtgOXcisJMRJKxh+7oxAXw4+oW3U2XX0oNFDziJcPj5YlF8KTlzbOOjX7b0T4RxV5S8U0fhTRqGK3zBlYHKyn5W+VQLyvhQsiIvhrJAIHVbAZVJs1ts2v51Y4NwhYWdzLJLI6hM72uES+VRYba/nU9FRVDXnS4tQbjfMkWEaMTXAf8QsQvvTuXOZI8YX8NSqqSFYst5ADa+QbCos054fNwaDxPGKDONL9NdzagnMHB4niZgFVlYEnoVJsR79a1WJNgT0Gu1ZfmDhTOoYM2W3wDrmO59r1j1zipXM5c4nK+RfMsZt1ttYDvpRHHcNyLnvlkuNxYW1DAj5i3tR7FcsqEEoIsWKnuDlJVvqKyeKxUjSWaS6Zc1jrcj/eql1QPNh7Meua9j29xU8ELCNlv10t6a7monxhkYsQoAPS/wCd6sIwcFAfN2FtvetIFjhGJQRlQLk637AbAj3qkMFmcZ2CDW9/TXarfCoWiZrpckWAPvVHiFwxcqSAdb7jenpVa/wp/BMoAKDb2I6fQ0zAzyKwGUEWuDbYW39TVrDcbUJ4ZzZLWAOo1Oo/pUsiIF8jH4cvS9j/AEqdJa4XxMlyVjuw6+lrXNHosavhi299dfhrFriXjQPG2UHQm29tLH3qjh8awY+Ztd6n6rnTTcwYuRfgJ0sD3PrQ1eKeIVR0Vge+mttr9Nail46WAVxpawJ3+YFVsRCmXMGBuAdTt7etOc+l1UsuJDsbHToO3ueuoNT4Nla4e2gzA2GnS1UuHYViSLG1t9QAO9Ty4J1F7jzbDfSr/ChqYVkbMSAM3e19P96JPhoSSfEYfIUmD4VNMgG4v1I0/vWp5eWpwSLbE1P3isd+Q+Uf6V/QUhpkTaD/AEr+grxarjIrNTS1taRnpoPpf0/v1qg519ragz8NUD4p1JsN/Mt72q/9tsYXhbhbf/URbexrH808Xx+NxEEkeAlBwzkrdT5rH1otzbJxDHcNImwjJJ95jsoGpUA66dNaAqc2c6YPF4FMJHC88xVVQ5fhYWBtatxwN/uHC4vvTWaGLzgnXMdVX320rMce+ztMqzYK8WIRVOXSxYDUa0zmDB8Rx2EwUM0JVnkJxBNhYIbLm16gUg59xviceKSbHSTf8y0q5Iu0akansdB9a6J9qOPM2G4dGGsmJdTJbYgBdL0e4pybhGwssEcCK5jyq40Ja3rQgcrTYrhEOHn8mJhv4V7XBB0272FOE3eFgiwyRwoVRbWUEgFjYHTuf6CsFz5D4fGuHSp8bkZtNSASLkD0ArH8x4ziU6wRS4WUYjDt5JVB1A0G2nf60S5AxXj8TaTiUjLiYwojSQEbKALDYaAUzdokbU+9IGqIN9a8GoRU4alvUIanBqDTXrxpimlvSIoFQcUx4gglma5WNWY29Bt+dT3obzPhnlweIij1d4mC301bSnoTPxZBJhospLYhSyX/AAhUz6/Wh2M5vgQYzJeQ4RQZAp+ItcAA/wCr9KCScmvBIkuFLNIIJlJlkJGd41VMoY6eYH2tVB/s+lhjxCwyCU4jCSRymQgEy50ZTp0PnHzpgak52bwmP3ZvHE0UIiLi15EMitn22VqIwczxNgmxjLkVC4dDuGQlbKfxC4Oo9axZ5BxPgsojhF54ZPu/iEx/skZGYudcxDDQfu0Qw/IrtFDhppMsCPNK8cZ0DPbLGD1UeZr92NAFF5yg8bCxsCqYqFZEkvopbQKx96q8U5ukjd1TCGTJifuxIcDzlQV371Dw/kxgBFiCskKwSwqV0YAyl4ivZlBtf0qp/wAJY5YxGs8LZcUuIzvmufDsEB6k2H5UATxHNZXOkkBTErLFGsGYEsJNQwt8QGuo7UQxPH0XHRYG13dGZj0U2zBfc0yXg5kx0OMl8MmGEqLD4pGOrH0A2oVDyVaRcSZb4rxzIZDfLlPlC5fY0sBDzmPukU3kEskwjMQYZheYx3y3vsL1oeIYGOW6SIGF++vyrNR8kRrhokAQTpMsjSgG5yzGS300rUY92s7IFLXJUObLf+Psoq51Ynrjnr9CJ+XcKoBbMik2F5CoJ6Aa70rcsw9GlUjezmstxbH8NAb7/i/vUpB8sLNkjP8A+WF0uD1NM5E59Rj91mZja/gSPoW/dVz0Nup0qv8ALUf4OWkjx0mFLRTh3QWKShS1xbZrdRRHA8ThlsEkBPY6H6UK5N4ziMSJvvEBiyPlW4Ivp0v+tFuIcJinBzKA24dfKwI2160fbnr9ReOuPxc1/v0p9CuC4tjnhlN5otz++n4WorUdc5WvHWx4mkJpbivEUo0jw10PXT60G5ZbKjQH4oWI/wChiSpozoNyBfTcb1TxGAXxUnz5GUEE3ADr2b271fPU9lY98W9bFkmvE1RxnFYUMV2DeNJ4ceXzXbtfpVXmXi64bDtKpzHNlWwuuYHUE9NAfpWd8bT8Fc1NU0HxHElYRJ96hilkdSLlWGUAl10NgTpvVTE8zEYx47KcMi+Zxrd2W8a39bH6UplDSE14HvQ3gGLllw4lmQRG7G19Mo2JvtpV3DSpIM0bq4/hIO/emcTZq8Cb0L4xj2SMmJo2db5lZ1uFCkmwvqbgVn+IcwvM8UUbCMuStw+7ZepF7WNLTbQNTg1Ao+MSDHthHClUhEjOCb7ak9LXv60bI/v06W76WpUMvzhyUuNu6m0hB3P4rgKPYLm+tCMJgxwrDGeCIyyq7I11zZSrAmzbi6nauhRNVDgkgaTGIbEJiRoRf4o1O1IKfI3G5sZA0s8fh+c5RY2tWhnsVtah3A5gUlUbJNKthbTW4v20NEM4qepojHcz4eZUtGLKDm9fl9TXOS5jkuV8qqbadz1ruuJw6suutZDjnDIgGJXQA7De/Ssr5VOTqFfMBZbsLdBc7n2q/hJFFlZQCugbvrvUMGHUzNdSBm2Oml9NKt4iNWLKupWwJt21/wBq104mKgEFZBuD6kdNaGcSxTzyW0GXQ+ttqvJKsqMoQZkOpXp0NvS1B2Fzew32pQzQmTQgHUXq7ABJcAC9zrc3A/nVFoSvmIFvXWjHBnjJ85AG49zVUlWXBsgspzoPNlt12AobK19hb26UbKR+KUMt7g5WGuvQHsamxXBmSPPYsQM1v9+ptSlEZwt9R3q5wyLxHy5bi3m02vUOMYsdrAW6a67UR4TBIgZgQLqLHSnb4eND/g8kiiGLTP8AE99FUaW7dqN4Xl2OFQpYsw6n8zVflzHynDEhVZhe3qatYOfxHDkkBR5gQel9j1rl76u41nMh8Ygw7CU+UsLE9D6iocVxdS7EEkZjY3GutBec8bqpKeRhdVPxA9yKzvjSnXy6+n+9ac8bEa+ioibDTov6Xp29c0+2DmN4Ew2HhkKSG0jEHUC2l6LfaDxWfDcMikhkIlLRLntqcy610MWxZTSHe1wL6C5tesvybyxiYnGJxGNeZ3QXS3k1825O+naua8wY7FYk4riAmYDDziNIlva17X09u1MO4GQ6i5036W9/WmZ7m97+t7/LSsV9ovFJDgsLEjFJMW0SnLowvlzVT4dgW4bxaDDJLI8WIjOYSG9mHUX/AEpfobuWVVF3ZVGvxEV5JLgMDmVtiDobVyzjWBhlx/EmxUsngYZQyorFbsRYD+dXeGYqTCcuNIxOeTN4ea5KqzHL+VGB0RcQjaK6sR0BBNWFQ/71yfinAhwyLh2Khd/GaRBMSTZ8+ViLXNqLfaxFjIwsseIyYcmNMqjW77m9/wCVMOgQY0OTkcMVtexvY+tBeL8JwWKxKmQj7xEc/lPn0sfN8iKbyryvDgI3dXdy6K8jOb/CC2g6b1gvs5x7TcZknkH/ANQsmQnaysUFu+iAU4HW8Vi401d1QE2FzbW1+tPXW1uo371zv7cUvg4DsfGt9RWi5D48kvDY8Q5H7FSsvp4YNj86KQ3HxKEymASL4wFyl9dr/lT04lCZvAEi+KADk62Ncg+zXiJxHHGnkGsqSsvtrb8q1WCUf8TTaD/6YEenlFMNvxTicWGjM0zBI1tcn10sPWp8FillRZEOZHAKnuDXPPtpmeRMPgolzPKWkZQekffTQWF61P2fYkScMwjDYRZfmDY0hWgvSFqRqa1JJQ/8qQSVGxqPNVGnzU29NBrzCgFvTWp1eFLSR2ppqQimkUDEZXSqfEsIZVyiRo9TcrbUdQb1eY1G1MMi3IUFtJX2P4UG59qnh5JgXeWW4IIIy9B7VpRuP700vWVPHJfHAzqP23heFla+S9zL/K+1qVMdwWCMZJ8aWQtvnIIvfcaaVauarcaxRhheUIzlBoq/0/vSh/KfGnxeHWaSIxselvKeoy+mhFL9K/i1xXAuzJNDYTR7A6CRDup/I/Kojx1xo+EmDDewBHysaKuTZiBcgMQvcgEgDT0oPynx77wlmcPKBncKpVY83/psTu62N625+SZlYf4v7KnwvHYnYIVeNj8IkW1z2BqHmviEi4TE+AD4qqRe2i6XJv2tV/imBXERlH6/C3VT0I+dUuHytiMPJhpjlkUeDJ6g6ZvmKXXMvsHHV5uVznB4KTFSqWnUzeHECM7ZWDoxGmwIy796tJgG8ThyyvKfGXEhlZzYCI6bb3FbiTlXCmFIRHkEdvMvxnLewJ+dei5YgHhG8haEOEJa5AcWbpWf1dH8YzFYFY8LwloiwviGmO5t5yKk50IkxeKhjfLHCqExgizSyXzG3XQj61vOG4BIYo4lGZYvhz6ncn+dUF5ZwokM3h3lbPmYn485B19iBRmlrJvgZ8Q6SIIUkwrhYozHrKcovnI0A1312odz4xE9/CkhkJheVUsY1yMRnWx82hNv5Vu4+KJA7eLCYc5uZN1a/r09qnl4fh8QS5AckC5DdB0Gug9Kf+PqInyRlOauNJFhIoMk2IVrMJAyqsg+IqTfMLDpaouWGeLiDyQYV0glhVvCDKctwGvbNtYj6Gtk/A8Ows0KkXBsb2B2uB02qzHhI1fxFQBwoUEfurYAfQUrq5XD4Znm4gzxoxZmkyIxAuyq2m5HSreFjlmfEImGcyhoZHC2BUxE+KF1vrmA07V12PhsKgARro2YEAZg173BtSxcOiWXxggEmt2vrdu/f/alitcm5g41J407RRNEZYkjVVJZwouWzda6dyomXCQ/tmlDIpu3QgAEflVbjXEYcPOGXD+LP4ec2yghL5eu5NtrdKu8BxkUsWeFSi5mzI2hVjqR9DQYpuDY2Ouvy0/WgXL3K4ws0k/3mWQyg5w4sCe416bUYzVW4txdMOgZgWZiAiLux207AdTSCThfCIcOZDCpBkbM5LXue9X2NA+XOOPiGlSWNY3jy+VSTo19ydzp0o05qQr4mcrcDrWE5q5syqViVib2uQa3WMawvWO4xzFhVkMbAZgL6qD9Kz7iowK40TM0kocOMu23YVd5cmV2YFb3vcncdRrRjBtDiQcyBe2U9L7kdanl4C0S5oLG5F7aaD94Gp+xszxG0cgeMZUK+b1oI2JBN9BeiXMOLZ91y2+VBT+Va8cjVhIi5styNLUTwUDZjG66jpVThU+W9l3tRX7+nf5Hb5nejqnIZi+GABHH7xuLa+UX2/nRfheOCo63vYDyk7Dbc6e9UuIp46jw9yQRrbprt7UPsqqVZQSRYEHY/wA6j07kXOMwKrCRWFmGnUXHSq8Mi5Qg3ZvNbtVDES7KSbXv7UT4BMoPhLGGd9Fb07mqsyFLtbzhWGTwgmHsW/i2B9fSrWCw7xizjJbU9V1NtPrQ3hPBZoCC0iC+xGpY9jRLiryhS3xKvxDqB7dq5L+tv4xHOWJE7iFWBaMk5juVI2HtrWb8O2mZvp/vWt5h4Okq/eINSQC3brp71ljOf3TXVz1JGVg1zHh2xWGxPFXuA06JCDtkuBoK2v2tOf8AC8IF+JpYbe/hm350S4xyc0/CoMFG6oyBCexa1zU/NXKzYvBQ4YyhZIihLdDZSv1sTW1ZJeTpsTHBI2NnjfIFYeHYsqhdmArDYz/llm4nw6dZMK8n7aFwCLk9tPW1bzlflSHBBijNI8gAcudD6AGs/wAR+zhHkcR4gxYeVw7wgaEjtQDefsaJDwnFkZUMqMRb4c4H5XqfjL/eOYcKikEQRlmI2F9dfrWj41wCHE4b7q4IjUKEI3Qr8JFU+VOVI8C0kviNLNJYF26AbAUBh5uW3x/GcYofJCkiGUA/EN7flWs+1TBX4VKiABY8hAHRU0/OiXC+X1gxOIxAkLHEWzL2tRiWJXVkdcyuCrDuDSDm/OmOXFQ8KhjIZpTE5tqRlAvf5CjP2xm2EiGljiIvnbKP61c5b5GwuDm8dC7OLhA5usftV7mbgEeNjRJHZQjh/L1t7+tGkj56xvg8One+rRqijuWUCw/vrXKcTNjMMmCnTCmIYdPCV32cu5N2At1PcV2HjXBYsTGkUubIjIwsbXZLWv8ASpON8MjxULQTAmNrbGxFu1OGw/2ss54bhDNl8UyIXy/DmsL2uTpe/WsxxZpcPNiOFxDy4x4WFugIucvYfKuq8W5cw+Jgiw8oYxxZcnm83kAtc9bgV7E8tYZ8VFiyG8WEACx0sqkC/fW1UGRwmETDcw4eFAAq4bJ88ut/Wr+FP/8Ak0uo/wDpgPnlrTT8Bw8mJTFtGfHTQMC2vuKnXg0H3k4oRgTlcue51HsdNKCc/wCOSYzEcanOBjSQwReDdycq518x0I82tP8AslixUOImwc01o8OrXgNt2t5lNr10TBcMhieaSOMK0zZpDc+Y+3TalThsSztiQgEzLlZ+pHttQKtNTGalaomNKJITTWpC1KjbXIuen9PagPKafmqvHIGF1IIOxBv6bj2qVKZpCaSoZsXGiszyKqx6PcjynSwPY6inz4hEyB3VS5smvxG2bT5CkRVNLeh/C+N4bEllgnSRl1IU622zDutW2xMYLAuoKJncX1Ve5HbSg8PNMIqpwvjOGxKloJlky723HqRvb1q2xoI0evv9CP8AesdjOHSmM8REz+MENhlGXw81wu2unWtg+oN9tqFNwSEpkLS5bEWzm1rWt/4opwH4LJLxDNM8jphlOWONPIZD1ZjuQNbDT51em4OMHGZMIWVYlu0LsWRo11YLfUG1z8hTIOVsKgCr4oA2Alew9rVI3LmHIIIkIOhvLIdDoetKQU2LGDGvkhlZcOiK0jKcruz6ogJ2UAEkjqBVj/hqFLmAtBITfOrtZmtvICbNfao15bwo2jI2GjuPhFhex1py8u4Uf+nf/rf+tOQJeC8cWUCN7rOFYumUgXU2Yr3BJB+dR8WHgzx4j8D2im/6tm9xVnBcMgjbOkYDWIzXJNjuLk1Y4hCskUivquRrg+gvWnF9xj8081OwphWqnL8pfCwltygue+u9XqizLV/H1slNApLU+kNFUZkFtQCOx1H0NDJuAQklo80Td4yQPmDcUVIpL6VU7sR18UtBSMXF2nX5B/8AzU+E4tHKSvwP+44sfl3onmqnxLAxzLaRf+oGzL6girnXPX6zvHXP4lcWNqba1DIcS+HdYZzmRtI5e38L9j2NFuvz/nWfXGNOO9/WK5qhz4qSRM3/AC+HRZCD+K+dB7atf3FVOCY84fEqA/8Ay88xVo8vw+WwfMdfisL0V5hkeHEtJEpZnhRiikAEqxju/cEH8qB4zEI0crtZWdFESRqzBWFm1IGrXt9KitW+gxsbu6I4ZozaQD8J1/K4rNc+SrnwwzhX/bag3Pwroy21B/lQrlDinhzSO6ZmlDEhB5iQ5diRv1OlOlnRUOKaFmzYpvPl/aIq5muFPoBpapMR5ZxkaY6aNpxbwo1jzG1yCSbA9fNWyZq59JFHiJcSCryO7rkVgCUEir+1LjQC/TpWs5axDSYOBnbM2TIzfvNGShPrfLvRPU25+is7qFbN8IBJPYWrjPF+WFxM0hwc4ny5WIv5gGLX+lhXX54A6MjC6sLH56UC5V5aw+EmlWIG7KhzHfK+by+11p4qVzbESHCQx6XZxcN29DXReSMUcRh0dx5tie/SmcF4SmIwaq6hssk6ajUWle38qK8rhRhYSAPh1t6MV/lWd5FtVuN8rwTqcyAHoV6e9cw4/wApS4YllBZO/au471FPgFcEEX9DtS2wSvncTW022pEAFxvrXUeYuQEe7ReVvy+Vc+x/DXgJWRTcfi12q51rTFjB4zKuWxBGua2xqXCxAqfFIUEXW+5Peh+GlLeUm46e9tKXEOcoJBLbX7WqLuhJLhsxy/hGorbck8GX/NGpGh029qw3CnZ5NFOnYb23+dbWDFSRINcqkj3+dR8tv4r45NaHi2TQOrWPUaEHuPWhmElmSQQ5s6sCUzg3PoxHsaF4nmq7hSmeO9mI3HetdgcbBIiujrYba6g9rVz/AFs/Wtxk+KYwwyeEImTPYm/wanWo2wcZN8i/nR3mefxBlSxJFtddB27Gs5fEDQE2G2la/bEV2aP4R7L+gobxnjC4Z8MrKzePL4QI/CcpIotEPKPYfoKyPPtjiOFi/wD90T8gpua6ua52pdN/77U3KabxbHRQxySs6kIpYjMLnXYUGxHNUSYBccwF2QFYgRmLMbBTrpVAZY2BO9lZreyk0EwPMYk4ecb4TMQrfs11JytbShfBeZ8TPPiIJ4o4wmDkksj5/iBtc9DptU/2Z8RhThmHV5o1azkhmANmJOtGAS4Hx44mSRPu0sWRVOaS1jfoLUYy0L4bzGmIxk+GTK0cMSuzqb5ib6D6Vhzz1iZcVC3iQw4V8QUy3/aBUuCz9gbUw6bl0r2X+/ag/GuccFDDLKk8bsiOUUNqxAOUfOhnMnNMkHDsLMpRZsUUUM3wICLsf77Ug1uQ01V/v8653yhzykUeLONxaySLJ+zsQFcKoPk73JIqRftUiZ4NY0R4pGlvqUcXCIT6gA29acDoYWvLHWE5V+0TCnCxHF4gCdi2cBdrnQW9qTgf2oYa+JOIkH+Y3gKqm5QDQfM6UBvxF1pQvSuQcO5pxGLxWDP3pyZZyHgWPIkaC5X3JrszKOm2tMkSbUtqfTWNFTUT1CetSvUbUtMgHfQdT6dfyvXNIeOyy8UgxWSRcJnkgjY/Aw8N7n3JUa10u1wb1B9yi8NYvDXw0IKIR5VI7fK/1oPGc5Jxsa4KFA4Mh8Uqlxma0jEAX/vUVck5jkiw02ImwrwlLCNXKsZGbRQAvqat4HgOFhfxIsPGjk3zAa3P6bmiTxBhZlDAEGzC+oNwfe4oJx3ErNFg+JRYtWSWZIcR5tSWaQg29gB+VHuLGeGfB4GYF/DxOaCbo8WQ3Vr/AIwNPlW/lSGVmVwjsgUOCASAbMt/Q2vUxClkDZSwuRcAn91it9dAaNDknIfEPCmwsrNHKsWDmDLCCHiC2P7fozXFWsAuKWeTFYpMox2HxCrY3y2XPGpHTQmtnw/jECrKZEhhBabIFUXeOIorM1v4jajbWIFwD1HzFtARppp7Uabm/IqSjE4UzxeD/wAkiw5F0mBVSTIRs2nXua6MaW/t6emltO23So3NCKp8T4xh8OP20qpfa976+lC35wwXScH/AKW/pWX5ylVcXiboGOfh5DbsoEjGwG1mJtR6fjjAgfd9bSBssembeOxtt3paoS4ZxiHE5jC2bIbNcEWuL1dsa5c/Ok0OKxJjgVvE8Ive4yskYBsAPS1P43zNj54GRsK0cZALsquLoLMwB9QCPnVaG1k5vwSsyma5BsbKTqPUVPgOZsLM4jiluxvYFSL2F7fQVneBY4IZRh4LQBmsCoNv2UbA3I2B1rz8ZLYrBlgiqJEufKLExSXY5ejWWw6WNAbmqXMExTCTsN/DI+un86tQyqwDKwZT+Iai2x1+RpuMw3ixPGfxqV+ZGlVxcrP5JsqXARZIY07Io+gvU1DOAYovCA3+ZGcjj1T+oorEuov3FL5P0vi/6x7JTbVjeS+NyviXjnlJV0me7KAF8GZl/Z/whQL0nDObpMQOJFRk8OCSXDabqisLi+/f51LRsmFNymsVy/xHFS4fEBZX8SDwZlEgXMyWDOt1NrMAwFWcFxaaRcFiXbIuKxTsEJsFh8I5Vv8A6gD86ZtXl10vXsp9rVnuL4jxcT4AxRw8KQeL4ilQZCTbc9FsPrQvDcaxQbBTG8i/dmedNmdFlA8RB+9lOb6UDGtx2ESRDG4upHTcHow9qDpiZ8OAsiGaMaLInxAdMwPYU/lTGeLhi+cv+2mAY9VEjZfyNFlbX++tVO8/jPv4t9lZLE8RWbFu0ZYBcMg1FjcF2/WvcNUmPCMNvHjB73O/6Gl47hS2OYqLD7vEWO3/AKsi/mSBVYBlgRhe8UpfTb9m4v8AoahpzMgfiiY3x14S8sk4TDgCxAYNIzqRbQA7elT8K4e0ZWSSdnC3bI8LWBYaliNyBf60Vx0XjYxpAMyQKYo/KzAs2rEZSNQLL8zXuJwEQvdTa2oySC4uL65tNKiqAOK4KKYu8OOjhLC5CJIpOUbAg0f5e4fL90w8mGmIzRK3hv8ACd72vsSdfnVXCcv4YvEhMq57kBLZAMxABvrrYijnKumEReiNKg7+SVwPnaq4t5Z/Jx9olwXGkc5JB4Mo3RrAe6nrTG4dK08s0eJVc8QRUIuFy6hrjrrVvFYVJNJEV/cbexqn/wAPYfoHX/S5Faz69TWU/wAnPityzy5NhVlSTFGQSkkWBBUsSWy9tbmiPA+EphovCjZ2W5PnOtzqRftc1U+54mL/ACZfFH7kg1+TVLFxxQcs6NEepPwn1Vh096m/Fv5Tnze514MKDVqJ+lVYHDDMGBHcG4qwLVnebP1tzZf6lYA9KEca4JHMhDLoevUUVVrVNYGpxW1wzmblGXCnNGLpe9xTsMyJADIpLHoBrcnQ12jFYRXGoBvuOh9x/OsPzJys2jRX0PwjsO3pU2Veucyqy4gEXC3F7aWv8VHsaJQfI+dSBYEaj2NR4tU/9VbOOutz79KHiU5wsLOM1va/YXqbDlwKxUTK7KSQwbppvRXgOHfxQqq2Qa7m3v70R5hiBizt/mXC6Drte9XOHtLHADHIpYAghh9LfnStlmK5gzi+Ch1zRvkkAvY7UDkixFzqN6h4XzHOWPjZRobnb2uKimxd2J8Tcn9ayvNaeO6xp5V/0j9KCc0cqwY/whMzqIiSMhsdfUVoreUf6V/QVFauqOVzTmDkfhmEEXijGS+IxXyuxtYZtflUnLvIXC8VD4oixKrmZQskjC2U2vlNdJv29/nTb7f2PWn6TP8ABeTsJhfE8FHBmQo5ZyxKncC+1Dx9mPDP/Yb/APcb+ta+1JlqjCeBcs4TCZ/u0QVnFmJJNwAbC9YHD8hvPjI/EwEUEEbO0jB2YTA3sCCe9vpXVstOAphyXh/Bo3xf3T7hhPFSUtKLNdYSfKb7E7aVueb+EvJh0TDYfDymIjLHNfIABby+uv6Ue8BQxfKudgAzWGYgbXNPVaQYjkvkOKGFzjMPA0ryM4QAlY1IUBR6XBPzrSLy3gxthIAP9NFgKSloCp+A4YIxjwkBcKSoKbm1BeA4DFtKhxWCwaReGSxVBcPfQD51sAtKKqEgiwcSm6xRqRsQoBHsampwFey0EYajapiKjZaAgZajIqwRUTKainIYFrxWplWvFKqUVEFqvxXGCCGSZto0ZrX3t09zV7JVbiPD4p0Mc0ayIbGx9KpLHw8wrFip5XgmIxEOFdMkZbXwrkEgaEXAr2G5jE8+EdcHMMQXCl2VgkcbnznsdAK2zDymMXClctlJFha1h20qLCQCKNIkLZEFhmYk+lz1pYHLJ4gWMUZDvk4ndR8S5sRGyi3qNq6gB5V/0r+lMw3DYY5XmSJVkf4nA1Pf6kCp2oPUDCoiKnaonGtIOf8AOEoV8cTa+fhxB7Wluaq/aFzO5URQy5bi7FT17D5UvPsNxxNj+FMEf/kaweE4ZmF3JJMfiewJIH5VNONLhoMCmHYlWaVkYXLvmzFTYkX9q055swzYEq2ITN92IIub5spUAD3tWQTEYc5gD4kzAAKo1uVtVrl3hca4eGWeGFUaSOzvbzIYzc6/x2pymIvzBhhh50E4u8uH0U2JX9gsm3pep+GNw+JHZ8OjxtNN4bgM5IjIABt2vYH1NVeFcLimjPgxYdmEMN8tiQ/j+fTf/LzflRPgfExhIGXwS8Xj4kKEXMQQ17Hspv8AlVBPyQ0ayPFHpdGulyVVhM40B/hK1sgf61juXoFE8cuzSPjA2v8AGrAfKtctLfUWaGJ+yxpGyYhL/wD6if1FG0ex/P6UI5ihPgiVB54WWVfYGzfkaKQuGUONmAYfOtu59pK5/j/49XlQwnAcNGXZIgDIHDeZj/mElgM3wg3O1T/4fCAoES2SJoV02jbQqe+29XLUlqzdAG0GFwfhwqiRxTMyyXPQRsVuapYnH4CYNBNkaCEIYelyAVOUje1rUfxHDonYu0as+Urc+oI27+tI2FjsoKLZbZdF0tt0oNWl4RhZY40eCNo0t4YIPlG9vUelWMihgwUBguUEDZdPKPTQU9mqNjSUbFEqjKqhRcmw0Gup/OkY2BPbXa9KWr1jv/f1pwMNx/j8pmilw2GmfKjI6shA0bMh131JoZh+YscmGMLYJ2ZlcMxXq9yT9TXTBIejXGuxuKd4x7n60qTk3B4cTHE4KylpLnzLL5C2+W2l763q7iJMUysGSWQ5SBmSawvbUC9unWumiU/vH6mvGU9z9TRYbCYTjDq0JOExHksCcnaRmuOuzUa5SxZZJI2ikjyySuC62BDyMw/I1oPFPc1jsVza8M6wzkWjnfxTbaAgmNvTW1Ega0V69ZvF8wyQ8OXEyLeaS/hpbUlicunWw1p2N4rO+Dw8uHF3ly+IVXMyAK2Yhevm0+VE8Jpo/Sn5AwswDC3UXGnvWTxvEJpIMLLBicoeURSExgebMQxIO1iNatccixQxOHRMYyJOxT4ENmVC2mnXLTmy+IvEq1iMKuFlgeK6xu+SRL3HmBAI+daG1BeOb4RTqTMt/XKpNGyda0+T3mVl8X/aw4CpL1HTlNY10RIjUsqAjX/eojS5qWaYBx7lZMSOgPp1oVwj7MV8MCaRjbVVXTLrpqK2wNW4ZrVF59GsPiuQ/DFkJIJBCsSdb+tYvjni4dSrKBvr/Tsa7ZiJxt079q5n9o7xSh1zZTZRcbZgQfzrOzGnPTnMcOdb7luva9qc3DiCRn2qzhGXJke+Zbgeu3WvNDFfr9DS2rfRWGlDRqf4R+lLXoY7Kv8ApH6UrLXRGBpFJanWpQtMGZa9lqQJT/DoCICvWqQLTilAR16pgleyUEitSqtSZaUCgG5KQJT7UhoMlq8RThSGmRlRsKkphoohtqQilIpDU4ZLUqrXr0opwq8aZlqS1NppRMtIVqUikp6EdqYRUvpXstIRXZahcf386tOtQSCkHOedBdOLjtBg2/8Akah4Rw9GjhJUXbhmv/TI1v1p/P0vgniAlBC4mDDrE1iVLROSykj0q7yyA0eEtqDw6QXB6q4//mozVRS5cnwyGCJYP+ZKxHNlOWzpmzFva9cz5m8ZY8MsjZoxGREL6BQ5GvrXXOBcWZBhoFgJfLCPEt+zAKg6ne42rmXO0WVMIo1CpMvsFmIpyYFf7PfGOPjXDuqSHN8V8pAF7H6V0rgmMxMMLlYRMfvGIV0TSx8rZgT09K5z9mbW4phzewzEE6aAqRXS+GSYhFxD4fJIfveIzI7AC2VLMD3vToWODE54S3xGfF3BFrZkDW+Vauspw2S00IZgZPvUxZQQT+0gudulz+VawLSkJIqgjKdiCD8xahXLBKiTDN8ULED1RtVP8qLhaE8XjaKVMWilrDJKg3KEXDD1BrXm74w+XyzqC4FeNNwuJjlXPGwI/wDkLdxUj1nZY047nSJjUZNSMKpcUxyQQvNIbKg19aSj3FRNXOZPtQkcO0USKqkDW7MQeoFB5/tAxM6vEHClke5VLHRTpe+lCmo5v5/iw58KC0s19Tsi/PvWETjWIxzOkmIdZCLxBSVS4NyDb+G9jWfw+HLrLINfDAZr7nMwX9TTuG4rwpUkFjlN7d+lvpemY1yzzlPgzYHNHmuytc67b13KJw6q63ysqsPmAa+eJxE2J/Z38NpFsDvYkXB+ZIr6NKBbKBoFAA/6RSpGivEVJGlQ4zEpGLu6KP4iB/OkbzUO4hwOGYymRdZY1jc9bKbi1CMXz1D4vg4aMzttmLBIrgagMRUfFsRxMBDfDwK4vdbyEembQXqgK8d4lgsO8JxLqHjuYkIuQCpTb2qhBieGYlESOYCzOyqsjRuC/wAW24N9qzPEuDySN+PFSsI2tJYEBH89mXTKQ3uLUOwPC47ucQsKhM8TjzXjYsGRrre91JF6A6XNy7hnjSMxnw4yxQBm3OpYnqb3N/WiL4dD4fl/y7GP+Ehcot8jXMeG444dXGH4hKWBXw42jzh8w27j61peX+ZsbIt58ET5Q14zYlb2JysfQ0FR3j5t4E1vLFKGb0BupNGoZlYZlIIOxGo1/Sg+B49h5T4ZbK50ySjKxv8AwsNabieEmG8uFJQjUxnVG727HQ1rM65xy3eOtg/Tgfb+vt61U4bjVmjWReo1H7p6j5UK52ilbDK0NzJHPE4Avc5WuR7HasrzldHPc6mtCGHcb2329+xrxYdSBqR8Q/DYtf5GudvDjJsPOBG4lxWIhmAvYIoJul+nwa+9X5eFSTySyOjKr4NnyAmwmfKj2PchRU1TdxAHqLkXXUajuPSnIVb4TfQE27Hb62Nc84VBjBJgpFgIjghMTqzG9pG1Ou560Y5F4fPC0omDZSiZGPZXcBT7CppthHDffrQXivL8T5gyAhxYH9L0bWSocVci671NmjXBOauATYSYgaKdMx6E9PnVMKOp/WuhfaNw2fEJcXsCCwHXLtWA+520u+nvSi9x9KRSCw/0j9BSkVyKDnjEAhTEtgL6EflVmL7RiCA0O5toaf2TjqoUUoFc8Tnc5mCpmsL6b6+tVR9o12IERv70vsMdOr165jB9oDk2MYFzYXND5/tNnViogW4OmtH3GOuBh6U7MO9cUb7SsYxP7NFt6bU5OesaxsCNetjVaUjtIcdxShh3ri0vOuMAv4inWqcP2iY3P+Ei3b9KNFjuwtXitcg4T9qEl7Sxm2112/8ANb3gnNuHnAs4U9iRen9oJGiIpKjwuMjkuEdWI3CkG3v2qdkp6EdMapCKjNNJlJTqA81SzoniRk+GiOZFQ2dtPLl+ZoMaYfn/ACpCKzXDsRHhpZxLM4DJAUSVsxJIctkH4je2grCfaFz9j1cpChwqggMbHxfN8N+1xqAaRuvEflTlrlfIHPmKdFXEq0qBWYyKPOoBtmI/EO9dRglVlV0YMrAEEbEHa1NNPFLalFLTI2vU6ktQZCut6awqSmGgImFVpBVwrULLQShPCrDK6qy7lWAIJ9qy+L5LHimTDYiTDAqQUQBkGY3bKD8IJ6VsWSquPGWGVr2IjkI/7bi3reiGycHJ8yAKOI4gAaWAQD8hpUnBeUIoJPEMjTNlIAlCsFzNdiO1zrpUHJnG8+DkxuJmzFEGaK48ioLDMDqM3Q+tAjxzFS4DGmTxFlEsbEEFJBFK4ACBrHW2W/vTEaXiXJGDxDh2iKOPxRMUv9Krx/Zzghf/AD9Tc/tnFz3OupoJJxB34e93kypjIUCO+SYIRqkzHUeYBtei0SwvGZF4WgjzyYiWSWCIXLvo7HykfEqqRqOjUAb4RyZg8PIJYkfxBexaRm1ItsetaFUNYnhHGgY+GSYiQRkLiY5i7BRniUp5s2xNutSc+8ZmKxpgw75VXEyvGCQYgwsPLfcXt3saA2oWnLTopA6q67MoYexAP0pctLSs0IxfLkTMXjLQyH8UZsL+qjQ0zAYmZJvu85Viylo5ALZgpAsfWjdqEcR1x2FUdFlY+2gFbcXfK5euJz7F4rWW+05R/heIv0yH/wCRrWMP796xH2txf8isma4jnjOU9RcX+VZOqORcOMjIYY0LSs6FdLnJl/8A4SSDU8nD5hnyiJiARdALm4sSNfQjStV/xPhgsni4iY5mB8KK2VkK3CZrZly/CbdqnwnN2CBCYlYJI31QIv8A9OB5RFtcoB1FKqYLhqtCxWZGSOVGiYkHS9iCL7kMoP1qphZ8j3Kq42s21tTetfzfxrBsHXCWaNxEcjA2DKzXIvt5TWSeZGcHJkTTMqk99cuumlM2p5d4XhpMZh2e0KNGJSjm/mV2UWv+E5fyrs5e/m7kf7Vy+HmvhQj8MwzEZgxLeYtlFhcnpWr+z3jCYjCKqsc0V1ZTuBclPy0pAzmHC4jFYs4eCYxrDCsjrfKHLubKWXUaKfrVLgnEcAuT7zhBC7GyPNeSNypsSrt61fxfEjgsTi5ZonyTBfDlQEquRGAVyNtSd+9T8DgRxhEYJJGmDYsNGUmRkBueh0OlACeMcMMS+HGYmwr55szRBvMx+AMPhFhpVPlR5JYi2GxPhsGZTBIc8bDut9Rfa19KvYPhEkSQPg5jGZnkvE/mhyguRZeg2+tSScTlkLYZuGh547XylRGofZlfoDemAE4eTErFNLJFhUmikIWEHNdfw6m1yaDTYUIzoIZFmURv+0BkLDWwZFOUKSb69a00PCcQMO0yGLDiO9goLyJZ8rZXbReu1CuK8TihklwuCcSNOiiad2vY5izEsdNARQAPDYDEs2GRPLJPndMrBV8rMmw2KlWG9aPlnEGOGFlxRSR2ZJwSrMAJwpy5thZifnWfn4VMsyAPI8EIJWYo3hjN5mAa1rFs2o70/h0WFbM7RF4AxaRUsZYtQFs/41bfSgmz45w1DhhMQZJo5pVMjMWP7PMyEH/prfxS5lVhsyqR89f51xjFYSQzRDDpLFBMyhY2mBDmVSFbQ+UeldS5bwM8EIinm8VhsRoFAt5fXbej89KwmHH3fF5B/lT3Zewcbge9qPg2NxprQziGAEyqMxQq2ZWX4hVR/veHGYN94jG4t+0Fu1t61uduadf47+eL3HOIvEqFA7HMbBRcMTpZjbQa3uKGYSbicaxxLhoyifEzS+dhe+nr/SjvDcakyB4mup+o7g+tWax75sdHPU6/Gf4bxTiE8ikwLHCsjLKWJJYDYLetNmN6jv76U4UrFpQakWoBS5qgrEksAbf+/esxiuX4s7eRfiPQd606P3ofiD529z+tE8NylsUpZbxNY2APe+36U7hvL4DGRjproO3rVzAoAoXqq3HysRe9ebi3kysNWHQfzrG1th0cMbOFW4OouLfK/wBaEjg7xyMWPmvYAamx61PwbCyDEF1FwAfnf36i1XMVxDxSQbggXyj4jra350hgbPhyL3AOVgwI0NrdPeqOUF8z7W26ijst/KhIW9l9d7D50Am4c/j5TcnNvbp3NVyV8UMbiBnA1sBpV7hUjF1RvgYnbfbqRVSLD5pCGIUKSO2g70Z5cMVmupZlfMhBOul+lXfxE/Uk/C0S/mup082971nOLDK+1h0rpWMWKRUJUXGuvS/esoeEmSSQuL2a6qNbgdvyrPntdjPLAXIWPVjrYelv61f4PwycG4FvNbca9xatJhcGAc1grDYaaaDe1X5sMqBCegJsNtNTT67gxd5HgWLFB5XMdtMuylt7E11YNeuK+aUDoBZgTfUf+K1vAOZDERHM2aPZX6g9j6U+O8T1y3bpVd6fhMUkguhBHpSyJWs61niE1BiYQ6OjfCysp9mBB/v0qcimVRszPPicOl5MMmIEVgJgyg5LgXKsb3Vdf0rNc3YSLE4rFeGmIafJEieHbISoKlmJ0WxNr79q3PMWJSOBy/4hkHqz3sD/AH0rMfZtG4knkNyHLEE3AuJCLe2lTQGYDDHBS4iKeFUZ8G3hlXL3IQlxfvcXrY8n4WSPCxrIysLKUZb/AAsoNjfres1zhJLiMWsIgZRFIQrkG7iZTGcuW+lnO9tq3sECoqolsqgAfIW/l+dUR9LSU61NJK9ThSMKASktS0hoEMao7VNTSaAhZKhliBBBFwQQR6EWN/rVkimEUzDP8Iw9iPBSxVUbQeZU+G/S+gqebCo5YsqsWADG24U3UewIBFWSK9agKmJwMcgYPGjBiCwIFmK7E+ovUscCLkyIq5PgsoGXSxtbrU1q9loCpiOGwuAHijYBiwBXTM3xH3P8qmjQDQKBpl2FsoGi27VLavAUB5VtoNht7dqVlpmJlCI0hBIVWYgdlF7e9UeBcV8eJWfIsjKHyK4aysfKWPepIQXSgynNxA/wQW/7mB/lRqguBX/nsX6JCPoLmt/j/rn+X9kEnqjxXh8eIiaGUZka16l45xaLCRGWY2GZVA6ksbWHtvTcJjVkeZFB/YOEJOzZow4I+tZV0YyY+zXhw3jf6ilH2d8OH/on61oeNcTXDhTlaR5GyxxpbMxAubXIAA6mq2D40jRTvKjQthwTMj2zKLFgRY2IYWtSOBI5B4cP/t/zqQci8PH/ANsPrT35pTLh5FhkeOeNpCUALIqsoN13Nibm3Spl48TiY4UhZ0lTxEmBAVkFrnKddLjpRpohyTw//wDCr+dEuFcIgw4IgiVAxuwHW2gvQzC8z+JHM8OHZ1iViDnQFwhObTcaA1F/xfliEs2HaMPCZoQWDeLtZFtsbFaDaRlBFjqDoQQCDWdxHK2RzNgpPu8pFiupibrYg6jU0QxPHkjxGFwzqfExC33H7P8AZlrHvci1Vo+ZkKQfB4ksxiKA6oA7C5638tACMJxVoZMPFjI/A8FGXxNDC5sAMrDbrvaifDpVGOxbFhlWLDEm+lgNTfrp2o7jIFdSsiq6kahxdd7bdKxPHfs9EmcYbENCsmXMjEspttY7ga7UAEm4vPjjJg8IQkBkk8SY6LkZiRqbW61Xw3BsNFiXTDYgeKlirghlYLE5ca/xZPrWr4VyHhoUCyyyTC+ozeHGeljbf50WxvLuGkjEZhVVAupTysultH60wxsUkPjYZ8fiGlSbCmXI2iq5Ngqonp6VV5bwuHaMpKfus6uHw8joQCN1zX8pX0JrccI5aw2HAyRhmsAHc5202sSbAWojisLHMuWVFkX+IX+jdBQHMcJg/uuLSR4M0ibxXJ8Qk5jNAfhAXU5biupcN4lFiYxNC2ZDt0IPYg6g1luNcls6ZcNOy21SOTzKp/8Ay3+JPbUVV5P4Njo8QHkVYlAyzWN0mAHlKqNmvuaRN9GasI1V06VIlG4m86F8Rw7YdzioR5D/AJ0Y2I6sB366UZhlV0DobqwuDSp/fr7/ACoLhAcLP4R/+nl1jY/+m3VT6HpW0v38/wBMMvx3f5R4U4GkYWrwrB0S6cDXqaKcDQooqhO3mb3P61eLaVQnHmb3P60BzbCY1Y1zSakqNvbTTpaouIY8MgVUADG99iCKrwRK8eZdCRpfbahfiksoe1ztrtrXPWttbDAYYZTY2Gh+Z31qCTCeE2YHMTfzelMWWTwl1tfQqeuh7UG4kzTOBnsxOQAHYAbVKotM4MpOoVwLE6211I7GrkuKVJLqzOSACdNh+tEP8IEaKj2Kta3e/W1ZgwMstmOULopPU30H0p8/iaj4hACQTopZiL9T1v6Ci3CnhQqFN3a1wNrA/lVLjMkauLgWt669zQ+HELC11Fzc77AE6Wq7+IkGOaOKOjGwAvpl6G2txVblvi/mkz/EbWa+gGvSpebuJwSxrlsSAFLW1+lZ/hkyq/YdyNNNiRSnPir012GJS0jA7i4O5Gv0rSSeC6g+bpp6E3INYyadcubPmJILG2gAvbTpepsNipjI37Qsn4Q2ltNrCs+ucV9tHmmvpobdLfl7VHisGWZdfKNbHYG4A19qqy4xw1iDe46aC4tqew39KEc1YkjIm4azEjoVJFtOmoqZFW+JuCc3ywTkA/CxFr3BAJBrs3A+Nx4qMOpH8Q7GvmqSAhgF69e3/m9a/lDis2DcSXLR3IZb6H5d+tdE/wCP4xs13UioyKr8L4nHOgeNgykfMHsfWrlXLqb4rTRKwysoYX1BAI/P50qqALAADsAAB7VI4pl6opXi31714e1v70pBS0CvGnLSDoLi56d+9qSJwwuCCNbEbaGx/MU04eaaWpuIxCoAXYKCQBc21NJPKiEB2Ck5rXO+QZmt/wBNB4eTUZpskqgKS6gMbKb6Ne5AHyFV/wDFILK3ipZwxQ33CfGR6C1AxZLU0mq0nEYRHHKZFEchQI1/i8UgJb3uKkaVVdEZlDPfKCbE2FzQMSXr1qDxc14FnMQxUedbki+oy3v+lO4DzLhcYWWCXMy6lSLEqfxC+4oAravZaktXgKAZlr2WpLUlBI7Ulv7+v9KltVTH4XxIpIySM6MtxuMwtceovQFLGYuSSVsPAVXKgaWUgMEzbKo6uR+VDMByw+CDvhJM7MSzpIo/adcqsPgA6CpuHcvSwKVixOUEgm0dyxAy3JLam1Wf8NxP/wCNb5RLTNa4bxBJo0dTbMD5SRmW3lYEb3BvQ3FyeBjVlb/LnURk9Ayny396XhnLoin8cyZnyutsgUHObkm3WimNwySoY5FzIdx/Meo6VXHeX1l8nGzZ+gnN3KpxzqskpWFI2yhDqZWuqsfRbg1W4TwvHwyvpCY5Gjd3LEt5YxHYC3pe9XYcNisNpGRiIhsrH9oB29dqdFzPENJUkibrnU2Hzp3jfUc/N/LMpeYuGSyGObDMonhL5Q3wkSLlPset6y+E5dxWIaWPHMQzGAyPGAEkiiGig/vE71uMPjopf8uVG9iL1YIPW+uvzPWp+ta8981kIOV58M0bYWRCIvvCoJSbCOazAHTptbravYblfExSYdkxESrBE8Y8jEt4rBnI12BAtWsGmlRtU1esivKeILGQy4dWETxAxxsucSaEyjNqQP1PerKcrMYMJDPKsiYeRGuFILJELIi9hcC9aW1LakIy3EeUFlnkxLyn7w0qPG/SJU3QD11+tSw8pRKkdgolSczGXL5iC7Nl9PiNaFz1pqip31QdzEL4bEb/AOW+2+1Bk5jiXA+JCwlkSCIZV1PiOgAHvetU66EWuDuDsarxYeNBZI0UXFwFUXttew9KuBzpxOOHyQ4mN3mhxUJZLkNIsjZgAR03FWFkvw8xzSnD/wDM5bPnPhjVhGzCxIsR5vWtXFxeO0xxDxpklZPMRchTdCep3qPH8ZjaAyQFJMxQ2IBzKZAmYg0wz2G4lJ/h7RwRedpmgiKFirA7upbWw1ovyaXGFWKa4lgLRNc9EYkNfrpRXhWKMkETkAEjS2gBBI0A27VbjUbECx0P6fOloZ8844C1/vKAHa99q8OeeH//AIlbext+lc8ThawLLJOmbw3aGIWU+ZTYZh0tpc0d4QIsTE018ngLcosasG0sb2FAaqPnjAMbLOCewFGuHY2OaMSxHMhJANrHymx0rkcMWGxUmQ5Y2NykgFth8FhqGNdA+zgWwIiIIeKWVHBBBvmuLg+lqXhNSpqPH4RZo2jbY7H91twacDTxV89ZdT1xOpgfwHHs14Jf8+PQ/wAS9GFEJ5wsbOxVQqkkvfKLd7dKH8a4aZAJIjknS2VurAdG70mDeLHQZJVtZgJY721U7Efuk1fXM69jH4+rL9KweK+1N4hLH+ylk0EMsd/DF/3wdrVs+TOOLiIyj4mKadbFvDGW1/TrWJ439nLOwlc7+M7qi2CBATGoA6ECi+N4inCsLEYj4gkCyKrpqqlRmXOLb3/IVlcdLf8AWqU58ze5/Ws1yDzk2PklzLYXuqhTZQNsz311rU4mPzt5h8R/Wp0OX8LiQC+e+guttbDT5a/lT5cLESpIFibjvcfyolBgo/K42AUjoToBrQnieFBlLWI0IHbXXT6VzNxVsTlAAt5bXvtb0+VA+Exhpc48xDMSegJNv6UOjxTr8YNgbC+xB6etH+EyhEJjUd2tqfpSoE+ZWyokul0N7eh0rG8bxviyoygixvrWvknWVcmXW+t/xAa6Chj4eMTFHUfDmJX30GvanwVU8PgxMtiFvmuT1K9h2NVOIYVY/wDLsxFiwvfU9DV7C8IKuJQSqG+569Kg5gKIUjXR5NXOnxHTy/lVpD4/D0ut2OpPT2puOWNEy5fO2t/Q/wDirYwKMEs5LAfD+Vj63puMgAIz30Ug/wC1UnqIOG4RHBOt7eYX0I6H5fzq/hs8ZtIfLcFWXc3Fhp0oIlizAA/u36W0olgITexBNmHXTUXAI+dLrMOT0ZgDMjHMfNp6+bf0OnShuP4iFPhqCQAysbDc20H0OtF8M0mQm1kj7jtqdPagM0cjLYxopBL31uQw116is+Y0VJ8AcuY6k2AW9rADT3NWeH4WeR8uy26/DcbWq3hyUIzBXJtltou39aMf4iiIDLaOxy3v5WPUCnerE5A/A8yNgpLKWz6Z1Pwn5V1Xg/OGFmRT4gV20ynvXCuPYhGxDSFsyCwUqNLCiOASExrZ7Nuve59fSnNhXl9DGxqFktWK5C5n8QGGY+ddFa+9q3RFac9MrMQ2r1v7/X6b/KlZaYVuLHUEEfXf8r/WtBHLhzK8/F4ZhnGGEj4eM2ORrq12v6sB9K1f2bkLgI1ZxnM2JsMwubzybfIUaThGHEMcHhjw4yCg/dK6g3771R4byhg4JPGSI5wSVLMSFLEsbDpqSdO9OgN+1GPxMGiXIzYrDoDqLZpFH6GshzRxGdmgwcqscZAMYo7Sp90lCOCNLmy39a6rjsDHMFEqhgrrIB/EhBU/UUmJwkbSpKyKZEuFci5Aa4YexBtTNhsdjo514TFC6vZvGbKblUiw5Ulh/qYis5yFLCYp2xDETjDyjDBhZPBObWPuSd66hw/guFgZnhgRGcEMQOh3A7U5OEwBUTwUyxgqlwCVDXuAe2p0pROucIuMOB4X94WJcL4mByZDeQjy5C3aouL8TxE+Pi4l4bDDQ4pYlOlgCxjYkepNdTeBMqJkXKmXKCLqmTRbDsLC1III8uTIuQfgsLXvfb3uaBrCQYzB/wCJcRVTGWaGMREJ+PLLnt67XoP9mOJLYrCftEm/5MxMI0K/d8trLKSNW7n0rqKYSJWzLFGDqb5Vvc/+adh4EQHw0VAeigD623oGplqSmgUq0EcBTSKdXqcBtNf+/nTzTOopBXMy2Y5lshOc3HlsCTfsdq87AAFiADtr30A/O9c54ph8REeKTxK8sbvJFNDbU5oUKyx97fDarHNqYydYIoEOXCQw4h73Bd8oyoO/w7UxG1xmPhiIEsqIT8IYgE/Wp3dVIDMBmIC3NgxOoA73rK8yYiLEYnDQPA2cyQyq5S4KEF3W+wselUufcJjJ580K2hwZSS2t3ZiGIW29l0+dAaubjeGSbwGmUTXUZNbgkXGtX5FDCzAH0IBrK4PhDPxDE4jxHRfEiYR5FIa8YucxFx2sO1as70bf4V5l/QrE8u4Z7kxZSeqXB/Kqp4TiIhmgmMgH/pydfQHpej1IRVz5L/WXXxQN4dxdJSUIMco+JGFv+3vV906WqrxPhcc4Ga6sPhkX4x/tVFMLj0GVZYpF/eYWYe9O883+p+/XH7NFiKa1CH4djT5jikuNQoXQnsxq1wviYlU57JKjZXU6ebuPQ0v8fnh8/NLcsxcy00illcKrM2ygk+wFz+lBOHc0xzQiYRuEaVI1uVufFICtpsNDvWdnrpgw1Rsu9DuI8yRQiYsrWhxEeHO1iZLG4/7qHz82qYDLEgP/ADRw4zvlXQ2uWsdKDEZ+CYZ2Z3hR2OpJG5ta/vUEnL0P7SwKZ4xHZdlUNnGX1vY1QxXNZiETPAGVow7mOQELeQJ5L6tvWjdCVYK1iVNiR6G1KhWwmGEUaxreyCwvv6n51PFuPegHJvFziISsn+dEzI/rZjY/S1aBRQGG4fiYnxqxTIhvicUPMCb5g4F7+oFGcRicPgy0MccCB1uwZ8mhNje+/wAqxHGsGPveJAazrM7qQrFlO9x0HmN61fCJ5MXCjzYaDEZGK52IVrqex6UBLxfB4WPB+JEiR5pIjnjFyTnW+XqaJ8mOrRSurFg2IlOY3BNiBqD13rE89YqeSXwGAVYRHIqQ/AC+YG5GtwB071pvs2J+7yKRYrLY6WJ8o1N9bmjA1bU9TTBTwKZHLQiRRFjVbZcSuU9i66j2uKLUI5pH7ES9YnR60+L/AEw+af0aIvf1BH1U0A5cwseIwMKyrnC5lsepUsB9NPpRvGYyOGMzSNaNRmb9dKx/2X8yQzpJAD51klcDurOWFvbT61HU9xtLsaDlnh8cLzxogGRlsQACVZVOvzDVfxEpzt7nr60B4LxotxOaPwZQjoihyPLmjvf9aPYkedtR8R/Ws7FRzrDcRBORvKuUEHvbSwoLjsW5c5mIt2q7w7FK7GSVCFUXRtxcC23S9T43hiS/tVBYnpe3qa555W6sWZkUWBW9wf3T0YmoMVCYTdGIDb329SCenpVnEtZEEYygAFri5FjVXiWIzxgMCAwzBiDcCn+lav4biCm72By7jqf4h/Sm4do5MUPDVjdSWMp676AdKGYFY1hYk+a+nv6+9WeB4VjeWQlbarY67U7JImIeZ5WVtGNgNgdARvYU7AcPkYR4h2BZSSL9rVDxHRxpe4uRb97e9ewOPGUBrhAwA3NwT+lH8FF04cufxity/wCEbLfY396E4/AEyfvIDY69Qdq0uFx5j0XzK97n8K21odjVYSeJcFdgBtrrf39ajavFTB8FIe+6gA7WHmvYeu29FsJJGHPhIQABmO+o0AF6g4biGlJVTlOUkHpbpoaFw4N2dlDsoV7ZlOlzdjf2NOWhbxPFsRK5i8kKnNqNTbpf1oDjsbIh1lLG1joNr32qbFSMFbO4zEn9ptcjbTqaEeA7K0h1Nh+ZtWnMRaL8Kx4lYKSRlvsNxf8AWrPEZsyOcq5V2U3ufWx63qPljCuoaQAEnyi+gHzq9NDZyLi2hJNmux+ID0FK5ogDhz5T5dCtiSNBervD+EmMRlmBBJCdbi1ybdKvYqIuBG2set7aAHfp61J4eWUMDfy2UX0W38zS6qsNaPIMwOUWuD1BBrZ8o89A5Ypjforn/wDqrn3GsU7oiv5QX1y9rX6UHxWPyEBPY+wo5lTZ6+m45QwuNR0PekZK47yDz0UIjma6aWPUCuwQzh1DKbqdQfSr+zOzCFa8KlqNhWkoIaYwpxppFMIzXr05qSnqcMavGlNIaBhDThTAKkBoI5TTxUS1IKAdSXpaS1AeIppNqfTWoCMNb+++/wA/U0lzv/e1OaqvEjMI2MCK8mllY2B11ufaiGdFOGLAXuhynQ6Ei+lxtr060vijNlv5rZgL62BsT9aynDYOKx4meZoldZiCsbTC0drXym21P5XxmMeceKgaMtK3jA3shvaO5A1DU6GqOteNKRTaRPUlLSUg9TWalJppFODNKTVDHcHglfxHS76agkXtsTarxWkp/az8LrmdIZ48yMgYoSpUNa5W+xsd/nWdw/KIVZy8/wC0k8IhkjCLGYGLq+XYsSda0xNMcXBB6ix+dKrkyMLiHwUiJh3xJmeSSTEyuijzMFKC/a1r/Kh2El4eMIix4vJm8B1DIGtJDcEup0Ja2tdDw2AhjTw0iRVylbBRqPU2puGwEMSKkcSBVsAMq663Otr0QtAsTyvFikhkncllisjKoQKWIcHItaAAiwvc2Av10trVLiGAkkKtHM0ZAtoND71Ti4hNA6riQpRvKsq6a3/F2rSfHs8rLr5PrfYH8Kjw3+IStG5WXUPF0JtuB670dTiURVHDizlgp75L5re1j9Kzz8vyff2kWEANiI5RiMwGVAgDIR1uQfrT+E8vSxPBKZCfDmncxkjIqSGS1u58w0rLL/Wss/YnMfDZg+KJUgnzuGYC56abmrXCcDgTE0kCoY7ksbtuNTe57a0JwvBsSMOA0EQkjxDTrHcFJAxY5WtoLZvyqLCYDFTx4uJ0GHkmeHPkH7Pw7AM8ZGmYi6kb60GI43DcMujSIl5l8jAv5gvW4OwvRzA4CKEERIFDEE2JN9N7mspiOTpjh4IVlCGATIHtcvG5GVT22GvStfhkIRAQAQqggbCwAsO/vTL8TCng1XxE6oMzsFHqbUNfmfD3sMz+qoSKr6Vl18vM/o3VXiuH8SCVP3ka3vavcO4jFMCY2vbcHQj3FO4lxGOBc8h9AvVvYVXPNnUT33zeVfhypicJGJkDoyKGU7eXQ/pUuA4LhYWzwwJG1rXUG9r7H8qG8oytlkgdSjKc6odwj6ijxFP5Jl1Xwd/blYif+9PWq07DM2g3P607NVWeRsza9T+tY5rdy7hkZLWBUpb4RpY2sbdxV7hWBlViS3lBGUbaWN9PSqkYeP4EDA799drVZh4jJcLIoTWwJHS+1c1biqlA5N9bWItcGvcVlzR2Edzl9rDrp00qXEqtgUGtxfTUj0r0rCRHUaWGrDTU30Ht1qBYyOVUhK2DEspY9tOp3NXBxGNWQoQdB5ToCBqbHvSYOFGYJmOYGwJG/Q2onjIMOxMaot9Lkb6b29b1VokBVxBd3a4Ym5y3FrX6VMIMxK28JdMoO+gvf2verH+BxZxIt1sbWvptqT2pnEZgUEatlY6Xtfa9O+hcxWLaKIhAhJHbym+h/WqpRyq5gQT1sSMvbT5UAE0q+b4yNQtz00uR/KiOI4rKFXOGW/T+npR9QqcRecOMm3obfDp/Oq33uaIFXB1J3313tRLhuFkVjLLlZTqe9iOnrtVLEgSNrqB339aqWJqtFC072yeYDyXPlAtuaJ8PxK5fDIsRoT3tf4u1LgcGGfMptbYX9N9+tNxcYJcoQbkXNtDYWt+VFuJz0mE4kIi8TRiRCRfKxG/ao18zr4TWy6ke3X3/AFpOKYNowkiqR4i6dtNDf1oRg53DNkFiAL3NtV3970807410cC+GSwIPxC56np60GxXlc9lF99+mlV8bxmSWIhtG6EdCbdPYVWlxjGHwwLNtqNTc3NqPqN8PQJLIsYOQDbXTvc9zUHFUUsQLM9xfLtoKUxrGmx8QDXtY1PwvEgLqBY3IuLXt61U8EQYLChV82jgaC9bnkTm+TDhYp1Phk/T1FZDByxOhaRbWP++h616efxVWxtYaDrao/b6K+g8HxKOYZoXDjS9jr8xVzPXz/wAmczyYOUM2qXsR3Hr6j+ddw4VxOPERiSJhY79wfWnNiMXDXhXhXqvmpNNNYV4mvGtDUeI8SSIorBmZ82VUFycov8qi4ZxNpXeN4WiZAjeYjUOSBt7U7j3DVnglTKC+RxGeoYqdj0NC8KkkoWXCzIgeKOOTPqyGMWOXXRtTvegLPMvNOFwKgzy2Y7Rrq5+Q2pOWuacLjgTh5LsN0YZW03sDvXNftE5QtiHWPxWGRJPFytIfxZ7noNBao+QOWrzKt2/y5JlcEKwFgqm173zX0PSmnHaacDQPlLiv3jDhmYNIpysQLE20BI7mjQNKhMK9TRTqCerxWvUhoBpFNNPppoBtNIHalrxopmk02lpKE0oHyAFyenrQmPmLDtFFMrZo5pVhQgfiZ8i37XNvrS8z4WaXDtDAcrSMqM37qMfOw9bCsyvLOIw2F8GJfHWHGwTxAEKWRWEjA30vcEbdqFN1bW1CeGcwwYiVoovEbJe8mQ+HdfiXN+8Kt8KnmaMNNEsMpJ8mbMB2uay/A+C4lMWkngLhlUyNJlmZklLXtaPYagG++nrQeNLFxSJ8S2FDXlRFdl9GOmvf0oanNeHZlUX1xJw2v7wNr+1DeA8qzwYqPGtLmmlaUzqbZQrg5MvXTKvXqaBp9nuIAaXP+0yGZVvoMR4pa/exWwoLG74lxWKCSCGQkPO2VB7XNz22qlj+ZYYTIkisHSeOC3cyi6kelDuZOVpcViHxJlyyJ4X3ZRbKMtmfNcXuTcb0nNHKLYrE+Pe37Fri+njqB4b/ACuaDHcHxWOQTsNEgkZC3Q5ACSPmbfKqEHMMb4eDFICY5pRGNdVJYrc/rVb/AIbkPD48HnysWBxDj4mBbM9ulztUB5Oth2wiveD7yk0YPxBBYspI63oGDeHxweaeIf8AolLsCCGzAnp7VLi8MskbI4urbjt2I9ao8I4GmGmnaJQscoiIS5JBUMCST1sR9KJmnOrzdhXmWZQKOPGxDIFSZF0U5rPboDTjxmcaHCSZvQgijJNJYmtp8u/rC/Bf5QU8SxS/HhDb+FgfelPMij44plPbISPqKNBT6/p/Om3v7Uvvz/pN+Hr/AGEnmaL8Mcx//Tb+Yppx2Km/yofDX999/kKMg9vyFKDfre29je1H+SfyD/F1f6E4bl9L55nMz9ydB8qMx2AsAFHYCkK0tr/3071N72tefhkDeJcKzsssTeFKD8Q2YfxDrTsBwYK/izOZpOhb4R7CiSEEXGo9Py2pbb+m/wDvSvy9SYU+Dn0O4xg3LLPCf2qA6HZ16qal4VxZJlNrh10eM6Mp9u1XFYaajXbXfrpQ7jHBxKQ6N4cw2kGmb0b++tVO/tM6ReOuLvImBQ+cnM3uf1qDhnGSSYsQvhzqLj92QDqv9KrT40Zm1O5/Ws7x9Wk+SVlOGo5s+4GhHyq9j1zocrC/QEfD/elJjMQkaOyCyAC3vYXI7ioeF3Yq7AnOLG/TSuKu1V4ninVIyHzBT53X6WqljeZM+YKbLoFNre97VPxaNY7rmAQX0Bvck7kVk4Z7sIwAwN9D+ZPyqufStajCRm5Yaeo3t3WqWO4k0fkEeptZvTeryY7MGVbKQAF00tbqO1Rvw+RgGmceVifKNSOg9BTuKgjheJmeKWOUeGuUEsCAb0OwcBADAh7A2vvbYfMm9FRCrRhQgzG1/wBde4I0qq+Hjjl80hjva9h5F7gVBBUUrEhF8rOT0/dufpXpUxBW7kWjUm41bX/zR2Vo0VShJGpV9xr1a+1RiOT8Hmzaa/Lt9flV2+AHdX8FTYi17qT7aj1qHhPD2mfKVIAJtqfxC4uauYzDgSLG0/lOrNm1uTY+w0oxw/ExRZlSQMddd7HYW9u9LKVZKJmRnVfKysUcEeXWi+Fw6LCB4oHfW1jfoepqjiFbEFluVILZ23DDoc3Un8jT8BwxcpYtcDy/nTpSLXEeKyI6/sQY1sVGYkHudO9ZzFskjPILo5JJH99KJTSm/hLqxOg/h7A9a9jYkisp0BuT6DrenC6isHSNcwIIHxE97XsO9UMVNJNKWsAxGwFgKvyYaPUAfGBkJOl271Jy/Eh0cgMGspJ0O+h+lVvhRawU6tGEdbsvxX2bt61HxbhGdlSKyXFyt9B7dqsLjYvFQb5Qbnpcj86HYviKjEo7EZbajX87bVM3VK+DwThxHcHUFv52qzJg0DM4JULrex01/Tp86nw2KgbEArqh01v7313qbGY4rGyIquQTfrYWPTrRb6VgDNFqWBvm1FG+SeIYmGQtGfIurXOhv0t9Ko4kIgRmurkAsh2sevpRaTGpZU+G4F8ulxTtTI6/y/x5MSosbOLZl/p3o0NRXCMFjnRw0bMCCQhG/t2IrqHLPMwltHN5JdvR7duxpTodctIwqJmNWG9qhlWtZUo70F4vy5h5lclCHK3BRnS5XUEhSBuPnRgmq3FVkMLiAgSkeUnoNm+djT0MXwwtj8VKjyyxp4CI6oVAcBR1tcXzHa1WOYOERcPkw+LwwEYBXDyLe5KSEAMfUXuTRLlfl5sPI0rkBmDWUEka5QMxPa350nH+U/vM3imYhctijeZFtpmRb2VvUa0wvco4ULhIW8MI5QByNC1iQCflRpaagAAUbABR7KLfna9PWgqfTqQGlJpp/HqQ0tITQCGmE069Rk0GQ16vU00CErxpL16gWEvSE161JSPHi1ezV4Cm2pmdevetJalt0oBGplqfQ/jnEPu8JlsGs6LY/wD5jql/legLtNtQPmLmB4GxSIq3gw8Uysx8p8Ryup7C1WeWeLnECVHCCSBwjmM5o3zKGBQ+xowhJhUSuGAKm4OxGxqtxTjmGgyiVx528MKDc5jYWP1FV+Vnvhl0C5ZJUCgWsEkYDT2FFhiJFBubMe0UFkWQu+i+HYFbbkk6AUbNYXn3mpoC2FEBkWVMpJB/FvY9qAxvCOdcTiJ4ElZ2VNFCMELknTxW2O4FhauzRNdQSLE20JGh6j1NZ+LhUMc0Mqxqv3kyBlZRYEwlgLWsLMu1Zr/h3H/4grPJ+zzllBPlvbex0vT0nSoxqOwt+v61zvkyVlx4UkgPJikY5y+Y+JdS42QKM1rb3rogP1Fv6/Kq8GAiR3kSKMSPcs4UBmvvdrXN6WjGR5f49LLxIyMrLhZVeOEsPKTFqD3uSD8qh4LisuL80njHEGZFZJWJQWZhmj2WwAWtbxiQQYfOgiXwbGMvZUTobaaGxI0703g/3fwhivDgRnQu8iBQCNmIbTy0Gx/2fYspNZlkiQwsWDsWEzox88V9rDcVb5b4jiHxGIeZWWLFROYb7AR3AHoSpvWpwHGMJK6xxSRO4ByhbXF97dhV+KRGFkykISuljlK+UgDp02pUMJwCXFEcKeVEWEHKpDEuf2bWMgNdAK9NO1MyCwAC2GwsNOmnbSnM2Uf3pQX/ANB+aMKkqBTo4N0YaFbDXXt6VjJsQ4ZhnvYkXyHWxrYYk5jfvoB2Gt6pzcO8x0Xc/rVTusevhlrI4OQqB4l/MAcp1I0FvbWrIxLJYrpm3v29qzq4l5LNmOfTbpsBRloyGBYEk6eh9647zXdFbH4LxAehGuboRvf1qjgcAi3YEFgdCet99KP4LEKAEdbkkkD0Att1qtDgDImaEFfKdXFidTa3Qa2pzwsRcH4gviZPD8wUhtrEjax6VemxSooUjz5hsb/T2ofLwoxRGRlJkuAQNrk62oBLj2DXvfW5B3GtPPse41r8UiBzL5m+Eg9CB27a70JhQSSMz65SSFF7A260LweOVXbOpOY62rU8BkjGYqoudNSCdOpp3jC1FBiJAoilQBdbE7AWvr6a0QRVXByBGLOwGQaDUkAkH0BJqHGYqylJCzNl2Oo6nf1odBxYOuiZXXRR6EVNEZHG4QxyMh8zC2o1vemYSUq1hce2npY1tuG8tmdhM7gMfw+i0VxHLkGZthcfF61X+SD62sZhCJCqNpcjbQNY3H0q+IcrAZiw/dG1t9b70d4Vyp4ZMgcMttL97b61LiJo4EYsFz30XS5F+lRepaeZPQXCYzPLmYZFF8t9/wDamYqaMFkvfMVsRrZdyT16VAYmkU6ZR27/AJUPw2Al8TIgNhfXoLdu4pwqKcQIaT4Re1iQvwn0tQR1QnIVy21J723t8qLYnEyASuLF1FiPwi51YfrQ7h+HaQjzD4SBm39fnV8xOGLroo8h1DW2X1oZHCHdtbC/16UdhwjKjqWuCCLjaw9OtA2Iyi1wwvenP0Ys4CEb3OZG11tpcbVq3wDSANCVUbvfqw1sO38zWUwcJCFrDU1qOA44vmWwVbAmx6io7VADiUMgVlJz2sbncebYd/8Aaq/LWEEk6hmAUb30Fqv4uGVJiMpZXY5dOjba9r1awXDA15LKpFwyEgXKm1gPWn9phYOTQRxnKq5jvprp6H+VUWmZbG58vcWPfX1FWeE+IwaO1tTb+Gx0v30NCeJ8IxEs/UKVy36eX+tZxeOn8vczZQqTve4FpOxI/H2rXZwRuP5fKuI4YtG7wFszFQV0301+laPlfmeSBvClRjENLtuL7n1FOdM7y6M2tRkV6CdZFDxnMp2IqUC4rXnqYzRrTgaRlpQK0geAp6V6kBphJTqZelBpkU0hNNpppQHKL/Wx+l/5VlY+cUkgx00a/wD0psP4xbcdx0rQcSw5lhkjV/DZ0ZQ/7twRf3rNxcjRxRzph2yLNhliIa5GdSfP86YsahGuobut9P4gT+hrH8xc8rhZcXDYZsOsBQXF2LkBhbuBrWj4HhcREhGInWVtAoVMoUBbWN96BYvkWGXEnESPmJmeRhY+ZWTIqn0G/wAqALrxY+PJEFGVMKk4a+5bN+WlAcZx/GnD4XExRw+HiBECHLZleS9ibdOlWZ+VJMkKx4ooyYf7vK2W/ix3H0bfWiuO4OkkEeHDMqRNEUP/APyNxRpqWI4/93xEUWMeKLNhy7EHQushUhSRtaqP/FhThYxz2LyZhGv7zZ2CD8hWgm4bG+KXEuAxWMoEYXGr3v8AShkXKcGWBJLyJA0pVDoG8Q3F/wDTegKHEObvC+4SqmaDERM0mXUoAFuwt0BtrVbinNkyCR4lEoTGpEMozF4ngMoKgbm4tp2NHcDy5HH4FmusAmCqRoVm0Km/QA1BhOTYIriNmCnEpiBfWzIjJlHpY0BNwvjyS4iYBl+7rBFMraXAJfOp9itqrcj8yffo52sBklIUDrGTdSfexqeXlKAnFFSyjFIEkUHQANc5O1/51ewnCYYZWkiXJmREKrotk2PvqaAuAVW4rw5Z4XhY2zi17XsQbg1ap1KBnF5YJixKTzmWXEqiPJlCgKmii3tVzgXAYsH4iwkiJipEZ1VGAsxX0O9Fa9T1LG8R5G8XzGcGQ4jxixXW3l8q9tFtWngwqRgrGMq5i1j3Y3P51ZNNJoUgtVHjqL4EjFRdFLAkdtfer7GqnFeHpiImhcsEcWbKbH119qAo814lUODdiB/zMZNz0ZWW/tdrVLzHi1iELuwUeMm5Ave48vpY0N4tyRh8QsSySTZYlCoA2vuT1PrRd+DwsiJIgkEYGQte4I6n1oC9btt/Yv8APSvV63b8tq9QFHjXCo8VEYZb5CQdPQ0ExPJaySIplYYWOFolRWIdsxBOfuNN61NetQGc/wCBsNoQ02ZfgJk0GnvRPlvhow+HEV7kks5uScxJJ1NEAKQPSCZTVTEvepZH0oXPNpm76ClaC4aTM1+g2pkx8ze5/WlwiZRao5ycze5/WpgcqZApBW7C+pHbetThJBlDXup2sL69mrNcEmKMFvcMtzcUXOIWE2AuTpa+w3vYdax6bQ7hzFXZspZ8psN8u+1FG4rZo4bWKqCL6A97/Wq2KnK+YfCV1I2F/wCzUOdG81/MQLW0sR09BS/gaHiBUxECQBrj2v0GtYnG8MzqcpQklr2N7EH0rUKkUoUMLA+Zr6Fj/W4vTMTh1ErMIwFyrZgNztr60Tqw8c9Xhst7FSADqf6elXMPh5YXEo6g6H+dbLDQB3ykG501PltTeIYVZbBSVyrYm2x2Nvyqp3qcqnhOKiRWjGW+6uddLXIA69arTwLGmbKNdQ2oJ9x2oZjJyrqZIyiqDZh7W6VPj8X4ka2a9yAvfUdfSnedM3G8xvHIjRsAQPN21p+L4liJsrK+YnTKBQPFYYISG1fWw3HStly1LDBECf8AN1v6Hp/Kl1xJNHN9HMFg8TkjLWAAGa+hv7UM5nwbNqqo8t9m3UA3FqZhuc2IkEgsRpcdaB4vi4kbPrmAsBe+lr3btWfPNX1V7h+JLnwihVwDc28v1qtjseF2INgQFG2u+veoW480ehF8x67H3obiuII6hsigk6230rSRnaqIz3JYmx31teieD8M4YR7SBiwY/itvr00oWhzGw1G/sKK4OHxFEZcALcqQNyQbgn2rS4CwcTnUKsVtb6sAbnbSkxfCMypI5OY5swAt10J96v4BUdcuUlSBYndWXcCqmJ4mY3VGBZABmBtdvn6VH9PQuHD3Iy3tfrtpR7leFHkkQvb906XPW3tpQrzSKTGLA3NhvbrVX7uy5WF0vs23lpdTxNatJsSmL8JpFMYPUfht0PehnH+FMhkmVxlvexHmB/u1e4OskjhTKLg6Zvitve/0rS8a4bnHhlgVZblra3G23Ss/xpPVLlnEGSINGbsptISLa9KPeNlu0gyjcm223Ssji+Ey4XDko9rEbXzM3tVnhU2MkjyuTbMDmYdDvp2qbNOQQxcJk/bqmQLoSdyAb6e9U8NxyKR3XKSfXSwX+tE+Jzm3hlSU6W02G/tQDGwRhDLGPPmAbW+ltRVcxPS7wTmaTAuxDhoS2qG+gNr27HWuq8M4lFOgkiNwenUe4rg/EAFUOovG1g/ex1otyrx2VcQBASPLfKToco1B/rWlZ2O4KbikIoTwTjKTrdRlcfGh3+XcUaQ3FXz2jEYNONNZa8KuUHCvXpK9VaDqSvGkFAeFeFepFFAeNNIp9q8aehHSEU69M8TW1IFAptqktTQKYNNLTiKSgENeIr1LSBjUt6W1etT/AAPAU1hTqYTQRtMenk0y3qAOpOwokNGabUGB4rh5y4ilRimj2YeX3qNeLYYtkGIiv/qoC1mpQaa4ry0gfSgUlKKA84IBI3AJHa9tL9qyXJ3FsVJPiI5wgVGOzgshsCAO41ojiZPvU3ghiIYheXLcZm1AS/apW5cwxHkiEbdHjJDX6XPX50AVJtWTxnGPBxzLIXYuEWFFIyBSAXLdmBudaWbjLgHCsf8AmBIIs4BtlazB/fLf5iicfBMOot4aN3Z7sxvuSxN70qFjiM9l330HXf1FVGFyB0WhUsbYcsyNfDqpZlY3aM7eU9j29KMcIdXjWVdQ4BBPa1SJ6sxLp2qvMpzNqdz271fFUcR8Te5/Wgq5phXSNo2Y2ZQNDvffXpbaiPCkSZjK5ykkhQBcGx0/6qHMVLx+Cok0GYEiw0/lVjBYx4rgRmxPQ/Cf9qzv563jSr4aOBKQhYHKGG47297VQ4kt9UCEluugNt/yqOfikWhxBzEWUNa+tiQB6aikVDKQwF1DEqBuoItUReB8jvfzDMSwUZdrnb8qM45yYxHmIYG172zDoNe1QcIwRXNI3mIICpf1sSPW1B+YYik5El8qjygHXXS5pyamtDhMOzsPDfw7RlSPizG+7H+dGkxcaqczp5CA19tvzrG8I4kkBDKxyXPl30I1v7dqM4zPJGSmVsxJFhue57CpvOUpdLi8PG2HYBVbNsQNrn1rHwcDkAbW2XUj09KU8ckEpVQAuxPQ2OtuwuKKT8UIB8tywvrv219NaqaYDi42VlupBuPb5nvRCKUebqL/ADqMceJAhkQEObh9K8ZCM5JAVdABue9XUyYpTWD339OtRlfMSp0JuR/LSlgi7g31v3tTMSCLZfp+lHJUmLk0trV7geCia+dc7WDW1sutrH6XqghN8xAsdBf9aMcHxKRMCxHn0NOmqT4vLM3hoMpNgBoulO/xRS2qFMpuFUdR1q7xtYnA8MqpA16b0OnCkhgdiPnUngjPjzZWGU389j+9sdttDQvi8gc3I1IFrHTWicuGiyhrFQLk36k229KqcTwgYh16qunqNPzolibKEYKVllUrfKGubaXFxetdxTguGZfLII5SFOraLYXtY970DEjRAXC6WFzvYb/rU+DU4qQdbnMTbQadaL/sYi4PHnez+V0PkP71vX2o9FhcVHLmU5kIubntuAKrjCJchZQpG3X5j8xUnHIsQ0kXhtYKpN72N+599aztlXPBuTmGIjUXZdbEbGqeI5gjdspkIJYA6W0tp8r1lY3Y3diDcm/13qHiMPkz9TlA+tE4V9vB7mXiGZlRCbAWY9G9qzhxyhmUk2K206G9/wBKvYJ0AUsrMNd+mlUeIIpbRbA/Ww2+dXIi0X4LgxLAz2FhmAHcbC/rVLhryYaRSpUyXK2P51Hww2VgrFD0J2t61Qwst3YPdibkOOh62HUGmTTRcVkWdpQbNYWC7A+vpXUOXeZVlsklllsOuje1cdwvDH85kDhRtfQm+v1qWbF5PDMQaw/ESd/61Oeizx39ZgaWub8r85ByEkPmGgvXRsNIGHSqnXuMrDg1LSOKaTWkI+1IKSvCrM6kpaS9ALSV69eJoBpFIEG/WlNITQCV4Gkr1MFvSV6vUAgr1KaSgPUl6QmkvSoKxplKTTCaYVeLvOImOHRXl2XO2VRfuaxPNXPM+EVYcTgxnYEM2a8bafhNb8NWF+1fhjYpMFAgJczH1CrlFyfSiBnuH4vh/EIfAGGbCTWJR4gSr7k3Yb1hOWuXpcXiPBjGq3zNtlANtTX0LgMBDhYrRRi6R5dAPMctr+5N6zHJHKn3fDS+KSsuJvnyfEitqFB760wLcocOnihAmnaUEeUMAMvuetG7VzH7SuGyYTDI+HxEqxBgpiLEkE7EPvVv7PMJxBQjSzXhcXKyAlrfwmkHQi1JnqEvSZqQUcRwaF3ZyGBY3NmYC9rbCoDy/h+z/wDe39aKBqaTQAs8t4U3vHe9jqzbjrv2FI/AcN/7f/yb+tFDUM52qaAd+CQZrKhAt5lubHte53vRrCxqiKiiyqAAO1U5G8xt3sflr/SvfeFUFnaw13rP7YcggZPWqWIn8zajc/rVccYww3lH61Vk41hrnzdT0qp6eOa4fCspEiggA3tfTXUD5Ue4dFJICo3Yktf4tTc/LSqqYNiqgsQpy397UkfFzmNozdbKWBOvSp6anSM13iMbZg1ybbbEWt7ijmJiaJLo4BuCANyL2/lWfh4wPGZna2oYH2AFj9BU8nH4xMGJuDYFrfDc3uB6XNZ/WkLYbiIax0EguRbc2G9DeN4TNGrZz4gF3Lak5joBRIYKMBnSUs2mS6jUEG9RYbAu6ZSy5L3IXe/vRuKzQuHhTxoGcAqNSt9daNYbFRZLA5VtvfT1FOw/AgQcxIB63LE1FFgIrsWLeHay5r2ux1t9Kd61OYEDDYfOCx31J6WvfU0Q41i0SIrEAXPlLDzeW4OhpP8Ah5WW2YgC5v0P8IpxwcSRCO4Jc99fnRKKxckRIzb9h6mnS4dlYWJ+G5/K/wDIVaeJlkyC39Kr4zNfzEggW+VbeYkX4dILEsNWUXvp8r1Yk4ecjlmsRt7gjT6GqnC0YqtzYG9h12vRniZQRnW2Ur7sbf0ArO0sZLHQ2N10G4uablvbfbb9Kt49gtmKnUHfb6dq9ELpmuLt07Vf7FQyaEsDpc7A+tSxwMrKhVT1zHS4G4NLAjlWI2Xe/wBLinCY2Cm5cEjN01G1Kq1q24hhpY1VbDSxUjaw1tQDH4xkPgWVb/C34rHa9R8Ixj5vDZV36CxOveoeOO3juWGxt7W2ArKTDtVsZg5mZrqSFt6G3QmjnCcCyQMQ+pFwm2vvUUHGQpjzEMugkBGuX3ps0skhLRjKpvlHQAbW9bVSf6j4Q8q2PhKbZhmbS9xr896uLMxv5iCCAUvckC5NjS8DcSpkKEspuL363GlT4zAWuxIXfQb22P8AOst9xf8AADHWRgcwyDtt86r4uZ75WsU023H+mp8WsZcKuuZb3vp6XqNoGK3tfLYE303t+ta/iTpsa3wbW1uBYajQH5UNxmctqGG1h096PYm+YoQPKBr0IIvv3q0MLdWI6i2u4HtT0ugPCw5lKsW111O9ulOwMximWRQt7Wsw0F/6Va+6MjMv4wLj2Pah+NhLNfW/WiJzI1mI4m8y+ZQTuAut/U1Xw/DQVILNdj+IWAHYfOhmGxSwqDqx2Fv51aj48XUqVyr019Nz86VhyveCthYr5DZyAfmB/WtryxzGFskj5ozazDdfesxwURjDXdgXJYn1saz5JTEAJcKSCUvoSDc/lUKsfRCTAgagg7MNj2p7rXMuXeaJIWyyAtExNl/dHce1zXRcFi1dAym6HY9fnWvPX8ZWYmvXs1eZajvWsRp4an1EGp16ZnE169MpaYKTSGkNJegPA16m3pC1ASXpL0zNSZqAeWpuakvTSaUBSaSmFqGcxcYOFiR1iMjPIsaqpAJJBIGptVAVN6YaAYHm2OVo1MbRs7tEQ1v2cqC+QkdT9Kt8O4us4kKAhY5Xiv0YobEj0vcUgIGSmE63sL97agdbHpUJkrxegJGao81MJpCaAG8y8JGLSOFzZFkV2t1Cn4R7k0UFrADYAAegGlNNeoDwFOptevSBSKS1evS3qbQS9V8VpY1aRKixo0FTb4UZ3iGPEGYnXW9vWsRxjjbMxLm7dEHwqO571qebQQQbaAEm/p3rB4SMzyFsgB3JB0tWUn9axcEvi/CwFx09LX0/nURwY7y/UVKvCgrZlJUDf09R3qZuLIDbO2n8Iqjw6OUuAlzbTQbn+xRbgWEYy2LZAFY5iLiwF7N6+tZPAFg6svfTX6VrsJ4ks8UKXKu1n7Abm57UdHKHz8LhkZspBuRt631/KvR8MwccmRwz3VrmxtcdBb2ra4DARDO2UAq2X0C7X+dj7UL47wdTlliOWzAFTrcE2LadLVE6p0KfiDDVI8sZyhcxFxp+VXsBiUCodAW10N8t+/a9UJ8KZkeJbBwbAgab6E/Kh2BkeBpEdLqm+XW4vv60pNOVtJ5QqAJcHbS3XXrpWY4ljYmk8MKVU9ehPUW6G9Cn4znc5LhToM3QX7d6NcH4Qs7sDcMQGS+xJNz8tKeYWr0HMZSBomVRYfFpcA+/WsbiMcA10Un1vrr7Vt8VwVWz+ZDfe2+g1FvcVkuI8LYm6LZBqNddRc/mPzqucosMhPiDNcJlFmudRf8AM1UbEZxYqLr+LW7DpvVvB8Kbw3Y5r7XtuAdTUmIAYAIDZQczH06fy+VVaiQ0yPl8VQGsbMPS3foaKcN4Z4pEkj2GoQX0F+tDvBkaKwXKthsfjub7UKkxMqgKSy/ujbajmarRjj8RUFLXyG2Y9RYUFiqXOzA3JN+pp6Rm+gqkpVYBTY2v/KmYHKFtf8QN+ulIsRBs1rE29BfenmBREAjeY3zenQUaaTCP4cySXuM12HUAUa4xhDi7SQg5ibm+g07UMweCVlFyVZfxenWtDhOKQxrdWACDboTvUb6pkcXw+ZGyP2vfofStbyRhFfDku2ubboANKzrTPiZTuNCxHYdLVf4NiLDLH5APjzdbb2qe74UaN8RFh5bEqFAupPX+70C42shcuSPDtZWBBDA6j56moOKSLNYoMz381+gA6fl9Kt8FKIAuI0QkWVgLdyfT/as5FUCk4UVOZRcWvlvuO1RrjgrHQoCoGUdCNdb9aPcX4phmkCIDkFyzg2sBtbvVbEYISgyFQL3K2IOm1zfratOb/tOqk3EnaKNGQC7edmUm/Y6dLaVHPim8xVssd8ttmNhe+vSmpxiylHUFtAOw13NM4hKpIZQST1b2qsGpFxaOuVrlgRYk2/7j2qjjwQ5GY37dPlUdgN/i39PpVgPmJzjKQBYnY05Qqi5Onw7HXWrnBGQy5ZFLKQbih9++52sN6XhmNeGVWAFwdAet9Kd9icdI4fwt8oc6tlHhqdCqdMw2vWV4rEs7jJdZE0J3GhtatanEXyKXyhvxWNwKB4TBJFO0ni3znYLsWNtfrWHP6u1bhbJCDKwFl1J6Wr3J3HJoCxAZlvqpvlKkmxuetj+dRYqET+LBlIVG1PXbNcfT86hXFMgWFyLDRGBPmttf1t+lV+FbHXOF8SSZA8ZuPxL1B61dGovXCMNxzEYLEhka6t0vvfpaut8v8wx4tS0Zs9vMn62rbm1l1BlltXs1Krg/3+tMYWq5SLmr16Zmr2btVaD2NNvTHkUMqlgGc2UE6m29UsXxaCOPxJJUWPMVzE6Zh+EdzQF69NvQ/h3GcPPG0sUyMiGztewX0N6sJjYjGZRInhjd7jKLa6nvapCxXr0L/wCIML4TzeOhSMXcqb5b7X9yQKkh4xh3hM6zIYhu97BdrBuxN6egQvSMaDjmjBGIyjEIUBysQb2JNtfT1r3D+YsLO5jinR37A9BQBPPWZ+0RC+DGUOcs8LnwxdwASrFfXWjq4qNmZFYFktnH7t9dao/49BljfxBlkkaND3Zd6NDHYDhzf4fjVMUuQyeJh84PjliALm+t7+tazgGB+74WGH8Souc/xsAX99TUC804VpvAEv7W5W2U3uD+nrV58WglWAsPFcEql9Tbr6U9CcmkzVmcbznBHKYwksgUkM6LcLbfrrrppRfDcYikdERsxkiMqkbFQQD+Z/KkF+9LegOK5rw6T/d28XPfpGSNdrHtU78wQ+DHMCSskgiUW82cuUtb3oAwDSE1msBzS0zgJhJvCLtH4vlygqSCTre1G8fi0hjaSQ2Rdz+gHcmgLV68azsfN0JiaQxyqVdUEZXzuWFxlHXQVNguZkdJi8UkUkKeI0cgAOW17gigDleoNhuZIpJMLGAf+ZQupvtl6ba0bUXNSFiFdDrVbErm09andrCh/FcUUiYjdrKvfXSppT9YDnjibFJVH/qOFX/Su/1NZ7gJIO2W2lv9qJcyYYmQEMCEACjrcnX6/wAqpy4PITY2LWOtZ2tYLYyUNGVv5rbbdazzYNrnymoji3DagginHG+9OK0b/wCHcShH/Ly9LWWiXDMNjYWzJBKCdL5T+dq7wrG29OvpW/0lZTuuORQYtkaMxyZ+rMmgzb2tVrDYB44QjRyyACxJVje21tPWur4djYe1Sk7/ACrP/Dv9V964+uFmjZGWFwn4wUJJvtsKH8Q4fMk2dcPKVZbNlXfX1FdtB/l+tev+tK/F9f6PvXAsXy1I6llwkgN72t/Koo8JxBTmWCRSBYHKdB6V9AOa9mPen9JS/wAlcVwkWJEdngkLdwpBoHiMDi7sFw01iD0NfQ5NeY6j50c/FDvyVxvg3AcR92VskobW4I29tNqp4/gsogKrhpM7XzELv0/QCu4g60hOtVPhz3S+9cEwfAcTJEEaKRCo8tlI+t96q8R4HjGhtJhnYrpcDW/pbevoR2PepE6e1KfHIV6fMuH4Hi7W+7S/NGH6iiXDuB4i9mw8otsQpr6InOlRZjbeqvInbhuO4M6gt93k+E/hO9DjwObKtoJh1PlNfQSMb70pY1PPEP71wr/h+bwmVcPNma2u23yoDiOUMYq3OHkJ1+VfSrny15TT54mj7181cO5fxYkUmGZddWy/r+lanH4KQkLHh5LkWJyWX512lWPelRjrS7+PTndcDxPKc4VciSqy3vZT5r+w0/8AFWcXyziJVTPAxkYWvY2XXt3/AK13YmpO9KfHDvdfOjci4gM4CPZey9xfT0oV/heOAZBBMVud0NfTUjG49qaWPenPjiPvXzRBy5iA4Jw8xvv5D+VEZOG4rzAYV7MBqUJIt2r6FDHv1qRzpVfSH96+aoOAYppBmglsOuTt0p2M4Fii3+RIQDp5DX0fmPelQ0v8ef0feuEYHliZUTPh3ZtbeVtB66UN4/wHEu6MuEcZRYgKd6+jYjoaVjrS+n/pXuuHfcMRJhYz92e4tmW1jp19adgOC4qW5fDsOxIO3yruEfSvTaWtU/4pT+9cfl4LICWWKTXRtDrpQzjfLssyKqxOHUgqcp/lXcmNObaq/wAUnuj718x8X5cxYa4hkY21OQ7+n5Vd4LhMbBlePDzBwf3Hsfewr6LmOo9qmU6Cq+hXphOXOKSYhfPFJHINDmRgD9RR1UY/hP0o+tNvROUs80Dfun6Uiwt+6fpWjpr1f1NyHn5sSmOws8UEki4ZGLgA2JkuoA2va9AsFwzGfdRAYGMq49J0zqSmWRLkP3AJO1q7vJ8QHrTYTdjenngcv4ly3jJsP4MvgJM0ocJEjrG6qPhksf50JbAys8OBlwXhQrilM5hV/DkXLfqDoTobna9doh/p+lMh/D/pX9KWBxrnjgj+O4wuGIUQJnCpZGcYiIpcdba39KsSctTCWL7xHdJ8SJZkiQ+GvhxEKCouct7E36gV1xGNhr1P/wDCakY7f31FGE5tBwpG4m+XDWgGGRXPhkIz5mIspG4/nVXlXCthsJLJ93JkjefLZAHYZrrrXUyf1/mKVOnuf1NGG4ZyxhcbBLPNNh5P+Yw8jnqc41TTpobfKgmF4BxBUji8JrYdvvQOU6liLqPX0r6IQ6f938qlXp7/AMqchOTxpbibTGCTK+GjsfCbR9S1zltegMWEx331OIPBIIxNkGnmEWqDy/MGu7THQ+3868N/mKWG+feHcvY6KSQxIVeJ3N3ViGGYk2tuGBF79tLUZ4TwqbCT4dpEdgcPiMxSN2AaSQOF0GgHQV2aM6L7j9TT4zp/1H9TRhOP4vGt9/w84w8xQROrHwpNGZ7rfy9AB9TUGC4FOOJCLwnGFSU4lTlaxZ1vbXaxN7d67Rf+dRqfKPc/rRhuK8r8IeOS0rYpW8eS0YRxF5muCTl7+tGOb8HJJHGVikdYsQhlQIbsFBOgO4uQflXVT8RHTTT509z/AH86Proccx0+IleDF/cphHBMbqy+ZgykBgo18t7fOqnHMHisSMViEhlRDCsEYZfO928xYWvau0OdAfQ/pSwsbj2X9DR9Q4LFyri4HMgSQ/dJoli03jYgvb01I+VdUjwrb5W+laaI6r6g3+tSqdKm8+kyMmHcn4Gt7VneaRKoJWKRsgAUBCfM25+QrqlQynT6/wAqLxDnT57w3Dp2YXw03zWouI8BxbThjDIEW1rLrX0JGx79KdmNZ344qd186cR5exJa4gkI3+E1UPLuK/8Aw8v/AGmvpVmN96TMe9VeIPvX/9k=">
+        <button class="map-pin" style="left:38%;top:15%" title="1 — Nineveh" aria-label="1 — Nineveh" onclick="filterMapSite('nineveh',this)">1</button>
+        <button class="map-pin" style="left:47%;top:29%" title="2 — Ashur" aria-label="2 — Ashur" onclick="filterMapSite('ashur',this)">2</button>
+        <button class="map-pin" style="left:55%;top:21%" title="3 — Nimrud / Kalhu" aria-label="3 — Nimrud / Kalhu" onclick="filterMapSite('nimrud',this)">3</button>
+        <button class="map-pin" style="left:48%;top:39%" title="4 — Samarra" aria-label="4 — Samarra" onclick="filterMapSite('samarra',this)">4</button>
+        <button class="map-pin" style="left:39%;top:48%" title="5 — Tell Asmar / Eshnunna" aria-label="5 — Tell Asmar / Eshnunna" onclick="filterMapSite('tell-asmar',this)">5</button>
+        <button class="map-pin" style="left:68%;top:66%" title="6 — Larsa" aria-label="6 — Larsa" onclick="filterMapSite('larsa',this)">6</button>
+        <button class="map-pin" style="left:59%;top:75%" title="7 — Uruk" aria-label="7 — Uruk" onclick="filterMapSite('uruk',this)">7</button>
+        <button class="map-pin" style="left:72%;top:86%" title="8 — Ur" aria-label="8 — Ur" onclick="filterMapSite('ur',this)">8</button>
+        <button class="map-pin" style="left:47%;top:69%" title="9 — Girsu / Tello (Lagash)" aria-label="9 — Girsu / Tello (Lagash)" onclick="filterMapSite('girsu',this)">9</button>
+        <button class="map-pin" style="left:33%;top:30%" title="10 — Tell al-Sawwan" aria-label="10 — Tell al-Sawwan" onclick="filterMapSite('sawwan',this)">10</button>
+        <button class="map-pin" style="left:28%;top:20%" title="11 — Jarmo" aria-label="11 — Jarmo" onclick="filterMapSite('jarmo',this)">11</button>
+        <button class="map-pin" style="left:44%;top:62%" title="12 — Tell Agrab" aria-label="12 — Tell Agrab" onclick="filterMapSite('tell-agrab',this)">12</button>
+        <button class="map-pin" style="left:45%;top:18%" title="13 — Dur-Sharrukin / Khorsabad" aria-label="13 — Dur-Sharrukin / Khorsabad" onclick="filterMapSite('khorsabad',this)">13</button>
+      </div>
+      <div class="map-legend"><span>Archaeological site marker</span><span>Selected site</span></div>
+      <div class="map-help">Each numbered marker is linked to an explicit list of catalogue record IDs by documented findspot. Marker placement is approximate on this illustrated map; it is not a surveyed coordinate or an ancient political boundary.</div>
+      <div class="map-help">Site-name and regional cross-checks: <a href="https://oracc2.museum.upenn.edu/amgg/Mesopotamianhistory/Maps/index.html" target="_blank" rel="noopener noreferrer">ORACC Mesopotamian maps</a> · <a href="https://whc.unesco.org/en/list/1130" target="_blank" rel="noopener noreferrer">UNESCO: Ashur</a> · <a href="https://www.metmuseum.org/essays/nimrud" target="_blank" rel="noopener noreferrer">The Met: Nimrud</a> · <a href="https://www.metmuseum.org/ko/essays/the-rediscovery-of-assyria" target="_blank" rel="noopener noreferrer">The Met: early excavations in Assyria</a>.</div>
+    </div>
+    <aside class="map-side">
+      <h3 id="mapDetailTitle">Explore the map</h3>
+      <div class="map-detail" id="mapDetail">Choose a numbered marker to see the catalogue records associated with that archaeological site, or choose a historical period above.</div>
+      <button type="button" class="map-reset" onclick="resetMapFilters()">Show all catalogue objects</button>
+      <div class="map-outside"><strong>Not plotted as Iraqi findspots:</strong> Mari (Syria), Susa (Iran), and the Tod Treasure (Egypt). Broad attributions such as “Mesopotamia”, “Sumer” or “Babylonia”, plus objects with an unspecified site, are not assigned to a specific numbered city. The Victory Stele of Naram-Sin and the Code of Hammurabi are shown in the catalogue with their original/rediscovery contexts distinguished, not incorrectly pinned to Susa as their original production sites.</div>
+    </aside>
+  </div>
+</section>
+
+<section id="collection">
+  <h2>Digital Artefact Gallery</h2>
+  <p class="section-intro">Browse the MADA Digital Archaeology archive. Search by object, material, period, findspot or museum, then open an artefact to explore its catalogue record.</p>
+  <div class="toolbar">
+    <input id="searchInput" type="search" placeholder="Search name, material, period, site or ID..." aria-label="Search artifacts">
+    <select id="categoryFilter" aria-label="Filter by category">
+      <option value="all">All Categories</option><option value="statue">Statues & Figurines</option>
+      <option value="relief">Reliefs & Stelae</option><option value="vessel">Vessels & Pottery</option>
+      <option value="seal">Seals</option><option value="tablet">Tablets & Plaques</option>
+      <option value="architecture">Architecture & Mosaics</option><option value="other">Other Objects</option>
+    </select>
+    <select id="periodFilter" aria-label="Filter by period"><option value="all">All Periods</option></select>
+    <select id="museumFilter" aria-label="Filter by museum"><option value="all">All Museums</option></select>
+  </div>
+  <div class="results-note" id="resultsNote" aria-live="polite"></div>
+  <div id="artifactResults" class="grid" aria-live="polite"></div>
+</section>
+
+<section class="about" id="method">
+  <h2>Digital Documentation Workflow</h2>
+  <p class="section-intro">Each object is represented through a consistent record to support comparison and preliminary interpretation.</p>
+  <div class="steps">
+    <div class="step"><b>01 · Document</b>Record the object's name, material, date, findspot and museum when stated in the source.</div>
+    <div class="step"><b>02 · Classify</b>Group the object by archaeological category and chronological period.</div>
+    <div class="step"><b>03 · Compare</b>Review similarities in material, form, decoration and context.</div>
+    <div class="step"><b>04 · Interpret</b>Present a cautious interpretation based on the description available in the course handout.</div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About MADA Digital Archaeology</h2>
+  <div class="about-box">
+    <p><strong>MADA Digital Archaeology</strong> is an original academic digital archaeology project created by Mariam Abdelrahman (مريم عبد الرحمن), a Level One student at the Faculty of Archaeology, Ain Shams University, designed to support the documentation, classification and interpretation of archaeological finds from ancient Mesopotamia. It demonstrates how structured records and searchable collections can make archaeological information easier to explore and compare.</p>
+    <p><em>Source note:</em> The object names, periods, findspots and museum attributions in this version were transcribed or summarized from the supplied course handout, <strong>معالم تاريخ وآثار الشرق الأدنى القديم (العراق)</strong>. If the handout does not name a museum, the record says “Not specified in the handout”. The catalogue is an educational index, not a live inventory or confirmation of present-day display.</p>
+  </div>
+</section>
+
+<section id="creator" class="creator-section">
+  <div class="creator-card">
+    <span class="creator-label">ORIGINAL CREATOR · PROJECT OWNERSHIP</span>
+    <h2>Project Creator & Researcher</h2>
+    <h3>Mariam Abdelrahman</h3>
+    <p class="creator-role">مريم عبد الرحمن</p>
+    <p class="creator-description">MADA Digital Archaeology is an original academic digital archaeology project created, researched and developed by Mariam Abdelrahman. The creator attribution and academic identification below form the official identity of this project.</p>
+    <p class="creator-university">Level One · Faculty of Archaeology · Ain Shams University</p>
+    <p class="creator-university" lang="ar" dir="rtl">المستوى الأول · كلية الآثار · جامعة عين شمس</p>
+    <p class="notice">Original project attribution: © 2026 Mariam Abdelrahman (مريم عبد الرحمن). All rights reserved. You may access and share the published website link; redistribution or modification must not remove or misrepresent the original creator attribution.</p>
+  </div>
+</section>
+</main>
+<footer><strong>MADA DIGITAL ARCHAEOLOGY</strong> | Created by Mariam Abdelrahman (مريم عبد الرحمن)<br><br>Level One · Faculty of Archaeology · Ain Shams University<br>© 2026 Mariam Abdelrahman · Original creator attribution</footer>
+
+<div class="modal" id="analysisPanel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="close" onclick="closeAnalysis()">Close ✕</button>
+    <h2 id="modalTitle" style="text-align:left">Artifact Record</h2>
+    <div id="analysisContent"></div>
+    <p class="notice">MADA Digital Archaeology provides a preliminary educational record based on the course handout. Confirm dates, object numbers, current location and interpretation against the relevant museum catalogue before citing them as research evidence.</p>
+  </div>
+</div>
+
+<script>
+/* Data source: course handout "معالم تاريخ وآثار الشرق الأدنى القديم (العراق)".
+   A museum is only named when the handout explicitly attributes the object to it. */
+const artifacts = [
+{id:"N001",name:"Female / Mother Figurines from Tell al-Sawwan",category:"statue",material:"Clay",period:"Neolithic Period",date:"Neolithic",findspot:"Tell al-Sawwan, Iraq",museum:"Iraq Museum, Baghdad",description:"A group of female or mother figurines included among the Neolithic material from Tell al-Sawwan.",function:"Figurines of this type are commonly discussed in relation to human representation and beliefs; the handout presents them as archaeological examples.",symbol:"♟"},
+{id:"N002",name:"Pottery Vessel Neck from Samarra",category:"vessel",material:"Pottery",period:"Neolithic Period",date:"Neolithic",findspot:"Samarra, Iraq",museum:"Iraq Museum, Baghdad",description:"A vessel-neck fragment from Samarra, included in the handout's discussion of Neolithic pottery.",function:"The fragment provides evidence for vessel form and ceramic production.",symbol:"🏺"},
+{id:"N003",name:"Decorated Pottery from Samarra",category:"vessel",material:"Pottery / ceramic",period:"Neolithic Period",date:"Neolithic",findspot:"Samarra, Iraq",museum:"Iraq Museum, Baghdad",description:"A decorated ceramic object or pottery fragment from Samarra, with patterned ornament described in the handout.",function:"Decoration can help compare ceramic traditions and visual motifs.",symbol:"🏺"},
+{id:"N004",name:"Mother Goddess Figurine from Jarmo",category:"statue",material:"Clay",period:"Neolithic Period",date:"Neolithic",findspot:"Jarmo / Jemjemal region, Iraq",museum:"Not specified in the handout",description:"A female figurine identified in the handout as a Mother Goddess example from Jarmo.",function:"The handout uses the figurine as an example of Neolithic small-scale sculpture.",symbol:"♟"},
+
+{id:"U001",name:"Prince of Uruk",category:"statue",material:"Not specified in the handout",period:"Uruk and Jemdet Nasr Periods",date:"Uruk / Jemdet Nasr",findspot:"Uruk, Iraq",museum:"Iraq Museum, Baghdad",description:"A sculptural representation referred to in the handout as the Prince of Uruk.",function:"A significant example for studying elite representation and early urban art.",symbol:"♟"},
+{id:"U002",name:"Votive Vase from Uruk",category:"vessel",material:"Stone",period:"Uruk and Jemdet Nasr Periods",date:"Late 4th millennium BCE (period attribution)",findspot:"Uruk, Iraq",museum:"Iraq Museum, Baghdad",description:"A decorated votive vessel associated with Uruk and discussed in the handout's section on early art.",function:"Its imagery is connected with offerings and temple ritual.",symbol:"🏺"},
+{id:"U003",name:"Cylinder Seal from Uruk",category:"seal",material:"Lapis lazuli",period:"Uruk and Jemdet Nasr Periods",date:"Uruk / Jemdet Nasr",findspot:"Uruk, Iraq",museum:"Iraq Museum, Baghdad",description:"A cylinder seal from Uruk; the handout identifies lapis lazuli as its material.",function:"Cylinder seals were rolled across clay to leave an image and could serve administrative and identifying purposes.",symbol:"◉"},
+{id:"U004",name:"Jug Decorated with Sculpted Figures (No. 19169)",category:"vessel",material:"Not specified in the handout",period:"Uruk and Jemdet Nasr Periods",date:"Uruk / Jemdet Nasr",findspot:"Mesopotamia (specific site not stated here)",museum:"Iraq Museum, Baghdad",description:"A jug decorated with sculpted figures, cited in the handout with object number 19169.",function:"The relief decoration offers evidence for vessel design and figural art.",symbol:"🏺"},
+{id:"U005",name:"Eye Idols",category:"statue",material:"Not specified in the handout",period:"Uruk and Jemdet Nasr Periods",date:"Uruk / Jemdet Nasr",findspot:"Mesopotamia",museum:"Iraq Museum, Baghdad",description:"Small votive figures characterized by prominent eyes, included in the handout's Uruk-period examples.",function:"Often interpreted as votive representations associated with worship; interpretation should be checked against specialist catalogues.",symbol:"◉"},
+{id:"U006",name:"Woman's Head from Uruk",category:"statue",material:"Not specified in the handout",period:"Uruk and Jemdet Nasr Periods",date:"Uruk / Jemdet Nasr",findspot:"Uruk, Iraq",museum:"Iraq Museum, Baghdad",description:"A sculpted female head from Uruk listed among the handout's examples of early Mesopotamian sculpture.",function:"An example for studying facial modeling and early sculptural technique.",symbol:"♟"},
+{id:"U007",name:"Mosaic-Covered Column Remains",category:"architecture",material:"Mosaic elements",period:"Uruk and Jemdet Nasr Periods",date:"Uruk period",findspot:"Uruk, Iraq",museum:"Pergamon Museum, Berlin",description:"Architectural remains of columns decorated with mosaic elements, mentioned in the handout in connection with Berlin's Pergamon Museum.",function:"The remains illustrate the use of colored inlays in monumental architecture.",symbol:"▥"},
+{id:"U008",name:"Sumerian Royal Game Board",category:"other",material:"Bone, limestone and lapis lazuli",period:"Uruk and Jemdet Nasr Periods",date:"c. 2500 BCE (as stated in the handout)",findspot:"Royal Cemetery of Ur, Iraq",museum:"British Museum, London",description:"A board from the Royal Game of Ur. The handout describes game boards and pieces recovered during Leonard Woolley's excavations at Ur.",function:"A game object that offers evidence for leisure, craftsmanship and elite material culture.",symbol:"▦"},
+
+{id:"S001",name:"Battle Mace Head of Entemena (No. 23287)",category:"other",material:"Not specified in the handout",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic III",findspot:"Sumer (specific findspot not stated here)",museum:"British Museum, London",description:"A mace head associated with Entemena, cited in the handout with number 23287.",function:"A royal or ceremonial object associated with authority and warfare.",symbol:"◆"},
+{id:"S002",name:"Four-Wheeled Chariot from Tell Agrab",category:"other",material:"Not specified in the handout",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic",findspot:"Tell Agrab, Iraq",museum:"Iraq Museum, Baghdad",description:"A model or representation of a four-wheeled chariot from Tell Agrab.",function:"Provides evidence for transport technology and representations of wheeled vehicles.",symbol:"⚒"},
+{id:"S003",name:"Bronze Vessel with Wrestlers from Tell Agrab",category:"vessel",material:"Bronze",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic",findspot:"Tell Agrab, Iraq",museum:"Iraq Museum, Baghdad",description:"A bronze vessel decorated with a scene of wrestlers, as described in the handout.",function:"Combines metalworking with figural decoration.",symbol:"🏺"},
+{id:"S004",name:"Statue Group from Tell Asmar",category:"statue",material:"Stone",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic",findspot:"Tell Asmar, Iraq",museum:"Iraq Museum, Baghdad",description:"A group of statues from Tell Asmar included in the handout's survey of Sumerian sculpture.",function:"The figures are important for studying votive sculpture and worshipper representation.",symbol:"♟"},
+{id:"S005",name:"Statue of Ebih-Il",category:"statue",material:"Alabaster",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic III",findspot:"Mari, Syria",museum:"Louvre Museum, Paris",description:"A statue of Ebih-Il from Mari, presented in the handout as a major example of early Mesopotamian sculpture.",function:"A votive statue that helps study individual identity, dress and devotional representation.",symbol:"♟"},
+{id:"S006",name:"Stele of the Vultures / Victory Stele",category:"relief",material:"Stone",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic III",findspot:"Girsu / Tello, Iraq",museum:"Louvre Museum, Paris",description:"A fragmentary victory monument associated with the ruler Eannatum and the city-state of Lagash.",function:"Its reliefs and inscriptions record warfare, kingship and divine sanction.",symbol:"▤"},
+{id:"S007",name:"Copper Plaque with Sumerian Imdugud",category:"relief",material:"Copper",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic",findspot:"Mesopotamia (as discussed in the handout)",museum:"Louvre Museum, Paris",description:"A metal plaque depicting the mythological Imdugud figure.",function:"The imagery is associated with divine protection and the visual language of Sumerian religion.",symbol:"▤"},
+{id:"S008",name:"Plaque with a Feathered Figure",category:"relief",material:"Not specified in the handout",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic",findspot:"Mesopotamia",museum:"Louvre Museum, Paris",description:"A plaque showing a feathered figure, listed among the handout's Louvre examples.",function:"An example for studying symbolic figures in Sumerian art.",symbol:"▤"},
+{id:"S009",name:"Votive Plaque of Ninhursag (AO 276)",category:"tablet",material:"Limestone",period:"Early Dynastic / Old Sumerian Period",date:"2500–2530 BCE (as printed in the handout)",findspot:"Tello, Iraq",museum:"Louvre Museum, Paris",description:"A votive plaque dedicated to the goddess Ninhursag, with Louvre inventory reference AO 276.",function:"A religious dedication and an example of Sumerian relief carving.",symbol:"▤"},
+{id:"S010",name:"Sumerian Lyres from the Royal Cemetery of Ur",category:"other",material:"Wood, gold, silver and shell (materials vary by instrument)",period:"Early Dynastic / Old Sumerian Period",date:"c. 2500 BCE",findspot:"Royal Cemetery of Ur, Iraq",museum:"University of Pennsylvania Museum, Philadelphia",description:"Lyres recovered from the Royal Cemetery of Ur and discussed in the handout.",function:"Musical instruments that provide evidence for performance, craftsmanship and elite burial practices.",symbol:"♫"},
+{id:"S011",name:"Ram in a Thicket / Goat Statue",category:"statue",material:"Wood, gold, silver, shell and lapis lazuli",period:"Early Dynastic / Old Sumerian Period",date:"c. 2425 BCE (as stated in the handout)",findspot:"Ur, Royal Cemetery of Queen Shub-ad, Iraq",museum:"University of Pennsylvania Museum, Philadelphia",description:"A standing goat or ram figure, one of the objects described in the handout from the royal cemetery at Ur.",function:"A richly decorated object associated with elite burial assemblages.",symbol:"♟"},
+{id:"S012",name:"Vase of Entemena",category:"vessel",material:"Silver",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic III",findspot:"Lagash / Tello, Iraq",museum:"Louvre Museum, Paris",description:"A vessel associated with Entemena, included in the handout's discussion of Sumerian art.",function:"A ceremonial vessel with royal and religious significance.",symbol:"🏺"},
+{id:"S013",name:"Votive Plaque of Ur-Nanshe",category:"relief",material:"Stone",period:"Early Dynastic / Old Sumerian Period",date:"Early Dynastic III",findspot:"Lagash, Iraq",museum:"Louvre Museum, Paris",description:"A votive plaque associated with Ur-Nanshe, ruler of Lagash.",function:"The relief offers evidence for royal piety, temple building and Sumerian visual conventions.",symbol:"▤"},
+{id:"S014",name:"Sumerian King List",category:"tablet",material:"Clay tablet / textual record",period:"Early Dynastic / Old Sumerian Period",date:"Ancient textual tradition; manuscript date not specified here",findspot:"Not specified in the handout",museum:"University of California Museum",description:"A version of the Sumerian King List is mentioned in the handout in connection with the University of California Museum.",function:"A historical-literary text listing rulers and dynasties; its chronology is not equivalent to modern historical evidence.",symbol:"▤"},
+
+{id:"A001",name:"Victory Stele of Naram-Sin",category:"relief",material:"Sandstone",period:"Akkadian Period",date:"c. 23rd century BCE",findspot:"Originally Sippar; found at Susa, Iran",museum:"Louvre Museum, Paris",description:"A monumental victory stele of Naram-Sin. The handout notes that it was carried to Susa and is now preserved in the Louvre.",function:"The relief presents royal victory, divine association and imperial power.",symbol:"▤"},
+{id:"A002",name:"Head of Sargon",category:"statue",material:"Metal",period:"Akkadian Period",date:"Akkadian Period",findspot:"Nineveh region, Iraq (as discussed in the handout)",museum:"Iraq Museum, Baghdad",description:"A sculpted head associated with the Akkadian ruler Sargon, described as a notable example of metal sculpture.",function:"An example for studying royal portraiture and technical skill in metalworking.",symbol:"♟"},
+{id:"A003",name:"Torso of Manishtushu",category:"statue",material:"Diorite",period:"Akkadian Period",date:"Second half of the 3rd millennium BCE",findspot:"Susa, Iran",museum:"Louvre Museum, Paris",description:"The surviving torso of a statue of Manishtushu; the handout describes the missing upper portion and head.",function:"A royal statue fragment useful for studying garment treatment and monumental sculpture.",symbol:"♟"},
+{id:"A004",name:"Stone Monument of Naram-Sin",category:"relief",material:"Stone",period:"Akkadian Period",date:"Akkadian Period",findspot:"Susa, Iran",museum:"Istanbul Archaeological Museums",description:"A stone monument associated with Naram-Sin, included in the handout's Akkadian-period examples.",function:"A royal monument that contributes to the study of Akkadian political imagery.",symbol:"▤"},
+
+{id:"UR001",name:"Plaque of Ur-Nammu (Moon-God Scene)",category:"relief",material:"Stone",period:"Ur III Period",date:"Ur III, 21st century BCE",findspot:"Ur, Iraq",museum:"University of Pennsylvania Museum, Philadelphia",description:"A fragment of a plaque showing Ur-Nammu before the moon god, as described in the handout.",function:"The scene links royal authority with divine approval and temple ritual.",symbol:"▤"},
+{id:"UR002",name:"Plaque Fragment with Water-Pouring Scene",category:"relief",material:"Stone",period:"Ur III Period",date:"Ur III Period",findspot:"Mesopotamia (specific site not stated here)",museum:"Philadelphia Museum (as named in the handout)",description:"The upper portion of a plaque depicting a water-pouring scene.",function:"The scene is useful for studying ritual imagery and religious iconography.",symbol:"▤"},
+
+{id:"B001",name:"Statue of Gudea",category:"statue",material:"Diorite",period:"Neo-Sumerian Period",date:"22nd century BCE",findspot:"Tello, Iraq",museum:"Louvre Museum, Paris",description:"A seated statue of Gudea, ruler of Lagash, shown with hands joined in a devotional pose.",function:"The statue communicates piety, authority and the ruler's relationship with the gods.",symbol:"♟"},
+{id:"B002",name:"Boundary Stone of Marduk-nadin-ahhe (No. 90841)",category:"relief",material:"Stone",period:"Old Babylonian Period",date:"Second millennium BCE (exact date not stated here)",findspot:"Babylonia",museum:"British Museum, London",description:"A boundary stone associated with Marduk-nadin-ahhe, cited in the handout with number 90841.",function:"Boundary stones recorded land grants and legal or royal privileges.",symbol:"▤"},
+{id:"B003",name:"Code of Hammurabi Stele",category:"relief",material:"Black basalt",period:"Old Babylonian Period",date:"18th century BCE",findspot:"Originally Sippar; discovered at Susa, Iran",museum:"Louvre Museum, Paris",description:"The famous law stele of Hammurabi, topped by a scene showing the king before the god Shamash.",function:"A royal legal monument that records laws and presents the king as an authorized lawgiver.",symbol:"▤"},
+{id:"B004",name:"Clay Plaques of Deities Holding Sacred Emblems (BM 103225)",category:"tablet",material:"Clay",period:"Old Babylonian Period",date:"Old Babylonian Period",findspot:"Mesopotamia",museum:"British Museum, London",description:"Clay plaques showing deities holding sacred emblems, cited in the handout with British Museum number BM 103225.",function:"The imagery contributes to the study of divine attributes and religious iconography.",symbol:"▤"},
+{id:"B005",name:"Clay Plaque with Bull-Man and Water-Pouring Deity (BM 116813)",category:"tablet",material:"Clay",period:"Old Babylonian Period",date:"Old Babylonian Period",findspot:"Mesopotamia",museum:"British Museum, London",description:"A clay plaque showing a bull-man and a deity pouring water, cited with number BM 116813.",function:"The scene combines mythological beings and ritual imagery.",symbol:"▤"},
+{id:"B006",name:"Four-Faced Deity Statues from Larsa",category:"statue",material:"Not specified in the handout",period:"Old Babylonian Period",date:"Old Babylonian Period",findspot:"Larsa, Iraq",museum:"Oriental Institute Museum, Chicago",description:"Two statues of a four-faced deity, Enshar, from Larsa, as described in the handout.",function:"The figures provide evidence for the representation of divine beings.",symbol:"♟"},
+{id:"B007",name:"Divine Symbols from the Palace of Zimri-Lim",category:"other",material:"Not specified in the handout",period:"Old Babylonian Period",date:"18th century BCE",findspot:"Palace of Zimri-Lim, Mari, Syria",museum:"Baghdad Museum (as named in the handout)",description:"A group of divine symbols associated with the palace of Zimri-Lim.",function:"The symbols help explore religious imagery in palace and political contexts.",symbol:"✦"},
+
+{id:"NA001",name:"Fertility Deity on a Stone Block from Ashur",category:"relief",material:"Stone",period:"Neo-Assyrian Period",date:"Neo-Assyrian Period",findspot:"Ashur, Iraq",museum:"Pergamon Museum, Berlin",description:"A fertility deity represented on a stone block from Ashur, included in the handout's Assyrian examples.",function:"The image contributes to the study of fertility symbolism and Assyrian religious art.",symbol:"▤"},
+{id:"NA002",name:"Black Obelisk",category:"relief",material:"Black limestone",period:"Neo-Assyrian Period",date:"9th century BCE",findspot:"Nimrud (ancient Kalhu), Iraq",museum:"British Museum, London",description:"A monumental Assyrian obelisk decorated with registers of reliefs and inscriptions.",function:"The reliefs and inscriptions document royal campaigns, tribute and imperial ideology.",symbol:"▥"},
+{id:"NA003",name:"Reliefs of Tiglath-Pileser III from Nimrud",category:"relief",material:"Stone",period:"Neo-Assyrian Period",date:"8th century BCE",findspot:"Nimrud, Iraq",museum:"Not specified in the handout",description:"Assyrian reliefs associated with Tiglath-Pileser III from Nimrud; the handout does not name the present museum.",function:"The reliefs are important for studying royal warfare, campaigns and palace decoration.",symbol:"▤"},
+{id:"EXT001",name:"Human-headed Winged Bull (Lamassu)",category:"statue",material:"Gypsum alabaster",period:"Neo-Assyrian Period",date:"ca. 883–859 BCE",findspot:"Northwest Palace, Nimrud (ancient Kalhu), Iraq",museum:"The Metropolitan Museum of Art, New York",description:"A colossal Assyrian guardian figure with a human head, bull body and wings. Its five legs make it appear stationary from the front and striding when viewed from the side. The horned cap signals its divine character.",function:"Lamassu figures protected important palace doorways and expressed supernatural power and royal authority. This example belonged to the architectural programme of Ashurnasirpal II at Nimrud.",symbol:"♟",catalogueNumber:"32.143.1",source:"https://www.metmuseum.org/art/collection/search/322608",sourceType:"Verified museum object record"},
+{id:"EXT002",name:"Relief Panel with Human-headed Protective Figure",category:"relief",material:"Gypsum alabaster",period:"Neo-Assyrian Period",date:"ca. 883–859 BCE",findspot:"Northwest Palace, Nimrud (ancient Kalhu), Iraq",museum:"The Metropolitan Museum of Art, New York",description:"A carved palace relief showing a winged, human-headed supernatural figure. The original reliefs were painted, and fine details remain visible in the carved clothing and ornaments.",function:"Protective supernatural figures formed part of the palace's ritual and visual programme. The repeated figures and royal Standard Inscription contributed to the protective imagery of Ashurnasirpal II's palace.",symbol:"▤",catalogueNumber:"84.11",source:"https://www.metmuseum.org/art/collection/search/321613",sourceType:"Verified museum object record"},
+{id:"EXT003",name:"Standing Statue of Gudea (AO 29155)",category:"statue",material:"Diorite",period:"Neo-Sumerian Period",date:"ca. 2120–2110 BCE",findspot:"Girsu / Tello, Iraq (catalogue attribution)",museum:"Louvre Museum, Paris",description:"A complete standing statue identified by the Louvre catalogue as Gudea, prince of Lagash. The ruler is shown with joined hands, wearing a royal cap and robe with one shoulder exposed. The statue is not inscribed.",function:"The devotional pose presents the ruler as a pious worshipper and communicates the relationship between political authority and religious devotion in the Neo-Sumerian period.",symbol:"♟",catalogueNumber:"AO 29155",source:"https://collections.louvre.fr/en/ark:/53355/cl010119653",sourceType:"Verified museum object record"},
+{id:"EXT004",name:"Large Head of Gudea (Grande tête à turban)",category:"statue",material:"Gabbro",period:"Neo-Sumerian Period",date:"ca. 2120–2110 BCE",findspot:"Tello, Iraq (Tello tell H / necropolis mound)",museum:"Louvre Museum, Paris",description:"A monumental fragmentary head identified as Gudea, prince of Lagash. It wears a distinctive royal turban or headdress. The Louvre records a height of 25.2 cm and a date around 2120–2110 BCE.",function:"The carefully modelled head is an important example of Neo-Sumerian royal portraiture and the visual presentation of Gudea's authority.",symbol:"♟",catalogueNumber:"AO 13",source:"https://collections.louvre.fr/en/ark:/53355/cl010119551",sourceType:"Verified museum object record"},
+{id:"EXT005",name:"Human-headed Winged Bull (Lamassu) from Khorsabad",category:"relief",material:"Gypsum alabaster",period:"Neo-Assyrian Period",date:"721–705 BCE",findspot:"Dur-Sharrukin / Khorsabad, Iraq",museum:"Louvre Museum, Paris",description:"A monumental five-legged, winged bull with a human head, horned crown and cuneiform inscriptions. The Louvre catalogue identifies this wall relief as a complete Neo-Assyrian work from the palace city of Sargon II.",function:"The Lamassu guarded palace entrances and symbolised supernatural protection. Its five-legged design was intended to show the creature standing when viewed from the front and moving when viewed from the side.",symbol:"♟",catalogueNumber:"AO 19857",source:"https://collections.louvre.fr/en/ark:/53355/cl010122557",sourceType:"Verified museum object record"},
+{id:"EXT006",name:"Human-headed Winged Bull (Lamassu) from Khorsabad – Companion Relief",category:"relief",material:"Gypsum alabaster",period:"Neo-Assyrian Period",date:"721–705 BCE",findspot:"Dur-Sharrukin / Khorsabad, Iraq",museum:"Louvre Museum, Paris",description:"A second monumental five-legged Lamassu relief from Khorsabad, catalogued as AO 19858. It carries Neo-Assyrian cuneiform inscriptions and belongs to the sculptural programme of Sargon II.",function:"The paired guardian figures framed an important palace entrance, combining monumental scale, hybrid anatomy and royal inscription to protect and proclaim the power of the palace.",symbol:"♟",catalogueNumber:"AO 19858",source:"https://collections.louvre.fr/en/ark:/53355/cl010122558",sourceType:"Verified museum object record"},
+{id:"EXT007",name:"Human-headed Winged Bull from Khorsabad",category:"statue",material:"Gypsum alabaster",period:"Neo-Assyrian Period",date:"721–705 BCE",findspot:"Khorsabad (Dur-Sharrukin), Iraq",museum:"Oriental Institute Museum, Chicago",description:"A colossal Assyrian Lamassu discovered at Khorsabad in 1929. The human-headed winged bull originally guarded the throne room of Sargon II and is nearly five metres tall, with the characteristic five-legged design.",function:"The Lamassu was a protective supernatural being placed at palace gateways. The figure's hybrid form combined human intelligence, bovine strength and bird-like wings.",symbol:"♟",catalogueNumber:"Khorsabad Lamassu",source:"https://www.lib.uchicago.edu/collex/exhibits/discovery-collection-memory-oriental-institute-100/human-headed-winged-bull/",sourceType:"Institutional collection history and object record"},
+{id:"EXT008",name:"Wall Panel from Nineveh: Attendant and Donkey in a Hunting Scene",category:"relief",material:"Gypsum",period:"Neo-Assyrian Period",date:"645–635 BCE",findspot:"North Palace, Nineveh, Iraq",museum:"British Museum, London",description:"A gypsum wall panel from the North Palace at Nineveh showing an attendant leading a donkey loaded with hunting equipment. A later Greek graffito naming Diogenes was added to the ancient relief.",function:"The panel belonged to a larger narrative sequence associated with royal hunting. Its findspot and associated panels help reconstruct the decorative programme of Ashurbanipal's North Palace.",symbol:"▤",catalogueNumber:"124895 / 1856,0909.21",source:"https://www.britishmuseum.org/collection/object/W_1856-0909-21_4",sourceType:"Verified museum object record"},
+{id:"EXT009",name:"String of Carnelian Beads (Treasure of Tod)",category:"other",material:"Carnelian",period:"Middle Kingdom Period",date:"Middle Kingdom, Dynasty 12",findspot:"Tod Treasure, Egypt",museum:"Grand Egyptian Museum, Giza",description:"A string of fifty-eight irregular carnelian beads from the Treasure of Tod. The Grand Egyptian Museum notes that the beads may mostly have come from Mesopotamia; this is a possible origin, not a confirmed Iraqi findspot.",function:"This object is included as a carefully qualified example of long-distance exchange and the movement of materials between Egypt and Mesopotamia. Its Egyptian find context must be kept distinct from the suggested Mesopotamian origin of much of the carnelian.",symbol:"◆",catalogueNumber:"Treasure of Tod – string of carnelian beads",source:"https://gem.eg/collection/main-galleries/artefacts/",sourceType:"Official GEM collection page; Mesopotamian origin described as possible"}
+];
+
+
+// Museum catalogue destinations.
+// Exact object permalinks are used only where the project already has a record URL.
+// Otherwise, open the institution's official collection search / museum page.
+// A search page is NOT represented as proof that the exact object has been identified.
+const museumRecords = {
+  "U008": "https://www.britishmuseum.org/collection/object/W_1928-1009-378",
+  "S005": "https://collections.louvre.fr/en/ark:/53355/cl010120528",
+  "S006": "https://collections.louvre.fr/en/ark:/53355/cl010121794",
+  "A001": "https://collections.louvre.fr/en/ark:/53355/cl010123450",
+  "B001": "https://collections.louvre.fr/en/ark:/53355/cl010119623",
+  "B003": "https://collections.louvre.fr/en/ark:/53355/cl010174436",
+  "NA002": "http://www.britishmuseum.org/research/collection_online/collection_object_details.aspx?objectId=367012&partId=1",
+  "EXT001": "https://www.metmuseum.org/art/collection/search/322608",
+  "EXT002": "https://www.metmuseum.org/art/collection/search/321613",
+  "EXT003": "https://collections.louvre.fr/en/ark:/53355/cl010119653",
+  "EXT004": "https://collections.louvre.fr/en/ark:/53355/cl010119551",
+  "EXT005": "https://collections.louvre.fr/en/ark:/53355/cl010122557",
+  "EXT006": "https://collections.louvre.fr/en/ark:/53355/cl010122558",
+  "EXT007": "https://www.lib.uchicago.edu/collex/exhibits/discovery-collection-memory-oriental-institute-100/human-headed-winged-bull/",
+  "EXT008": "https://www.britishmuseum.org/collection/object/W_1856-0909-21_4",
+  "EXT009": "https://gem.eg/collection/main-galleries/artefacts/"
+};
+const museumCataloguePages = {
+   "British Museum, London": "https://www.britishmuseum.org/collection",
+  "The Metropolitan Museum of Art, New York": "https://www.metmuseum.org/art/collection",
+  "Louvre Museum, Paris": "https://collections.louvre.fr/en/",
+  "University of Pennsylvania Museum, Philadelphia": "https://collections.penn.museum/collections/index.php",
+  "Philadelphia Museum (as named in the handout)": "https://collections.penn.museum/collections/index.php",
+  "Pergamon Museum, Berlin": "https://www.smb-digital.de/eMuseumPlus?service=ExternalInterface&module=collection",
+  "Oriental Institute Museum, Chicago": "https://oi-idb.uchicago.edu/",
+  "Iraq Museum, Baghdad": "https://sbah.gov.iq/museums/",
+  "Baghdad Museum (as named in the handout)": "https://sbah.gov.iq/museums/",
+  "Istanbul Archaeological Museums": "https://muze.gov.tr/muze-detay?DistId=IAR&SectionId=IAR01",
+  "Grand Egyptian Museum, Giza": "https://gem.eg/collection/main-galleries/artefacts/",
+  "University of California Museum": "https://www.museumca.org/"
+};
+function museumLinkFor(a) {
+  if (museumRecords[a.id]) return {url:museumRecords[a.id], label:"Open object record", exact:true};
+  const url = museumCataloguePages[a.museum];
+  if (!url) return null;
+  const searchReady = a.museum === "Louvre Museum, Paris"
+    ? "https://collections.louvre.fr/en/recherche?q=" + encodeURIComponent(a.name)
+    : a.museum === "British Museum, London"
+      ? "https://www.britishmuseum.org/collection/search?keyword=" + encodeURIComponent(a.name)
+      : url;
+  return {
+    url:searchReady,
+    label:(a.museum === "Iraq Museum, Baghdad" || a.museum === "Baghdad Museum (as named in the handout)" || a.museum === "Istanbul Archaeological Museums" || a.museum === "University of California Museum")
+      ? "Museum website / collection information"
+      : "Search museum catalogue",
+    exact:false
+  };
+}
+artifacts.forEach(a => { a.source = museumLinkFor(a)?.url || ""; });
+
+const symbols={statue:"♟",relief:"▤",vessel:"🏺",seal:"◉",tablet:"▤",architecture:"▥",other:"◆"};
+const categoryNames={statue:"Statues & Figurines",relief:"Reliefs & Stelae",vessel:"Vessels & Pottery",seal:"Seals",tablet:"Tablets & Plaques",architecture:"Architecture & Mosaics",other:"Other Objects"};
+const periodOrder=["Neolithic Period","Uruk and Jemdet Nasr Periods","Early Dynastic / Old Sumerian Period","Akkadian Period","Ur III Period","Neo-Sumerian Period","Old Babylonian Period","Neo-Assyrian Period"];
+
+function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+let activeMapArtifactIds = null;
+const mapSites = {
+  "nineveh": {number:1,name:"Nineveh (Kuyunjik)",modern:"Near Mosul, Nineveh Governorate, Iraq",polity:"Neo-Assyrian Empire; royal capital under Sennacherib and Ashurbanipal",period:"Especially 7th century BCE",description:"The North Palace of Nineveh was one of the major royal building complexes of the Neo-Assyrian capital. The listed panel is explicitly catalogued from the North Palace.",ids:["EXT008"],caution:"The Head of Sargon (A002) is described only as from the Nineveh region in the course handout, so it is deliberately not attached to this precise site pin."},
+  "ashur": {number:2,name:"Ashur (Qal'at Sherqat)",modern:"Saladin Governorate, Iraq, on the Tigris",polity:"Assyria; early Assyrian capital and religious centre",period:"3rd millennium BCE onward; major Assyrian phases",description:"Ashur was the namesake religious centre of Assyria and an early capital of the Assyrian state.",ids:["NA001"],caution:"Only the object explicitly labelled as from Ashur is linked here."},
+  "nimrud": {number:3,name:"Nimrud (ancient Kalhu)",modern:"Southeast of Mosul, Nineveh Governorate, Iraq",polity:"Neo-Assyrian Empire; capital under Ashurnasirpal II and successors",period:"Main palace sculpture programme: 9th–8th centuries BCE",description:"Nimrud's Northwest Palace and other royal buildings yielded monumental reliefs, guardian figures and royal objects. The records below specify Nimrud or its Northwest Palace as their findspot.",ids:["NA002","NA003","EXT001","EXT002"],caution:"These are four separate catalogue records; the two Met objects and two other records are not interchangeable."},
+  "samarra": {number:4,name:"Samarra",modern:"Salah al-Din Governorate, Iraq",polity:"Samarra prehistoric cultural horizon; not a named city-state in the later Sumerian sense",period:"6th–5th millennium BCE (Neolithic / Samarra tradition)",description:"The site is represented in this archive by Neolithic pottery objects explicitly attributed to Samarra.",ids:["N002","N003"],caution:"The pin is for the site attribution in the handout, not for a later medieval city of Samarra."},
+  "tell-asmar": {number:5,name:"Tell Asmar (ancient Eshnunna)",modern:"Diyala Governorate, Iraq",polity:"Eshnunna; an important city-state in the Diyala region",period:"Early Dynastic and later 3rd–2nd millennium BCE phases",description:"The archive's statue group is explicitly attributed to Tell Asmar. Eshnunna was the ancient city associated with this archaeological mound.",ids:["S004"],caution:"The map pin links only the Tell Asmar statue group, not all objects broadly described as Diyala-region material."},
+  "larsa": {number:6,name:"Larsa",modern:"Dhi Qar Governorate, Iraq",polity:"Larsa city-state; later a major Old Babylonian-period kingdom",period:"3rd–2nd millennium BCE; especially Old Babylonian period",description:"The archive includes the four-faced deity statues specifically identified as coming from Larsa.",ids:["B006"],caution:"The pin is based on the stated Larsa findspot, not the broader southern-Babylonian region."},
+  "uruk": {number:7,name:"Uruk (Warka)",modern:"Al-Muthanna Governorate, Iraq",polity:"Uruk; major Sumerian urban and religious centre",period:"Late 4th millennium BCE onward; Uruk and later periods",description:"Uruk is represented by early sculpture, a votive vase, a cylinder seal and architectural mosaic remains. Every listed item below has Uruk as its stated findspot.",ids:["U001","U002","U003","U006","U007"],caution:"The eye idols and the decorated jug are not pinned here because their findspots are recorded only as Mesopotamia or unspecified."},
+  "ur": {number:8,name:"Ur (Tell el-Muqayyar)",modern:"Dhi Qar Governorate, Iraq",polity:"Sumerian city-state of Ur; later capital of the Ur III dynasty",period:"3rd millennium BCE, including Early Dynastic and Ur III phases",description:"The objects below are attributed to Ur or its Royal Cemetery, including musical instruments, a game board, a ram-in-a-thicket figure and an Ur-Nammu plaque.",ids:["U008","S010","S011","UR001"],caution:"The Royal Cemetery is kept distinct from the general city findspot in each catalogue record."},
+  "girsu": {number:9,name:"Girsu / Tello (Lagash region)",modern:"Dhi Qar Governorate, Iraq",polity:"Lagash city-state; Girsu was one of its principal religious and administrative centres",period:"Early Dynastic III and Neo-Sumerian / Gudea period",description:"This cluster includes the Stele of the Vultures, the Ninhursag votive plaque, the Vase of Entemena, the Ur-Nanshe plaque and the Gudea sculptures whose catalogue records identify Tello/Girsu/Lagash.",ids:["S006","S009","S012","S013","B001","EXT003","EXT004"],caution:"Tello is the modern archaeological mound name commonly associated with ancient Girsu. The Gudea standing statue's Louvre catalogue attribution is qualified; its record is retained with that uncertainty stated in the full object details."},
+  "sawwan": {number:10,name:"Tell al-Sawwan",modern:"Salah al-Din Governorate, Iraq, near Samarra",polity:"Neolithic settlement; not a later historical kingdom",period:"6th millennium BCE",description:"The archive's female/mother figurines are explicitly assigned to Tell al-Sawwan.",ids:["N001"],caution:"The pin represents the Neolithic settlement, not the later political geography of Iraq."},
+  "jarmo": {number:11,name:"Jarmo (Charmo)",modern:"Kurdistan Region, Iraq, near the Chemchemal / Chamchamal area",polity:"Neolithic farming settlement; not a city-state",period:"Neolithic, 7th–6th millennium BCE",description:"The course archive identifies a female figurine from Jarmo. Jarmo is treated as a prehistoric settlement rather than a kingdom or dynasty.",ids:["N004"],caution:"The exact findspot wording in the archive is “Jarmo / Jemjemal region”; this is preserved rather than overstating a precise excavation locus."},
+  "tell-agrab": {number:12,name:"Tell Agrab",modern:"Diyala region, Iraq",polity:"Early Dynastic Diyala cultural and city-state network",period:"Early Dynastic period, 3rd millennium BCE",description:"The archive links a four-wheeled chariot model and a bronze vessel decorated with wrestlers specifically to Tell Agrab.",ids:["S002","S003"],caution:"The map pin is tied only to the two Tell Agrab records."},
+  "khorsabad": {number:13,name:"Dur-Sharrukin (Khorsabad)",modern:"Northeast of Mosul, Nineveh Governorate, Iraq",polity:"Neo-Assyrian Empire; capital founded by Sargon II",period:"721–705 BCE",description:"The Louvre and University of Chicago records identify the monumental Lamassu guardians as coming from Sargon's capital at Khorsabad.",ids:["EXT005","EXT006","EXT007"],caution:"The two Louvre objects are monumental wall reliefs; the Chicago Lamassu is a colossal guardian sculpture. All three are linked to Khorsabad by their institutional records."}
+};
+function filterMapSite(siteId,button){
+  const site=mapSites[siteId];if(!site)return;
+  document.querySelectorAll('.map-pin').forEach(p=>p.classList.remove('active'));
+  if(button)button.classList.add('active');
+  activeMapArtifactIds=new Set(site.ids);
+  document.getElementById('searchInput').value='';
+  document.getElementById('categoryFilter').value='all';
+  document.getElementById('periodFilter').value='all';
+  document.getElementById('museumFilter').value='all';
+  displayArtifacts();
+  const records=site.ids.map(id=>artifacts.find(a=>a.id===id)).filter(Boolean);
+  document.getElementById('mapDetailTitle').textContent=site.number+'. '+site.name;
+  document.getElementById('mapDetail').innerHTML=`<div class="object-section"><p><strong>Modern location:</strong> ${escapeHTML(site.modern)}</p><p><strong>Ancient polity / cultural context:</strong> ${escapeHTML(site.polity)}</p><p><strong>Chronology:</strong> ${escapeHTML(site.period)}</p><p>${escapeHTML(site.description)}</p><p><strong>Precisely linked records (${records.length}):</strong></p><ul>${records.map(a=>`<li><strong>${escapeHTML(a.id)}</strong> — ${escapeHTML(a.name)} <span style="color:#a9c2d7">(${escapeHTML(a.findspot)})</span></li>`).join('')}</ul><p><strong>Research note:</strong> ${escapeHTML(site.caution)}</p></div>`;
+  document.getElementById('collection').scrollIntoView({behavior:'smooth'});
+}
+function filterMapPeriod(period,button){
+  activeMapArtifactIds=null;
+  document.querySelectorAll('.map-controls button').forEach(b=>b.classList.remove('active'));
+  if(button)button.classList.add('active');
+  document.querySelectorAll('.map-pin').forEach(p=>p.classList.remove('active'));
+  document.getElementById('searchInput').value='';
+  document.getElementById('categoryFilter').value='all';
+  document.getElementById('periodFilter').value=period;
+  document.getElementById('museumFilter').value='all';
+  displayArtifacts();
+  const label=period==='all'?'All historical periods':period;
+  const count=period==='all'?artifacts.length:artifacts.filter(a=>a.period===period).length;
+  document.getElementById('mapDetailTitle').textContent=label;
+  document.getElementById('mapDetail').innerHTML='<strong>'+count+' catalogue record(s)</strong> in this chronological group. The collection below now shows the matching objects.';
+  document.getElementById('collection').scrollIntoView({behavior:'smooth'});
+}
+function resetMapFilters(){
+  activeMapArtifactIds=null;
+  document.getElementById('searchInput').value='';
+  document.getElementById('categoryFilter').value='all';
+  document.getElementById('periodFilter').value='all';
+  document.getElementById('museumFilter').value='all';
+  document.querySelectorAll('.map-pin,.map-controls button').forEach(x=>x.classList.remove('active'));
+  const allButton=document.querySelector('.map-controls button');if(allButton)allButton.classList.add('active');
+  displayArtifacts();
+  document.getElementById('mapDetailTitle').textContent='Explore the map';
+  document.getElementById('mapDetail').textContent='All catalogue objects are visible. Choose a marker or period to filter them.';
+}
+
+function setupFilters(){
+  const periods=[...new Set(artifacts.map(a=>a.period))].sort((a,b)=>periodOrder.indexOf(a)-periodOrder.indexOf(b));
+  const museums=[...new Set(artifacts.map(a=>a.museum))].sort((a,b)=>a.localeCompare(b));
+  const p=document.getElementById("periodFilter"),m=document.getElementById("museumFilter");
+  periods.forEach(v=>p.add(new Option(v,v)));
+  museums.forEach(v=>m.add(new Option(v,v)));
+  document.getElementById("totalCount").textContent=artifacts.length;
+  document.getElementById("periodCount").textContent=periods.length;
+  document.getElementById("museumCount").textContent=museums.length;
+}
+function displayArtifacts(){
+  const query=document.getElementById("searchInput").value.trim().toLowerCase();
+  const category=document.getElementById("categoryFilter").value;
+  const period=document.getElementById("periodFilter").value;
+  const museum=document.getElementById("museumFilter").value;
+  const matches=artifacts.filter(a=>{
+    const haystack=[a.id,a.name,a.material,a.period,a.findspot,a.museum,a.description].join(" ").toLowerCase();
+    return (!activeMapArtifactIds||activeMapArtifactIds.has(a.id))&&haystack.includes(query)&&(category==="all"||a.category===category)&&(period==="all"||a.period===period)&&(museum==="all"||a.museum===museum);
+  }).sort((a,b)=>periodOrder.indexOf(a.period)-periodOrder.indexOf(b.period)||a.name.localeCompare(b.name));
+  document.getElementById("resultsNote").textContent=`Showing ${matches.length} of ${artifacts.length} catalogue records`;
+  const results=document.getElementById("artifactResults");
+  if(!matches.length){results.innerHTML='<div class="empty">No objects match your search. Try another word or filter.</div>';return;}
+  let previousPeriod="";
+  results.innerHTML=matches.map(a=>{
+    const heading=a.period!==previousPeriod?`<h3 class="era-heading">${escapeHTML(a.period)}</h3>`:"";
+    previousPeriod=a.period;
+    return `${heading}
+    <article class="card">
+      <div class="artifact-art"><span class="symbol">${escapeHTML(a.symbol||symbols[a.category]||"◆")}</span></div>
+      <div class="card-body">
+        <span class="tag">${escapeHTML(categoryNames[a.category])}</span>
+        <h3>${escapeHTML(a.name)}</h3>
+        <p>${escapeHTML(a.description)}</p>
+        <div class="meta">
+          <div>Record ID<b>${escapeHTML(a.id)}</b></div>
+          <div>Material<b>${escapeHTML(a.material)}</b></div>
+          <div>Period<b>${escapeHTML(a.period)}</b></div>
+          <div>Date<b>${escapeHTML(a.date)}</b></div>
+        </div>
+        <p><b>Findspot:</b> ${escapeHTML(a.findspot)}</p>
+        <p class="museum-line"><b>Museum / Collection:</b> ${escapeHTML(a.museum)}</p>
+        <div class="card-actions">
+          <button class="btn" onclick="analyzeArtifact('${escapeHTML(a.id)}')">Open Full Record</button>
+          ${museumLinkFor(a) ? `<a class="btn secondary" href="${escapeHTML(museumLinkFor(a).url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(museumLinkFor(a).label)} ↗</a>${museumLinkFor(a).exact ? `<span class="catalogue-note">Verified object permalink</span>` : `<span class="catalogue-note">Institution search / information page; match must be confirmed</span>`}` : `<span class="record-unavailable">No museum or online catalogue identified in the source</span>`}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+const researchDetails = {
+ "EXT001": {image:"",caption:"Metropolitan Museum of Art collection record; open the catalogue to view the museum photograph.",iconography:"Human head, bull body and wings; five legs create a double visual effect—standing from the front and striding from the side.",inscription:"The object record identifies this as a Lamassu. The catalogue details displayed in this project do not provide a full translated inscription.",dimensions:"Colossal architectural guardian; consult the Met record for current object measurements.",analysis:"The hybrid combines human intelligence, bovine strength and avian movement. Its placement at a palace entrance made the sculpture part of the building's protective and royal visual programme.",comparison:"Compare with the Khorsabad Lamassu reliefs AO 19857 and AO 19858 at the Louvre, and the Khorsabad guardian at the University of Chicago.",reference:"The Metropolitan Museum of Art, object 32.143.1."},
+ "EXT002": {image:"",caption:"Metropolitan Museum of Art collection record; open the catalogue to view the museum photograph.",iconography:"A human-headed supernatural figure represented in Assyrian palace relief sculpture.",inscription:"No translated inscription is quoted here; consult the Met catalogue record for object-specific epigraphic data.",dimensions:"Architectural relief panel; consult the museum record for exact measurements.",analysis:"The relief belongs to the sculptural decoration of Ashurnasirpal II's palace at Nimrud. Such figures contributed to a visual language of supernatural protection and royal authority.",comparison:"Compare its protective supernatural imagery with the monumental Lamassu guardians from Nimrud and Khorsabad.",reference:"The Metropolitan Museum of Art, object 84.11."},
+ "EXT003": {image:"https://collections.louvre.fr/media/cache/large/0000000021/0000119653/0000220998_OG.JPG",caption:"Image: © 2012 GrandPalaisRmn (musée du Louvre) / René-Gabriel Ojéda.",iconography:"Standing ruler with joined hands in a devotional pose, royal cap, robe and one shoulder exposed.",inscription:"The Louvre catalogue explicitly describes the statue as anépigraphe: it bears no inscription.",dimensions:"Height 70.5 cm; width 22.4 cm. Material: diorite; carved as a three-dimensional round sculpture.",analysis:"The statue is identified as Gudea, prince of Lagash, with a question mark in the catalogue attribution. Its joined hands and attentive posture communicate devotion. The dark, hard diorite supports a carefully finished royal image.",comparison:"Compare with the fragmentary Gudea head AO 13: both present royal identity through the headdress, while one preserves the complete standing body and the other focuses on portrait features.",reference:"Louvre Collections, AO 29155; catalogue states findspot Girsu/Tello with uncertainty. Currently listed at Louvre-Lens, Galerie du Temps."},
+ "EXT004": {image:"https://collections.louvre.fr/media/cache/large/0000000021/0000119551/0000214134_OG.JPG",caption:"Image: © 2005 GrandPalaisRmn (musée du Louvre) / Franck Raux.",iconography:"Fragmentary head of Gudea wearing a royal headdress or turban; the face and headgear are the main surviving features.",inscription:"The Louvre record does not list an inscription for this fragment.",dimensions:"Height 25.2 cm; width 25 cm; depth 27 cm. Material: gabbro.",analysis:"This is a fragment of a statue rather than a complete bust. The Louvre identifies it as the head of Gudea, prince of Lagash, and records its discovery at Tello between 1877 and 1881.",comparison:"Compare with the complete standing Gudea statue AO 29155. The contrast is useful for studying how royal identity can be communicated through both full-body pose and portrait details.",reference:"Louvre Collections, AO 13, Grande tête à turban."},
+ "EXT005": {image:"https://collections.louvre.fr/media/cache/large/0000000021/0000122557/0000217141_OG.JPG",caption:"Image: © 2011 Musée du Louvre, Dist. GrandPalaisRmn / Thierry Ollivier.",iconography:"Human-headed winged bull with five legs, horned crown and pendant earrings. The five-leg arrangement creates the intended front/side viewing effect.",inscription:"The Louvre records cuneiform inscriptions in Neo-Assyrian language: two inscriptions between the legs and a 28-line inscription on the reverse, described as commemorative and votive.",dimensions:"Height 420 cm; width 436 cm; thickness 97 cm. Gypsum alabaster, high relief.",analysis:"Made under Sargon II (721–705 BCE) for Dur-Sharrukin/Khorsabad. The Lamassu combined supernatural protection with monumental display at a palace entrance. The Louvre notes that it was cut into six slabs to facilitate transport.",comparison:"Compare with companion relief AO 19858. Their paired presence helps reconstruct the monumental entrance programme of Sargon II's palace.",reference:"Louvre Collections, AO 19857; discovered at Dur-Sharrukin/Khorsabad in the 1843–1844 excavations; currently listed in Louvre room 229."},
+ "EXT006": {image:"https://collections.louvre.fr/media/cache/large/0000000021/0000122558/0000217148_OG.JPG",caption:"Image: © 2011 Musée du Louvre, Dist. GrandPalaisRmn / Thierry Ollivier.",iconography:"Companion Lamassu relief with human head, winged bull body and five legs; the Louvre also records pendant earrings and cuneiform inscriptions.",inscription:"The catalogue records two inscriptions between the legs and a 20-line inscription on the reverse; Neo-Assyrian language, commemorative and votive text.",dimensions:"Height 420 cm; width 440 cm; thickness 100 cm. Gypsum alabaster, high relief.",analysis:"This companion relief belongs to the same Khorsabad palace programme of Sargon II as AO 19857. Its dimensions and inscriptional evidence make it important for studying both monumental sculpture and royal text in architectural context.",comparison:"Study alongside AO 19857: the two guardians share iconography and date but have slightly different recorded dimensions and reverse inscription lengths.",reference:"Louvre Collections, AO 19858; Dur-Sharrukin/Khorsabad; currently listed in Louvre room 229."},
+ "EXT007": {image:"",caption:"University of Chicago Library / Oriental Institute collection history page includes the object photograph.",iconography:"Human head, bull body and bird wings; five legs create a double-aspect view.",inscription:"No full inscription is transcribed in the cited University of Chicago collection-history page.",dimensions:"Nearly 5 metres tall and approximately 40 tonnes, according to the University of Chicago account.",analysis:"Excavated at Khorsabad in 1929, this Lamassu originally guarded the throne room of Sargon II. The University of Chicago states it was given to the Oriental Institute by Iraq's Department of Antiquities. Its installation required the museum building and floor to accommodate its exceptional weight.",comparison:"Compare with the Louvre's Khorsabad Lamassu reliefs AO 19857 and AO 19858. All belong to the protective architectural sculpture tradition associated with Sargon II.",reference:"University of Chicago Library, Discovery, Collection, Memory: Human-headed Winged Bull."},
+ "EXT008": {image:"",caption:"British Museum collection record includes the object image and display information.",iconography:"An attendant leads a donkey carrying hunting equipment; this forms part of a longer palace hunting narrative.",inscription:"A later Greek graffito naming Diogenes appears in front of the attendant's mouth. The museum dates the graffito to the 3rd–2nd century BCE, centuries after the Assyrian relief.",dimensions:"Length 152.4 cm; width 116.84 cm. Gypsum wall panel.",analysis:"Created for the North Palace of Nineveh under Ashurbanipal (645–635 BCE), the panel belonged to a corridor sequence showing preparations for a royal hunt. Its later Greek graffito documents a second phase of the object's history after the Assyrian palace period.",comparison:"Compare with other Nineveh palace reliefs depicting royal hunting. This panel is especially useful for studying movement, attendants, equipment and later reuse/marking of ancient monuments.",reference:"British Museum, museum number 124895; registration 1856,0909.21; North Palace, Room R, Panel 3."},
+ "EXT009": {image:"",caption:"Grand Egyptian Museum collection page; consult the museum for the displayed object image.",iconography:"A string of 58 irregular carnelian beads; the material and bead forms are the focus rather than figural imagery.",inscription:"No inscription is identified in the cited GEM page.",dimensions:"58 beads; individual bead measurements are not stated in the cited page.",analysis:"The beads were found in the Egyptian Treasure of Tod. The Grand Egyptian Museum suggests that they may mostly have come from Mesopotamia; this remains a possible material origin, not a confirmed Iraqi findspot. It is included to discuss exchange networks cautiously.",comparison:"Compare with Mesopotamian carnelian beadwork and other evidence for long-distance exchange, while keeping the Egyptian archaeological context distinct from the proposed source of the raw material.",reference:"Grand Egyptian Museum, Treasure of Tod collection entry. Mesopotamian origin is presented by the museum as possible, not certain."}
+};
+function researchBlock(title, value){return value?`<div class="object-section"><h4>${escapeHTML(title)}</h4><p>${escapeHTML(value)}</p></div>`:"";}
+
+function analyzeArtifact(id){
+  const a=artifacts.find(x=>x.id===id);if(!a)return;
+  const rd=researchDetails[a.id];
+  document.getElementById("analysisContent").innerHTML=`
+    <h3 class="report-title">${escapeHTML(a.name)}</h3>
+    ${rd?.image ? `<figure class="object-hero"><img src="${escapeHTML(rd.image)}" alt="${escapeHTML(a.name)}" loading="lazy"><figcaption>${escapeHTML(rd.caption||"")}</figcaption></figure>` : rd ? `<div class="object-section"><h4>Object photograph</h4><p>${escapeHTML(rd.caption)}</p></div>` : ""}
+    <div class="object-facts">
+      <div><b>Record ID</b>${escapeHTML(a.id)}</div><div><b>Category</b>${escapeHTML(categoryNames[a.category])}</div>
+      <div><b>Material</b>${escapeHTML(a.material)}</div><div><b>Period</b>${escapeHTML(a.period)}</div>
+      <div><b>Date</b>${escapeHTML(a.date)}</div><div><b>Findspot</b>${escapeHTML(a.findspot)}</div>
+      <div style="grid-column:1/-1"><b>Museum / Collection</b>${escapeHTML(a.museum)}</div>
+    </div>
+    <h3 class="report-title">Object Description</h3><p>${escapeHTML(a.description)}</p>
+    <h3 class="report-title">Archaeological Interpretation</h3><p>${escapeHTML(a.function)}</p>
+    ${rd ? researchBlock("Iconography & Visual Features",rd.iconography)+researchBlock("Inscriptions & Writing",rd.inscription)+researchBlock("Dimensions, Material & Technique",rd.dimensions)+researchBlock("Archaeological Significance",rd.analysis)+researchBlock("Comparative Study",rd.comparison)+researchBlock("Catalogue Reference",rd.reference) : ""}
+    ${museumLinkFor(a) ? `<p><a class="btn secondary" href="${escapeHTML(museumLinkFor(a).url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(museumLinkFor(a).label)} ↗</a></p><p class="notice">${museumLinkFor(a).exact ? "Direct museum object catalogue permalink." : "Institution search / information page; confirm the exact object match before citing it."}</p>` : `<p class="record-unavailable">The source does not identify a museum or verified online catalogue for this object.</p>`}`;
+  document.getElementById("analysisPanel").classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeAnalysis(){document.getElementById("analysisPanel").classList.remove("show");document.body.style.overflow="";}
+["searchInput","categoryFilter","periodFilter","museumFilter"].forEach(id=>{
+  document.getElementById(id).addEventListener(id==="searchInput"?"input":"change",()=>{if(id==="searchInput"&&document.getElementById("searchInput").value.trim())activeMapArtifactIds=null;displayArtifacts();});
+});
+document.getElementById("analysisPanel").addEventListener("click",e=>{if(e.target.id==="analysisPanel")closeAnalysis();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAnalysis();});
+
+/* CINEMATIC INTRO */
+function enterMESO(){
+  const intro=document.getElementById("introScreen");
+  if(intro) intro.classList.add("hide");
+}
+
+/* INTERACTIVE HISTORICAL POLITIES MAP — no external library required */
+const polityInfo={
+  sumer:"Sumerian City-States — independent southern city-states such as Ur, Uruk, Lagash and Nippur; not one unified empire.",
+  akkad:"Akkadian Empire — founded by Sargon of Akkad; its influence extended across much of Mesopotamia and beyond during the late 3rd millennium BCE.",
+  ur3:"Ur III Kingdom — the Third Dynasty of Ur re-established centralized rule over much of southern and central Mesopotamia around 2112–2004 BCE.",
+  oldbab:"Old Babylonian Kingdom — Babylon became a major power; Hammurabi's kingdom expanded across central and southern Mesopotamia in the 18th century BCE.",
+  assyria:"Neo-Assyrian Empire — from the 9th to 7th centuries BCE, Assyria expanded from northern Mesopotamia into a large Near Eastern empire.",
+  neobab:"Neo-Babylonian Empire — the Chaldean dynasty ruled Babylonia from 626 to 539 BCE, before the Persian conquest."
+};
+document.querySelectorAll("[data-polity]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const key=button.dataset.polity;
+    document.querySelectorAll(".polity-layer").forEach(layer=>layer.classList.remove("active"));
+    const layer=document.getElementById("layer-"+key);
+    if(layer)layer.classList.add("active");
+    document.querySelectorAll("[data-polity]").forEach(b=>b.classList.toggle("active",b===button));
+    document.getElementById("mapStatus").textContent=polityInfo[key]||"Select a historical period.";
+  });
+});
+
+
+/* QR code: generated from the live public URL, not a local file path. */
+function generateMadaQR(){
+  if(location.protocol === "file:"){
+    alert("Publish MADA to a public HTTPS link first. Then open that link and generate its QR code.");
+    return;
+  }
+  const publicUrl = location.href.split("#")[0];
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=420x420&format=png&download=1&data=" + encodeURIComponent(publicUrl);
+  const img = document.getElementById("qrImage");
+  img.src = qrUrl;
+  document.getElementById("qrUrlText").textContent = publicUrl;
+  document.getElementById("downloadQR").href = qrUrl;
+  document.getElementById("qrArea").classList.add("show");
+}
+async function shareMada(){
+  const data = {title:"MADA Digital Archaeology",text:"Explore Ancient Mesopotamia through MADA Digital Archaeology.",url:location.href.split("#")[0]};
+  if(navigator.share){try{await navigator.share(data);}catch(e){}}
+  else if(navigator.clipboard){await navigator.clipboard.writeText(data.url);alert("Website link copied.");}
+  else {prompt("Copy the public website link:",data.url);}
+}
+let madaInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  madaInstallPrompt = event;
+  const button = document.getElementById("installMadaBtn");
+  if(button) button.hidden = false;
+});
+async function installMadaApp(){
+  if(!madaInstallPrompt){
+    alert("If installation is supported, use Chrome's Install app option from the address bar or the three-dot menu.");
+    return;
+  }
+  madaInstallPrompt.prompt();
+  await madaInstallPrompt.userChoice;
+  madaInstallPrompt = null;
+  document.getElementById("installMadaBtn").hidden = true;
+}
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => console.warn("MADA offline setup:",err));
+  });
+}
+
+setupFilters();
+displayArtifacts();
+</script>
+</body>
+</html>
